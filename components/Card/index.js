@@ -1,14 +1,5 @@
 import React, { Component } from "react";
-import {
-  Animated,
-  Dimensions,
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-  Platform
-} from "react-native";
-import Ticker, { Tick } from "react-native-ticker"; // 2.0.3
+import { Animated, Dimensions, StyleSheet, Platform } from "react-native";
 
 import images from "../images";
 import letters from "../letters";
@@ -118,48 +109,5 @@ const styles = StyleSheet.create({
       color: "white",
       backgroundColor: "transparent"
     }
-  }),
-  tagLine: {
-    color: "white",
-    fontFamily: "inconsolata-regular",
-    fontSize: 15
-  },
-  tagLineContainer: {
-    paddingBottom: 4,
-    borderBottomWidth: 2,
-    borderBottomColor: "#6D214F"
-  },
-  ports: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginVertical: 16,
-    height: 150,
-    width: "90%"
-  },
-  port: {
-    borderRadius: 4,
-    backgroundColor: "#2C3A47",
-    width: "48%",
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  portTitle: {
-    color: "white",
-    fontSize: 48,
-    fontFamily: "inconsolata-bold"
-  },
-  bookVoyageButton: {
-    backgroundColor: "#6D214F",
-    height: 60,
-    width: "90%",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 4
-  },
-  bookVoyageTitle: {
-    color: "white",
-    letterSpacing: 1.3,
-    fontSize: 24,
-    fontFamily: "inconsolata-regular"
-  }
+  })
 });
