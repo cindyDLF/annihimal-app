@@ -1,6 +1,8 @@
 import React from "react";
-import { Text } from "react-native";
+import Side from "../components/Side";
 
-const Animal = () => <Text>Je suis un animal</Text>;
+const Animal = () => {
+  return <Side />;
+};
 
 export default Animal;
