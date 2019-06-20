@@ -5,7 +5,7 @@ import SideSwipe from "react-native-sideswipe";
 
 import Carousel from "../components/Carousel";
 
-export default class App extends Component {
+export default class Home extends Component {
   static navigationOptions = {
     title: "Home"
   };
