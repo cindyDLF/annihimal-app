@@ -4,9 +4,16 @@ import {
   View,
   StyleSheet,
   Dimensions,
-  Platform
+  Platform,
+  TouchableOpacity
 } from "react-native";
 import { Constants, Font } from "expo";
+import {
+  withNavigation,
+  createStackNavigator,
+  createAppContainer
+} from "react-navigation";
+
 import SideSwipe from "react-native-sideswipe";
 
 import { Card } from "../Card";
@@ -20,11 +27,14 @@ const animals = [
   { title: "Tiger", value: "tiger", abbr: "Some fun fact" }
 ];
 
-export default class Carousel extends Component {
-  state = {
-    currentIndex: 0,
-    fontsLoaded: false
-  };
+class Carousel extends Component {
+  constructor(prop) {
+    super();
+    this.state = {
+      currentIndex: 0,
+      fontsLoaded: false
+    };
+  }
 
   componentDidMount = async () => {
     await Font.loadAsync({
@@ -56,17 +66,25 @@ export default class Carousel extends Component {
         contentOffset={offset}
         onIndexChange={index => this.setState(() => ({ currentIndex: index }))}
         renderItem={({ itemIndex, currentIndex, item, animatedValue }) => (
-          <Card
-            animal={item}
-            index={itemIndex}
-            currentIndex={currentIndex}
-            animatedValue={animatedValue}
-          />
+          <TouchableOpacity
+            onPress={() => {
+              this.props.navigation.navigate("Animal");
+            }}
+          >
+            <Card
+              animal={item}
+              index={itemIndex}
+              currentIndex={currentIndex}
+              animatedValue={animatedValue}
+            />
+          </TouchableOpacity>
         )}
       />
     );
   };
 }
+
+export default withNavigation(Carousel);
 
 const styles = StyleSheet.create({
   container: {
