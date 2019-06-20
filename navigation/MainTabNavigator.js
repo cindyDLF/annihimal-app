@@ -1,60 +1,48 @@
-import React from 'react';
-import { Platform } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import React from "react";
+import { Platform } from "react-native";
+import {
+  createStackNavigator,
+  createBottomTabNavigator
+} from "react-navigation";
 
-import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import TabBarIcon from "../components/TabBarIcon";
+import HomeScreen from "../screens/HomeScreen";
+import Animal from "../screens/Animal";
+import ListAnimals from "../screens/ListAnimals";
+import Profil from "../screens/Profil";
 
 const HomeStack = createStackNavigator({
-  Home: HomeScreen,
+  Home: HomeScreen
 });
 
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
-  ),
+  tabBarLabel: "Home",
+  tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={"random"} />
 };
 
-const LinksStack = createStackNavigator({
-  Links: LinksScreen,
+const ListAnimalsStack = createStackNavigator({
+  Animals: ListAnimals
 });
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
-    />
-  ),
+ListAnimalsStack.navigationOptions = {
+  tabBarLabel: "Animals",
+  tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={"hippo"} />
 };
 
-const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen,
+const AnimalStack = createStackNavigator({
+  Animal: Animal
 });
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
-    />
-  ),
+const UserStack = createStackNavigator({
+  User: Profil
+});
+AnimalStack.navigationOptions = {
+  tabBarLabel: "Animal",
+  tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={"user"} />
 };
 
 export default createBottomTabNavigator({
   HomeStack,
-  LinksStack,
-  SettingsStack,
+  ListAnimalsStack,
+  AnimalStack
 });
