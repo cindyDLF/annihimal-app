@@ -29,20 +29,22 @@ ListAnimalsStack.navigationOptions = {
   tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={"hippo"} />
 };
 
+const UserStack = createStackNavigator({
+  User: Profil
+});
+UserStack.navigationOptions = {
+  tabBarLabel: "User",
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={"user-alt"} />
+  )
+};
+
 const AnimalStack = createStackNavigator({
   Animal: Animal
 });
 
-const UserStack = createStackNavigator({
-  User: Profil
-});
-AnimalStack.navigationOptions = {
-  tabBarLabel: "Animal",
-  tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={"user"} />
-};
-
 export default createBottomTabNavigator({
   HomeStack,
   ListAnimalsStack,
-  AnimalStack
+  UserStack
 });
