@@ -1,6 +1,15 @@
 import React from "react";
-import { Text } from "react-native";
+import { ScrollView } from "react-native";
+import Side from "../components/Side";
 
-const Animal = () => <Text>Je suis un animal</Text>;
+const Animal = () => {
+  return (
+    <ScrollView>
+      <Side side="left" />
+      <Side side="right" />
+      <Side side="left" />
+    </ScrollView>
+  );
+};
 
 export default Animal;
