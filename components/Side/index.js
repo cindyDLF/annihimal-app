@@ -54,59 +54,88 @@ export default class Side extends Component {
       biggest_threat: "Habitat loss",
       "most_distinctive feature": "Highly intelligent with very long arms",
       fun_fact: "Known to use large leaves as umbrellas!"
-    }
+    },
+    side: this.props.side
+  };
+
+  image = uri => {
+    return (
+      <View style={styles.img}>
+        <Image
+          resizeMode="contain"
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 0
+          }}
+          source={{
+            uri
+          }}
+        />
+      </View>
+    );
+  };
+
+  text = pres => {
+    return (
+      <View style={styles.text}>
+        {Object.keys(pres).map((key, idx) => {
+          return (
+            <View
+              key={idx}
+              style={{
+                flex: 1
+              }}
+            >
+              <View>
+                <Text h4>{_.startCase(key)}</Text>
+                <Text>{pres[key]}</Text>
+              </View>
+            </View>
+          );
+        })}
+      </View>
+    );
+  };
+
+  left = data => {
+    const { uri, pres } = data;
+
+    return (
+      <View style={styles.container}>
+        {this.image(uri)}
+        {this.text(pres)}
+      </View>
+    );
+  };
+
+  right = data => {
+    const { uri, pres } = data;
+
+    return (
+      <View style={styles.container}>
+        {this.text(pres)}
+        {this.image(uri)}
+      </View>
+    );
   };
 
   render = () => {
-    const { animal } = this.state;
+    const { animal, side } = this.state;
     const pres = {
       name: animal.name,
       class: animal.class,
       scientific_name: animal.scientific_name,
       location: animal.location
     };
-    console.log(pres);
-    return (
-      <View style={styles.container}>
-        <View
-          style={{
-            width: width - width / 2.5,
-            height: height / 1.5
-          }}
-        >
-          <Image
-            resizeMode="contain"
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              bottom: 0,
-              right: 0
-            }}
-            source={{
-              uri:
-                "https://static.vecteezy.com/system/resources/previews/000/300/405/large_2x/orangutan-with-brown-fur-vector.jpg"
-            }}
-          />
-        </View>
-
-        <View
-          style={{
-            width: width / 2.5,
-            height: height / 1.5
-          }}
-        >
-          {Object.keys(pres).map((key, idx) => {
-            return (
-              <View key={idx}>
-                <Text h4>{_.startCase(key)}</Text>
-                <Text>{pres[key]}</Text>
-              </View>
-            );
-          })}
-        </View>
-      </View>
-    );
+    const data = {
+      uri:
+        "https://static.vecteezy.com/system/resources/previews/000/300/405/large_2x/orangutan-with-brown-fur-vector.jpg",
+      pres
+    };
+    return side === "right" ? this.right(data) : this.left(data);
   };
 }
 
@@ -115,5 +144,14 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     paddingTop: Constants.statusBarHeight
+  },
+  img: {
+    width: width - width / 2.5,
+    height: height / 1.5
+  },
+  text: {
+    width: width / 2.5,
+    height: height / 1.5,
+    padding: 8
   }
 });
