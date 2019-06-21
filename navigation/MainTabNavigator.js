@@ -20,9 +20,15 @@ HomeStack.navigationOptions = {
   tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={"random"} />
 };
 
-const ListAnimalsStack = createStackNavigator({
-  Animals: ListAnimals
-});
+const ListAnimalsStack = createStackNavigator(
+  {
+    Animals: ListAnimals,
+    Animal: Animal
+  },
+  {
+    initialRouteName: "Animals"
+  }
+);
 
 ListAnimalsStack.navigationOptions = {
   tabBarLabel: "Animals",
@@ -38,10 +44,6 @@ UserStack.navigationOptions = {
     <TabBarIcon focused={focused} name={"user-alt"} />
   )
 };
-
-const AnimalStack = createStackNavigator({
-  Animal: Animal
-});
 
 export default createBottomTabNavigator({
   HomeStack,
