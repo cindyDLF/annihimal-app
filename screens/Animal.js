@@ -1,7 +1,8 @@
 import React from "react";
-import { ScrollView } from "react-native";
+import { ScrollView, View } from "react-native";
 
 import Side from "../components/Side";
+import StickyHeader from "../components/StickyHeader";
 
 const Animal = () => {
   const animal = {
@@ -37,7 +38,8 @@ const Animal = () => {
     "average_litter size": "1",
     "name_of young": "Infant",
     "age_of weaning": "3 years",
-    conservation_status: "Critically Endangered",
+    conservation_status: "Near Threatened",
+    //  conservation_status: "Critically Endangered",
     "estimated_population size": "13,500",
     biggest_threat: "Habitat loss",
     "most_distinctive feature": "Highly intelligent with very long arms",
@@ -45,11 +47,15 @@ const Animal = () => {
   };
 
   return (
-    <ScrollView>
-      <Side side="left" data={animal} />
-      <Side side="right" data={animal} />
-      <Side side="left" data={animal} />
-    </ScrollView>
+    <View>
+      <StickyHeader conservation_status={animal.conservation_status} />
+
+      <ScrollView>
+        <Side side="left" data={animal} />
+        <Side side="right" data={animal} />
+        <Side side="left" data={animal} />
+      </ScrollView>
+    </View>
   );
 };
 
