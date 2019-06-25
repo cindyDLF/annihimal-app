@@ -11,9 +11,16 @@ import Animal from "../screens/Animal";
 import ListAnimals from "../screens/ListAnimals";
 import Profil from "../screens/Profil";
 
-const HomeStack = createStackNavigator({
-  Home: Home
-});
+const HomeStack = createStackNavigator(
+  {
+    Home: {
+      screen: Home,
+      //this will hide the header
+      navigationOptions: {}
+    }
+  },
+  { headerMode: "none" }
+);
 
 HomeStack.navigationOptions = {
   tabBarLabel: "Home",
@@ -26,7 +33,8 @@ const ListAnimalsStack = createStackNavigator(
     Animal: Animal
   },
   {
-    initialRouteName: "Animals"
+    initialRouteName: "Animals",
+    headerMode: "none"
   }
 );
 
@@ -35,9 +43,12 @@ ListAnimalsStack.navigationOptions = {
   tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={"hippo"} />
 };
 
-const UserStack = createStackNavigator({
-  User: Profil
-});
+const UserStack = createStackNavigator(
+  {
+    User: Profil
+  },
+  { headerMode: "none" }
+);
 UserStack.navigationOptions = {
   tabBarLabel: "User",
   tabBarIcon: ({ focused }) => (
