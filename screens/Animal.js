@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView, View } from "react-native";
+import { ScrollView, View, StyleSheet } from "react-native";
 
 import Side from "../components/Side";
 import StickyHeader from "../components/StickyHeader";
@@ -73,7 +73,6 @@ const Animal = () => {
   return (
     <View>
       <StickyHeader conservation_status={animal.conservation_status} />
-
       <ScrollView>
         <Side side="left" data={presentation} title="Presentation" />
         <Side side="right" data={hab} title="Habitat" />
