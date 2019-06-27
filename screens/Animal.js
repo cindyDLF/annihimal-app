@@ -46,14 +46,39 @@ const Animal = () => {
     fun_fact: "Known to use large leaves as umbrellas!"
   };
 
+  const {
+    name,
+    scientific_name,
+    group,
+    class: classification,
+    location,
+    habitat,
+    diet,
+    biggest_threat,
+    weight,
+    lifespan,
+    group_behaviour,
+    gestation_period
+  } = animal;
+  const presentation = {
+    name,
+    scientific_name,
+    classification,
+    group
+  };
+  const hab = { location, habitat, diet, threat: biggest_threat };
+  const info = { size: animal["size_(h)"], weight, lifespan, group_behaviour };
+  const repro = { gestation_period, litter: animal["average_litter size"] };
+
   return (
     <View>
       <StickyHeader conservation_status={animal.conservation_status} />
 
       <ScrollView>
-        <Side side="left" data={animal} />
-        <Side side="right" data={animal} />
-        <Side side="left" data={animal} />
+        <Side side="left" data={presentation} title="Presentation" />
+        <Side side="right" data={hab} title="Habitat" />
+        <Side side="left" data={info} title="Informations" />
+        <Side side="right" data={repro} title="Reproduction" />
       </ScrollView>
     </View>
   );

@@ -62,7 +62,7 @@ class Carousel extends Component {
     ) : (
       <SideSwipe
         data={animals}
-        shouldCapture={() => true}
+        shouldRelease={() => true}
         style={[styles.fill, { width }]}
         contentContainerStyle={{ paddingTop: 100 }}
         itemWidth={Card.WIDTH}
