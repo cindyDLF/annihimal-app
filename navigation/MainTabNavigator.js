@@ -16,7 +16,6 @@ const HomeStack = createStackNavigator(
   {
     Home: {
       screen: Home,
-      //this will hide the header
       navigationOptions: {}
     }
   },
@@ -58,8 +57,19 @@ UserStack.navigationOptions = {
   )
 };
 
-export default createBottomTabNavigator({
-  HomeStack,
-  ListAnimalsStack,
-  UserStack
-});
+export default createBottomTabNavigator(
+  {
+    HomeStack,
+    ListAnimalsStack,
+    UserStack
+  },
+  {
+    tabBarOptions: {
+      activeTintColor: "#6F9B45", // active icon color
+      //inactiveTintColor: "#586589", // inactive icon color
+      style: {
+        backgroundColor: "#4D3A34" // TabBar background
+      }
+    }
+  }
+);
