@@ -4,12 +4,19 @@ import {
   View,
   StyleSheet,
   Dimensions,
-  Platform
+  Platform,
+  TouchableOpacity
 } from "react-native";
 import { Constants, Font } from "expo";
+import {
+  withNavigation,
+  createStackNavigator,
+  createAppContainer
+} from "react-navigation";
+
 import SideSwipe from "react-native-sideswipe";
 
-import { Card } from "../Card";
+import { Card } from "./Card";
 
 const { width } = Dimensions.get("window");
 
@@ -20,34 +27,25 @@ const animals = [
   { title: "Tiger", value: "tiger", abbr: "Some fun fact" }
 ];
 
-export default class Carousel extends Component {
-  state = {
-    currentIndex: 0,
-    fontsLoaded: false
-  };
+class Carousel extends Component {
+  constructor(prop) {
+    super();
+    this.state = {
+      currentIndex: 0
+    };
+  }
 
-  componentDidMount = async () => {
-    await Font.loadAsync({
-      dhurjati: require("../../assets/fonts/Dhurjati-Regular.ttf"),
-      "inconsolata-regular": require("../../assets/fonts/Inconsolata-Regular.ttf"),
-      "inconsolata-bold": require("../../assets/fonts/Inconsolata-Bold.ttf"),
-      "libre-barcode-39": require("../../assets/fonts/LibreBarcode39-Regular.ttf")
-    });
-
-    this.setState({ fontsLoaded: true });
+  onPress = () => {
+    this.props.navigation.navigate("Animal");
   };
 
   render = () => {
     const offset = (width - Card.WIDTH) / 2;
 
-    return !this.state.fontsLoaded ? (
-      <View style={[styles.container, { justifyContent: "center" }]}>
-        <ActivityIndicator color="white" />
-      </View>
-    ) : (
+    return (
       <SideSwipe
         data={animals}
-        shouldCapture={() => true}
+        shouldRelease={() => true}
         style={[styles.fill, { width }]}
         contentContainerStyle={{ paddingTop: 100 }}
         itemWidth={Card.WIDTH}
@@ -55,26 +53,31 @@ export default class Carousel extends Component {
         extractKey={item => item.value}
         contentOffset={offset}
         onIndexChange={index => this.setState(() => ({ currentIndex: index }))}
-        renderItem={({ itemIndex, currentIndex, item, animatedValue }) => (
-          <Card
-            animal={item}
-            index={itemIndex}
-            currentIndex={currentIndex}
-            animatedValue={animatedValue}
-          />
-        )}
+        renderItem={({ itemIndex, currentIndex, item, animatedValue }) => {
+          return (
+            <TouchableOpacity onPress={this.onPress}>
+              <Card
+                animal={item}
+                index={itemIndex}
+                currentIndex={currentIndex}
+                animatedValue={animatedValue}
+              />
+            </TouchableOpacity>
+          );
+        }}
       />
     );
   };
 }
+
+export default withNavigation(Carousel);
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "stretch",
     justifyContent: "flex-start",
-    paddingTop: Constants.statusBarHeight,
-    backgroundColor: "black"
+    paddingTop: Constants.statusBarHeight
   },
   fill: {
     position: "absolute",
