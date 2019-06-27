@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Animated, Dimensions, StyleSheet, Platform } from "react-native";
 
 import images from "./images";
-import letters from "./letters";
 
 const { width: screenWidth } = Dimensions.get("window");
 const width = screenWidth - 125;

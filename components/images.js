@@ -2,5 +2,27 @@ export default {
   longnose: require("../assets/images/longnose.png"),
   maki: require("../assets/images/maki.jpg"),
   meerkat: require("../assets/images/meerkat.jpg"),
-  tiger: require("../assets/images/tiger.jpg")
+  tiger: require("../assets/images/tiger.jpg"),
+  litter: require("../assets/images/baby.png"),
+  carnivore: require("../assets/images/carnivore.png"),
+  climatechange: require("../assets/images/climate-change.png"),
+  desert: require("../assets/images/desert.png"),
+  diurnal: require("../assets/images/diurnal.png"),
+  forest: require("../assets/images/forest.png"),
+  gestation_period: require("../assets/images/gestation.png"),
+  group_behaviour: require("../assets/images/group.png"),
+  herbivore: require("../assets/images/herbivore.png"),
+  hunt: require("../assets/images/hunt.png"),
+  lake: require("../assets/images/lake.png"),
+  lifespan: require("../assets/images/lifespan.png"),
+  nocturnal: require("../assets/images/nocturnal.png"),
+  ocean: require("../assets/images/ocean.png"),
+  omnivore: require("../assets/images/omnivore.png"),
+  prairie: require("../assets/images/prairie.png"),
+  stork: require("../assets/images/stork.png"),
+  trap: require("../assets/images/trap.png"),
+  weight: require("../assets/images/weight.png"),
+  size: require("../assets/images/size.png"),
+
+  ourang: require("../assets/images/orang.jpg")
 };
