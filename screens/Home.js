@@ -15,7 +15,7 @@ export default class Home extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.center}>
-          <Title text="annihimal" />
+          <Title text="annihimal" size={60} />
         </View>
         <View style={styles.container}>
           <Carousel />
