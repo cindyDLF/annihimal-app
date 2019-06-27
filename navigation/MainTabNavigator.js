@@ -1,65 +1,60 @@
-import React from "react";
-import { Platform } from "react-native";
-import {
-  createStackNavigator,
-  createBottomTabNavigator
-} from "react-navigation";
+import React from 'react';
+import { Platform } from 'react-native';
+import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
-import TabBarIcon from "../components/TabBarIcon";
-import Home from "../screens/Home";
-import Animal from "../screens/Animal";
-import ListAnimals from "../screens/ListAnimals";
-import Profil from "../screens/Profil";
-import Register from "../screens/Register";
+import TabBarIcon from '../components/TabBarIcon';
+import HomeScreen from '../screens/HomeScreen';
+import LinksScreen from '../screens/LinksScreen';
+import SettingsScreen from '../screens/SettingsScreen';
 
-const HomeStack = createStackNavigator(
-  {
-    Home: {
-      screen: Home,
-      //this will hide the header
-      navigationOptions: {}
-    }
-  },
-  { headerMode: "none" }
-);
+const HomeStack = createStackNavigator({
+  Home: HomeScreen,
+});
 
 HomeStack.navigationOptions = {
-  tabBarLabel: "Home",
-  tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={"random"} />
-};
-
-const ListAnimalsStack = createStackNavigator(
-  {
-    Animals: ListAnimals,
-    Animal: Animal
-  },
-  {
-    initialRouteName: "Animals",
-    headerMode: "none"
-  }
-);
-
-ListAnimalsStack.navigationOptions = {
-  tabBarLabel: "Animals",
-  tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={"hippo"} />
-};
-
-const UserStack = createStackNavigator(
-  {
-    Register: Register,
-    User: Profil
-  },
-  { headerMode: "none" }
-);
-UserStack.navigationOptions = {
-  tabBarLabel: "User",
+  tabBarLabel: 'Home',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={"user-alt"} />
-  )
+    <TabBarIcon
+      focused={focused}
+      name={
+        Platform.OS === 'ios'
+          ? `ios-information-circle${focused ? '' : '-outline'}`
+          : 'md-information-circle'
+      }
+    />
+  ),
+};
+
+const LinksStack = createStackNavigator({
+  Links: LinksScreen,
+});
+
+LinksStack.navigationOptions = {
+  tabBarLabel: 'Links',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
+    />
+  ),
+};
+
+const SettingsStack = createStackNavigator({
+  Settings: SettingsScreen,
+});
+
+SettingsStack.navigationOptions = {
+  tabBarLabel: 'Settings',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+    />
+  ),
 };
 
 export default createBottomTabNavigator({
   HomeStack,
-  ListAnimalsStack,
-  UserStack
+  LinksStack,
+  SettingsStack,
 });

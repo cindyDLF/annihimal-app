@@ -4,9 +4,8 @@ import { Constants } from "expo";
 import SideSwipe from "react-native-sideswipe";
 
 import Carousel from "../components/Carousel";
-import Title from "../components/Title";
 
-export default class Home extends Component {
+export default class App extends Component {
   static navigationOptions = {
     title: "Home"
   };
@@ -14,12 +13,7 @@ export default class Home extends Component {
   render = () => {
     return (
       <View style={styles.container}>
-        <View style={styles.center}>
-          <Title text="annihimal" />
-        </View>
-        <View style={styles.container}>
-          <Carousel />
-        </View>
+        <Carousel />
       </View>
     );
   };
@@ -31,10 +25,6 @@ const styles = StyleSheet.create({
     alignItems: "stretch",
     justifyContent: "flex-start",
     paddingTop: Constants.statusBarHeight,
-    backgroundColor: "#6F9B45"
-  },
-  center: {
-    justifyContent: "center",
-    alignItems: "center"
+    backgroundColor: "black"
   }
 });

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Animated, Dimensions, StyleSheet } from "react-native";
+import { Animated, Dimensions, StyleSheet, Platform } from "react-native";
 
-import images from "./images";
+import images from "../images";
+import letters from "../letters";
 
 const { width: screenWidth } = Dimensions.get("window");
 const width = screenWidth - 125;
@@ -73,20 +74,40 @@ const styles = StyleSheet.create({
     alignItems: "center",
     overflow: "visible"
   },
-  animal: {
-    width: width - 25,
-    height: width - 25,
-    borderRadius: (width - 25) / 2
-  },
-  title: {
-    fontFamily: "Avenir",
-    fontSize: 32,
-    position: "absolute",
-    bottom: 0,
-    textAlign: "center",
-    fontWeight: "bold",
-    letterSpacing: 1.2,
-    color: "#C3CC6A",
-    backgroundColor: "transparent"
-  }
+  animal: Platform.select({
+    ios: {
+      width: width - 25,
+      height: width - 25,
+      borderRadius: (width - 25) / 2
+    },
+    android: {
+      width: width - 50,
+      height: width - 50,
+      borderRadius: (width - 50) / 2
+    }
+  }),
+  title: Platform.select({
+    ios: {
+      fontFamily: "dhurjati",
+      fontSize: 32,
+      position: "absolute",
+      bottom: 0,
+      textAlign: "center",
+      fontWeight: "bold",
+      letterSpacing: 1.2,
+      color: "white",
+      backgroundColor: "transparent"
+    },
+    android: {
+      fontFamily: "inconsolata-regular",
+      fontSize: 24,
+      position: "absolute",
+      bottom: 20,
+      textAlign: "center",
+      fontWeight: "bold",
+      letterSpacing: 1.2,
+      color: "white",
+      backgroundColor: "transparent"
+    }
+  })
 });
