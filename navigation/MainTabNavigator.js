@@ -59,7 +59,7 @@ UserStack.navigationOptions = {
 };
 
 export default createBottomTabNavigator({
-  UserStack,
   HomeStack,
-  ListAnimalsStack
+  ListAnimalsStack,
+  UserStack
 });
