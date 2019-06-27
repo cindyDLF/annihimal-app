@@ -31,35 +31,18 @@ class Carousel extends Component {
   constructor(prop) {
     super();
     this.state = {
-      currentIndex: 0,
-      fontsLoaded: false
+      currentIndex: 0
     };
   }
 
-  componentDidMount = async () => {
-    await Font.loadAsync({
-      dhurjati: require("../assets/fonts/Dhurjati-Regular.ttf"),
-      "inconsolata-regular": require("../assets/fonts/Inconsolata-Regular.ttf"),
-      "inconsolata-bold": require("../assets/fonts/Inconsolata-Bold.ttf"),
-      "libre-barcode-39": require("../assets/fonts/LibreBarcode39-Regular.ttf")
-    });
-
-    this.setState({ fontsLoaded: true });
-  };
-
   onPress = () => {
-    console.log("press");
     this.props.navigation.navigate("Animal");
   };
 
   render = () => {
     const offset = (width - Card.WIDTH) / 2;
 
-    return !this.state.fontsLoaded ? (
-      <View style={[styles.container, { justifyContent: "center" }]}>
-        <ActivityIndicator color="white" />
-      </View>
-    ) : (
+    return (
       <SideSwipe
         data={animals}
         shouldRelease={() => true}
@@ -94,8 +77,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "stretch",
     justifyContent: "flex-start",
-    paddingTop: Constants.statusBarHeight,
-    backgroundColor: "black"
+    paddingTop: Constants.statusBarHeight
   },
   fill: {
     position: "absolute",

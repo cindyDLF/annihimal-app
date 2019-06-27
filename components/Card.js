@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Animated, Dimensions, StyleSheet, Platform } from "react-native";
+import { Animated, Dimensions, StyleSheet } from "react-native";
 
 import images from "./images";
 
@@ -73,40 +73,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
     overflow: "visible"
   },
-  animal: Platform.select({
-    ios: {
-      width: width - 25,
-      height: width - 25,
-      borderRadius: (width - 25) / 2
-    },
-    android: {
-      width: width - 50,
-      height: width - 50,
-      borderRadius: (width - 50) / 2
-    }
-  }),
-  title: Platform.select({
-    ios: {
-      fontFamily: "dhurjati",
-      fontSize: 32,
-      position: "absolute",
-      bottom: 0,
-      textAlign: "center",
-      fontWeight: "bold",
-      letterSpacing: 1.2,
-      color: "white",
-      backgroundColor: "transparent"
-    },
-    android: {
-      fontFamily: "inconsolata-regular",
-      fontSize: 24,
-      position: "absolute",
-      bottom: 20,
-      textAlign: "center",
-      fontWeight: "bold",
-      letterSpacing: 1.2,
-      color: "white",
-      backgroundColor: "transparent"
-    }
-  })
+  animal: {
+    width: width - 25,
+    height: width - 25,
+    borderRadius: (width - 25) / 2
+  },
+  title: {
+    fontFamily: "Avenir",
+    fontSize: 32,
+    position: "absolute",
+    bottom: 0,
+    textAlign: "center",
+    fontWeight: "bold",
+    letterSpacing: 1.2,
+    color: "#C3CC6A",
+    backgroundColor: "transparent"
+  }
 });
