@@ -1,5 +1,6 @@
 import React from "react";
-import { ScrollView, View, StyleSheet } from "react-native";
+import { ScrollView, View, StyleSheet, FlatList } from "react-native";
+import { List } from "react-native-elements";
 
 import Side from "../components/Side";
 import StickyHeader from "../components/StickyHeader";
@@ -60,27 +61,71 @@ const Animal = () => {
     group_behaviour,
     gestation_period
   } = animal;
-  const presentation = {
-    name,
-    scientific_name,
-    classification,
-    group
+
+  const getRandomInt = max => {
+    return Math.floor(Math.random() * Math.floor(max)).toString();
   };
-  const hab = { location, habitat, diet, threat: biggest_threat };
-  const info = { size: animal["size_(h)"], weight, lifespan, group_behaviour };
-  const repro = { gestation_period, litter: animal["average_litter size"] };
+  const presentation = {
+    title: "Presentation",
+    side: "left",
+    data: { name, scientific_name, classification, group }
+  };
+  const hab = {
+    title: "Habitat",
+    side: "right",
+    data: { location, habitat, diet, threat: biggest_threat }
+  };
+  const info = {
+    title: "Informations",
+    side: "left",
+    data: { size: animal["size_(h)"], weight, lifespan, group_behaviour }
+  };
+  const repro = {
+    title: "Reproduction",
+    side: "right",
+    data: { gestation_period, litter: animal["average_litter size"] }
+  };
+  const data = [presentation, hab, info, repro];
 
   return (
     <View>
       <StickyHeader conservation_status={animal.conservation_status} />
-      <ScrollView>
+      <View style={styles.resultsContainer}>
+        <FlatList
+          contentContainerStyle={styles.contentContainer}
+          data={data}
+          keyExtractor={item => item.title}
+          windowSize={1}
+          initialNumToRender={1}
+          removeClippedSubviews="true"
+          viewabilityConfig={{
+            waitForInteraction: true,
+            viewAreaCoveragePercentThreshold: 100
+          }}
+          renderItem={({ item }) => {
+            return (
+              <Side side={item.side} data={item.data} title={item.title} />
+            );
+          }}
+        />
+      </View>
+      {/* <ScrollView>
         <Side side="left" data={presentation} title="Presentation" />
         <Side side="right" data={hab} title="Habitat" />
         <Side side="left" data={info} title="Informations" />
         <Side side="right" data={repro} title="Reproduction" />
-      </ScrollView>
+      </ScrollView> */}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  contentContainer: {
+    paddingVertical: 20
+  },
+  resultsContainer: {
+    marginBottom: 100
+  }
+});
 
 export default Animal;

@@ -25,6 +25,7 @@ const Side = ({ side, data, title }) => {
         <Animatable.Image
           animation={side === "left" ? "bounceInLeft" : "bounceInRight"}
           resizeMode="contain"
+          duration={3500}
           style={styles.img}
           source={img}
         />
@@ -66,7 +67,7 @@ const Side = ({ side, data, title }) => {
     const { img, data } = arg;
 
     return (
-      <View>
+      <View style={{ marginBottom: 30 }}>
         <Title text={title} size={30} color="black" margin={1} />
 
         <View style={styles.container}>
@@ -81,9 +82,8 @@ const Side = ({ side, data, title }) => {
     const { img, data } = arg;
 
     return (
-      <View>
+      <View style={{ marginBottom: 30 }}>
         <Title text={title} size={30} color="black" margin={1} />
-
         <View style={styles.container}>
           {this.text(data)}
           {this.image(img)}
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "row",
-    height: height / 1.7,
+    height: height / 1.5,
     alignItems: "center",
     justifyContent: "center"
   },
