@@ -10,6 +10,7 @@ import Home from "../screens/Home";
 import Animal from "../screens/Animal";
 import ListAnimals from "../screens/ListAnimals";
 import Profil from "../screens/Profil";
+import Register from "../screens/Register";
 
 const HomeStack = createStackNavigator(
   {
@@ -45,6 +46,7 @@ ListAnimalsStack.navigationOptions = {
 
 const UserStack = createStackNavigator(
   {
+    Register: Register,
     User: Profil
   },
   { headerMode: "none" }
@@ -57,7 +59,7 @@ UserStack.navigationOptions = {
 };
 
 export default createBottomTabNavigator({
+  UserStack,
   HomeStack,
-  ListAnimalsStack,
-  UserStack
+  ListAnimalsStack
 });
