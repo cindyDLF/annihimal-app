@@ -23,6 +23,5 @@ export default {
   trap: require("../assets/images/trap.png"),
   weight: require("../assets/images/weight.png"),
   size: require("../assets/images/size.png"),
-
-  ourang: require("../assets/images/orang.jpg")
+  ourang: require("../assets/images/orang.png")
 };

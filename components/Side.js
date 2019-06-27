@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { Text } from "react-native-elements";
+import Title from "./Title";
 import { Constants, Font } from "expo";
 import _ from "lodash";
 
@@ -34,9 +35,6 @@ const Side = ({ side, data, title }) => {
   text = pres => {
     return (
       <View style={styles.text}>
-        <Text h4 style={{ textAlign: "center" }}>
-          {title}
-        </Text>
         {Object.keys(pres).map((key, idx) => {
           return (
             <View
@@ -68,9 +66,13 @@ const Side = ({ side, data, title }) => {
     const { img, data } = arg;
 
     return (
-      <View style={styles.container}>
-        {this.image(img)}
-        {this.text(data)}
+      <View>
+        <Title text={title} size={30} color="black" margin={1} />
+
+        <View style={styles.container}>
+          {this.image(img)}
+          {this.text(data)}
+        </View>
       </View>
     );
   };
@@ -79,9 +81,13 @@ const Side = ({ side, data, title }) => {
     const { img, data } = arg;
 
     return (
-      <View style={styles.container}>
-        {this.text(data)}
-        {this.image(img)}
+      <View>
+        <Title text={title} size={30} color="black" margin={1} />
+
+        <View style={styles.container}>
+          {this.text(data)}
+          {this.image(img)}
+        </View>
       </View>
     );
   };
