@@ -5,7 +5,9 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  Dimensions
+  Dimensions,
+  KeyboardAvoidingView,
+  Platform
 } from "react-native";
 import Input from "../components/Input";
 import Title from "../components/Title";
@@ -93,44 +95,52 @@ class Register extends Component {
     const { alreadyRegistered } = this.state;
 
     return (
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <View style={styles.container}>
-          <View style={styles.containerHeader}>
-            <Title text="annihimal" />
-            <View style={styles.containerSwitch}>
-              <TouchableOpacity
-                onPress={this.changeRender}
-                style={styles.buttonSwitch}
-              >
-                <Text
-                  style={
-                    alreadyRegistered
-                      ? styles.textButtonSwitchActive
-                      : styles.textButtonSwitch
-                  }
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : null}
+        style={{ flex: 1 }}
+      >
+        <ScrollView
+          contentContainerStyle={{ flexGrow: 1 }}
+          style={{ backgroundColor: "#6F9B45" }}
+        >
+          <View style={styles.container}>
+            <View style={styles.containerHeader}>
+              <Title text="annihimal" />
+              <View style={styles.containerSwitch}>
+                <TouchableOpacity
+                  onPress={this.changeRender}
+                  style={styles.buttonSwitch}
                 >
-                  sign in
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={this.changeRender}
-                style={styles.buttonSwitch}
-              >
-                <Text
-                  style={
-                    !alreadyRegistered
-                      ? styles.textButtonSwitchActive
-                      : styles.textButtonSwitch
-                  }
+                  <Text
+                    style={
+                      alreadyRegistered
+                        ? styles.textButtonSwitchActive
+                        : styles.textButtonSwitch
+                    }
+                  >
+                    sign in
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={this.changeRender}
+                  style={styles.buttonSwitch}
                 >
-                  sign up
-                </Text>
-              </TouchableOpacity>
+                  <Text
+                    style={
+                      !alreadyRegistered
+                        ? styles.textButtonSwitchActive
+                        : styles.textButtonSwitch
+                    }
+                  >
+                    sign up
+                  </Text>
+                </TouchableOpacity>
+              </View>
             </View>
+            {this.renderRegister()}
           </View>
-          {this.renderRegister()}
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </KeyboardAvoidingView>
     );
   }
 }
