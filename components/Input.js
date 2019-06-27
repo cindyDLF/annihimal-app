@@ -8,7 +8,9 @@ const Input = ({ placeholder, value, handleOnChange, name }) => (
     style={styles.input}
     placeholder={placeholder}
     value={value}
-    secureTextEntry={name === "password" || "password_confirm" ? true : false}
+    secureTextEntry={
+      name === "password" || name === "password_confirm" ? true : false
+    }
     onChangeText={text => handleOnChange(name, text)}
   />
 );
@@ -31,7 +33,7 @@ const styles = StyleSheet.create({
     shadowRadius: 6.27,
     fontSize: 20,
     backgroundColor: "#c4f0c5",
-    marginTop: 20,
+    marginTop: 30,
     fontFamily: "Avenir"
   }
 });
