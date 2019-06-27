@@ -16,7 +16,7 @@ import {
 
 import SideSwipe from "react-native-sideswipe";
 
-import { Card } from "../Card";
+import { Card } from "./Card";
 
 const { width } = Dimensions.get("window");
 
@@ -38,13 +38,18 @@ class Carousel extends Component {
 
   componentDidMount = async () => {
     await Font.loadAsync({
-      dhurjati: require("../../assets/fonts/Dhurjati-Regular.ttf"),
-      "inconsolata-regular": require("../../assets/fonts/Inconsolata-Regular.ttf"),
-      "inconsolata-bold": require("../../assets/fonts/Inconsolata-Bold.ttf"),
-      "libre-barcode-39": require("../../assets/fonts/LibreBarcode39-Regular.ttf")
+      dhurjati: require("../assets/fonts/Dhurjati-Regular.ttf"),
+      "inconsolata-regular": require("../assets/fonts/Inconsolata-Regular.ttf"),
+      "inconsolata-bold": require("../assets/fonts/Inconsolata-Bold.ttf"),
+      "libre-barcode-39": require("../assets/fonts/LibreBarcode39-Regular.ttf")
     });
 
     this.setState({ fontsLoaded: true });
+  };
+
+  onPress = () => {
+    console.log("press");
+    this.props.navigation.navigate("Animal");
   };
 
   render = () => {
@@ -65,20 +70,18 @@ class Carousel extends Component {
         extractKey={item => item.value}
         contentOffset={offset}
         onIndexChange={index => this.setState(() => ({ currentIndex: index }))}
-        renderItem={({ itemIndex, currentIndex, item, animatedValue }) => (
-          <TouchableOpacity
-            onPress={() => {
-              this.props.navigation.navigate("Animal");
-            }}
-          >
-            <Card
-              animal={item}
-              index={itemIndex}
-              currentIndex={currentIndex}
-              animatedValue={animatedValue}
-            />
-          </TouchableOpacity>
-        )}
+        renderItem={({ itemIndex, currentIndex, item, animatedValue }) => {
+          return (
+            <TouchableOpacity onPress={this.onPress}>
+              <Card
+                animal={item}
+                index={itemIndex}
+                currentIndex={currentIndex}
+                animatedValue={animatedValue}
+              />
+            </TouchableOpacity>
+          );
+        }}
       />
     );
   };
