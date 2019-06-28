@@ -1,9 +1,11 @@
 import React from "react";
 import { Text, StyleSheet } from "react-native";
 
+import Colors from "../constants/Colors";
+
 const Title = ({
   text,
-  color = "#C3CC6A",
+  color = Colors.mainColor,
   size = 40,
   weight = "bold",
   margin = 20

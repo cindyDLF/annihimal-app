@@ -1,5 +1,6 @@
 import React from "react";
 import { Text, StyleSheet, TouchableOpacity, Dimensions } from "react-native";
+import Colors from "../constants/Colors";
 const width = Dimensions.get("window").width;
 
 const Button = ({ text, onPress }) => (
@@ -17,7 +18,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   button: {
-    backgroundColor: "#C3CC6A",
+    backgroundColor: Colors.mainColor,
     alignItems: "center",
     width: width - 50,
     borderRadius: 30,

@@ -4,6 +4,7 @@ import { Constants } from "expo";
 import { ListItem, Text } from "react-native-elements";
 import TouchableScale from "react-native-touchable-scale";
 
+import Colors from "../constants/Colors";
 import images from "../components/images";
 
 const data = [
@@ -70,11 +71,11 @@ const ListAnimal = () => {
 const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight,
-    backgroundColor: "#6F9B45",
+    backgroundColor: Colors.primaryColor,
     flex: 1
   },
   containerStyle: {
-    backgroundColor: "#c4f0c5",
+    backgroundColor: Colors.secondaryColor,
     borderRadius: 30,
     marginBottom: 8,
     marginRight: 8,
@@ -90,7 +91,7 @@ const styles = StyleSheet.create({
     shadowRadius: 6.27
   },
   containerTitle: {
-    color: "#6F9B45",
+    color: Colors.primaryColor,
     fontFamily: "Avenir",
     fontWeight: "bold"
   }
