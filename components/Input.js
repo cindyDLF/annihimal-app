@@ -1,6 +1,8 @@
 import React from "react";
 import { TextInput, StyleSheet, Dimensions } from "react-native";
 
+import Colors from "../constants/Colors";
+
 const width = Dimensions.get("window").width;
 
 const Input = ({ placeholder, value, handleOnChange, name }) => (
@@ -20,7 +22,7 @@ export default Input;
 const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
-    borderColor: "#c4f0c5",
+    borderColor: Colors.secondaryColor,
     width: width - 50,
     padding: 12,
     borderRadius: 25,
@@ -32,7 +34,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.34,
     shadowRadius: 6.27,
     fontSize: 20,
-    backgroundColor: "#c4f0c5",
+    backgroundColor: Colors.secondaryColor,
     marginTop: 30,
     fontFamily: "Avenir"
   }

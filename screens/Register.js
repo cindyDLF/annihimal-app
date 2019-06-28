@@ -13,6 +13,7 @@ import Input from "../components/Input";
 import Title from "../components/Title";
 import Button from "../components/Button";
 
+import Colors from "../constants/Colors";
 const width = Dimensions.get("window").width;
 
 class Register extends Component {
@@ -101,7 +102,7 @@ class Register extends Component {
       >
         <ScrollView
           contentContainerStyle={{ flexGrow: 1 }}
-          style={{ backgroundColor: "#6F9B45" }}
+          style={{ backgroundColor: Colors.primaryColor }}
         >
           <View style={styles.container}>
             <View style={styles.containerHeader}>
@@ -149,14 +150,14 @@ export default Register;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#6F9B45"
+    backgroundColor: Colors.primaryColor
   },
   subContainer: {
     justifyContent: "center",
     alignItems: "center"
   },
   buttonSwitch: {
-    backgroundColor: "#C3CC6A",
+    backgroundColor: Colors.mainColor,
     width: (width - 50) / 2,
     alignItems: "center",
     justifyContent: "center",

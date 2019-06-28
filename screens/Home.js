@@ -6,6 +6,8 @@ import SideSwipe from "react-native-sideswipe";
 import Carousel from "../components/Carousel";
 import Title from "../components/Title";
 
+import Colors from "../constants/Colors";
+
 export default class Home extends Component {
   static navigationOptions = {
     title: "Home"
@@ -31,7 +33,7 @@ const styles = StyleSheet.create({
     alignItems: "stretch",
     justifyContent: "flex-start",
     paddingTop: Constants.statusBarHeight,
-    backgroundColor: "#6F9B45"
+    backgroundColor: Colors.primaryColor
   },
   center: {
     justifyContent: "center",

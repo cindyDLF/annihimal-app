@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Animated, Dimensions, StyleSheet } from "react-native";
 
+import Colors from "../constants/Colors";
+
 import images from "./images";
 
 const { width: screenWidth } = Dimensions.get("window");
@@ -86,7 +88,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
     letterSpacing: 1.2,
-    color: "#C3CC6A",
+    color: Colors.mainColor,
     backgroundColor: "transparent"
   }
 });

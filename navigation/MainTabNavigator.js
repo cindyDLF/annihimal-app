@@ -12,6 +12,8 @@ import ListAnimals from "../screens/ListAnimals";
 import Profile from "../screens/Profile";
 import Register from "../screens/Register";
 
+import Colors from "../constants/Colors";
+
 const HomeStack = createStackNavigator(
   {
     Home: {
@@ -65,7 +67,7 @@ export default createBottomTabNavigator(
   },
   {
     tabBarOptions: {
-      activeTintColor: "#6F9B45", // active icon color
+      activeTintColor: Colors.primaryColor, // active icon color
       //inactiveTintColor: "#586589", // inactive icon color
       style: {
         backgroundColor: "#4D3A34" // TabBar background

@@ -1,6 +1,7 @@
 import React from "react";
 import { Text, StyleSheet, Dimensions, View } from "react-native";
 import Side from "../components/Side";
+import Colors from "../constants/Colors";
 
 const { height, width } = Dimensions.get("window");
 
@@ -19,7 +20,7 @@ const Profile = ({ data, title }) => {
 const styles = StyleSheet.create({
   container: {
     paddingTop: 30,
-    backgroundColor: "#6F9B45",
+    backgroundColor: Colors.primaryColor,
     flex: 1,
     flexDirection: "row",
     height: height / 1.5,
