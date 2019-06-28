@@ -9,7 +9,7 @@ import TabBarIcon from "../components/TabBarIcon";
 import Home from "../screens/Home";
 import Animal from "../screens/Animal";
 import ListAnimals from "../screens/ListAnimals";
-import Profil from "../screens/Profil";
+import Profile from "../screens/Profile";
 import Register from "../screens/Register";
 
 const HomeStack = createStackNavigator(
@@ -46,7 +46,7 @@ ListAnimalsStack.navigationOptions = {
 const UserStack = createStackNavigator(
   {
     Register: Register,
-    User: Profil
+    User: Profile
   },
   { headerMode: "none" }
 );
