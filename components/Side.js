@@ -102,7 +102,10 @@ const Side = ({ side, data, title }) => {
       "group_behaviour",
       "habitat",
       "diet",
-      "threat"
+      "threat",
+      "username",
+      "email",
+      "password"
     ];
     if (toHide.indexOf(key) != -1) {
       return;
@@ -135,6 +138,11 @@ const Side = ({ side, data, title }) => {
 
       case "Informations":
         return images.diurnal;
+
+        break;
+
+      case "Profile":
+        return images.user;
 
         break;
       default:
