@@ -2,6 +2,7 @@ import React from "react";
 import { ScrollView, View, StyleSheet, FlatList } from "react-native";
 import { List } from "react-native-elements";
 
+import FavoriteButton from "../components/FavoriteButton";
 import Side from "../components/Side";
 import StickyHeader from "../components/StickyHeader";
 
@@ -39,7 +40,7 @@ const Animal = () => {
     "average_litter size": "1",
     "name_of young": "Infant",
     "age_of weaning": "3 years",
-    conservation_status: "Near Threatened",
+    conservation_status: "Extinct",
     //  conservation_status: "Critically Endangered",
     "estimated_population size": "13,500",
     biggest_threat: "Habitat loss",
@@ -88,20 +89,22 @@ const Animal = () => {
   const data = [presentation, hab, info, repro];
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <StickyHeader conservation_status={animal.conservation_status} />
       <View style={styles.resultsContainer}>
         <FlatList
           contentContainerStyle={styles.contentContainer}
           data={data}
           keyExtractor={item => item.title}
-          windowSize={1}
+          //windowSize={1}
           initialNumToRender={1}
           removeClippedSubviews="true"
-          viewabilityConfig={{
-            waitForInteraction: true,
-            viewAreaCoveragePercentThreshold: 100
-          }}
+          viewabilityConfig={
+            {
+              //waitForInteraction: true,
+              //viewAreaCoveragePercentThreshold: 100
+            }
+          }
           renderItem={({ item }) => {
             return (
               <Side side={item.side} data={item.data} title={item.title} />
@@ -109,12 +112,7 @@ const Animal = () => {
           }}
         />
       </View>
-      {/* <ScrollView>
-        <Side side="left" data={presentation} title="Presentation" />
-        <Side side="right" data={hab} title="Habitat" />
-        <Side side="left" data={info} title="Informations" />
-        <Side side="right" data={repro} title="Reproduction" />
-      </ScrollView> */}
+      <FavoriteButton />
     </View>
   );
 };
@@ -122,6 +120,7 @@ const Animal = () => {
 const styles = StyleSheet.create({
   contentContainer: {
     paddingVertical: 20
+    //backgroundColor: "red"
   },
   resultsContainer: {
     marginBottom: 100
