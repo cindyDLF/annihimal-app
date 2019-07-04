@@ -7,7 +7,8 @@ import {
   TouchableOpacity,
   Dimensions,
   KeyboardAvoidingView,
-  Platform
+  Platform,
+  AsyncStorage
 } from "react-native";
 import { withNavigation } from "react-navigation";
 import Input from "../components/Input";
@@ -49,6 +50,11 @@ class Register extends Component {
       const { errors } = res;
       makeAlert("Error", errors, "OK");
     } else {
+      try {
+        await AsyncStorage.setItem("@annihimal:user", JSON.stringify(res));
+      } catch (error) {
+        console.log(error);
+      }
       this.props.navigation.navigate("Profile");
     }
   };
