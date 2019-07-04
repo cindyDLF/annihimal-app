@@ -26,23 +26,7 @@ class Profile extends Component {
       { id: 1, name: "Maki", img: images.maki },
       { id: 2, name: "Meerkat", img: images.meerkat },
       { id: 3, name: "Tiger", img: images.tiger },
-      { id: 4, name: "Longnose", img: images.longnose },
-      { id: 5, name: "Maki", img: images.maki },
-      { id: 6, name: "Meerkat", img: images.meerkat },
-      { id: 7, name: "Tiger", img: images.tiger },
-      { id: 8, name: "Longnose", img: images.longnose },
-      { id: 9, name: "Maki", img: images.maki },
-      { id: 10, name: "Meerkat", img: images.meerkat },
-      { id: 11, name: "Tiger", img: images.tiger },
-      { id: 12, name: "Longnose", img: images.longnose },
-      { id: 13, name: "Maki", img: images.maki },
-      { id: 14, name: "Meerkat", img: images.meerkat },
-      { id: 15, name: "Tiger", img: images.tiger },
-      { id: 16, name: "Longnose", img: images.longnose },
-      { id: 17, name: "Maki", img: images.maki },
-      { id: 18, name: "Meerkat", img: images.meerkat },
-      { id: 19, name: "Tiger", img: images.tiger },
-      { id: 20, name: "Longnose", img: images.longnose }
+      { id: 4, name: "Longnose", img: images.longnose }
     ]
   };
 
@@ -67,9 +51,9 @@ class Profile extends Component {
         <View style={styles.container}>
           <User data={user} />
 
-          <Title text="Favorites" margin={5} />
+          <Title text="Favourites" margin={5} />
 
-          <FlatAnni data={data} />
+          {data ? <FlatAnni data={data} /> : <Text>No favourites 😿</Text>}
         </View>
       );
     } else {
