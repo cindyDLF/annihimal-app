@@ -14,6 +14,9 @@ import Title from "../components/Title";
 import Button from "../components/Button";
 
 import Colors from "../constants/Colors";
+
+import { userRegister, userLogin } from "../api//callApi";
+
 const width = Dimensions.get("window").width;
 
 class Register extends Component {
@@ -21,7 +24,7 @@ class Register extends Component {
     username: "",
     email: "",
     password: "",
-    password_confirm: "",
+    password_confirmation: "",
     alreadyRegistered: false
   };
   handleOnChange = (value, text) => {
@@ -39,7 +42,7 @@ class Register extends Component {
       username,
       email,
       password,
-      password_confirm
+      password_confirmation
     } = this.state;
     if (!alreadyRegistered) {
       return (
@@ -64,11 +67,21 @@ class Register extends Component {
           />
           <Input
             placeholder="password confirm"
-            value={password_confirm}
+            value={password_confirmation}
             handleOnChange={this.handleOnChange}
-            name="password_confirm"
+            name="password_confirmation"
           />
-          <Button text="send" />
+          <Button
+            text="send"
+            onPress={() =>
+              userRegister({
+                username,
+                email,
+                password,
+                password_confirmation
+              })
+            }
+          />
         </View>
       );
     } else {
@@ -86,7 +99,7 @@ class Register extends Component {
             handleOnChange={this.handleOnChange}
             name="password"
           />
-          <Button text="send" />
+          <Button text="send" onPress={() => userLogin({ email, password })} />
         </View>
       );
     }
