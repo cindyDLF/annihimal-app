@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
     borderBottomColor: Colors.secondaryColor,
     width: width - 50,
     padding: 8,
-    //borderRadius: 25,
     fontSize: 20,
     marginTop: 30,
     fontFamily: "Avenir",

@@ -12,10 +12,10 @@ const StickyHeader = ({ conservation_status }) => {
       shadowColor: "#000",
       shadowOffset: {
         width: 0,
-        height: 4
+        height: 5
       },
-      shadowOpacity: 0.3,
-      shadowRadius: 4.65,
+      shadowOpacity: 0.05,
+      shadowRadius: 1,
       justifyContent: "center",
       alignItems: "center",
       paddingTop: 16
