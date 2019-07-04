@@ -1,10 +1,10 @@
 import React from "react";
-import { StyleSheet, View, FlatList, Dimensions } from "react-native";
+import { StyleSheet, View, Dimensions } from "react-native";
 import { Constants } from "expo";
-import { ListItem, Text } from "react-native-elements";
-import TouchableScale from "react-native-touchable-scale";
+import { Text } from "react-native-elements";
 
 import Colors from "../constants/Colors";
+import ListAnni from "../components/List";
 import images from "../components/images";
 
 const width = Dimensions.get("window").width;
@@ -38,34 +38,7 @@ const ListAnimal = () => {
       <Text h4 style={{ marginBottom: 16 }}>
         Animal List
       </Text>
-      <FlatList
-        data={data}
-        keyExtractor={item => item.id.toString()}
-        windowSize={1}
-        initialNumToRender={1}
-        removeClippedSubviews="true"
-        viewabilityConfig={{
-          waitForInteraction: true,
-          viewAreaCoveragePercentThreshold: 100
-        }}
-        renderItem={({ item }) => {
-          return (
-            <ListItem
-              friction={90}
-              tension={100}
-              activeScale={0.95}
-              Component={TouchableScale}
-              containerStyle={styles.containerStyle}
-              titleStyle={styles.containerTitle}
-              title={item.name}
-              leftAvatar={{ source: item.img }}
-              onPress={() => {
-                console.log("TODO::: navigate to animal page + send data");
-              }}
-            />
-          );
-        }}
-      />
+      <ListAnni data={data} />
     </View>
   );
 };
@@ -80,12 +53,8 @@ const styles = StyleSheet.create({
   },
   containerStyle: {
     backgroundColor: Colors.whiteColor,
-    //borderRadius: 30,
     marginBottom: 10,
     padding: 16,
-    //marginRight: 8,
-    //marginLeft: 8,
-    //borderWidth: 1,
     borderColor: "black",
     shadowColor: "#000",
     shadowOffset: {
