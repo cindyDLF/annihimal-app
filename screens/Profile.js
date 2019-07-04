@@ -7,19 +7,48 @@ import {
   AsyncStorage,
   ActivityIndicator
 } from "react-native";
-import Side from "../components/Side";
+
+import User from "../components/User";
+import FlatAnni from "../components/List";
+import Title from "../components/Title";
+
 import Colors from "../constants/Colors";
+import images from "../components/images";
 
 const { height, width } = Dimensions.get("window");
 
 class Profile extends Component {
   state = {
     user: {},
-    isLoading: true
+    isLoading: true,
+    data: [
+      { id: 1, name: "Maki", img: images.maki },
+      { id: 2, name: "Meerkat", img: images.meerkat },
+      { id: 3, name: "Tiger", img: images.tiger },
+      { id: 4, name: "Longnose", img: images.longnose },
+      { id: 5, name: "Maki", img: images.maki },
+      { id: 6, name: "Meerkat", img: images.meerkat },
+      { id: 7, name: "Tiger", img: images.tiger },
+      { id: 8, name: "Longnose", img: images.longnose },
+      { id: 9, name: "Maki", img: images.maki },
+      { id: 10, name: "Meerkat", img: images.meerkat },
+      { id: 11, name: "Tiger", img: images.tiger },
+      { id: 12, name: "Longnose", img: images.longnose },
+      { id: 13, name: "Maki", img: images.maki },
+      { id: 14, name: "Meerkat", img: images.meerkat },
+      { id: 15, name: "Tiger", img: images.tiger },
+      { id: 16, name: "Longnose", img: images.longnose },
+      { id: 17, name: "Maki", img: images.maki },
+      { id: 18, name: "Meerkat", img: images.meerkat },
+      { id: 19, name: "Tiger", img: images.tiger },
+      { id: 20, name: "Longnose", img: images.longnose }
+    ]
   };
+
   componentWillMount() {
     this.retrieveData();
   }
+
   retrieveData = async () => {
     try {
       const value = await AsyncStorage.getItem("@annihimal:user");
@@ -28,21 +57,29 @@ class Profile extends Component {
         const user = JSON.parse(value);
         this.setState({ user, isLoading: false });
       }
-    } catch (error) {
-      // Error retrieving data
-    }
+    } catch (error) {}
   };
+
   render() {
-    //console.log(this.state.user);
-    const { user, isLoading } = this.state;
+    const { user, isLoading, data } = this.state;
     if (!isLoading) {
       return (
         <View style={styles.container}>
-          <Text>{user.user.username}</Text>
+          <View style={{ padding: 8 }}>
+            <User data={user} />
+          </View>
+          <View
+            style={{
+              height: height / 2
+            }}
+          >
+            <Title text="Favoris" />
+            <FlatAnni data={data} />
+          </View>
         </View>
       );
     } else {
-      return <ActivityIndicator size="small" color="#00ff00" />;
+      return <ActivityIndicator size="small" color={Colors.primaryColor} />;
     }
   }
 }
@@ -52,8 +89,6 @@ const styles = StyleSheet.create({
     paddingTop: 30,
     backgroundColor: Colors.primaryColor,
     flex: 1,
-    flexDirection: "row",
-    height: height / 1.5,
     alignItems: "center",
     justifyContent: "center"
   }
