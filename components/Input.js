@@ -11,7 +11,7 @@ const Input = ({ placeholder, value, handleOnChange, name }) => (
     placeholder={placeholder}
     value={value}
     secureTextEntry={
-      name === "password" || name === "password_confirm" ? true : false
+      name === "password" || name === "password_confirmation" ? true : false
     }
     onChangeText={text => handleOnChange(name, text)}
   />
