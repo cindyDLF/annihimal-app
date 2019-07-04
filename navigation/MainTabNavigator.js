@@ -48,7 +48,7 @@ ListAnimalsStack.navigationOptions = {
 const UserStack = createStackNavigator(
   {
     Register: Register,
-    User: Profile
+    Profile: Profile
   },
   { headerMode: "none" }
 );

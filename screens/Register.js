@@ -9,6 +9,7 @@ import {
   KeyboardAvoidingView,
   Platform
 } from "react-native";
+import { withNavigation } from "react-navigation";
 import Input from "../components/Input";
 import Title from "../components/Title";
 import Button from "../components/Button";
@@ -16,6 +17,7 @@ import Button from "../components/Button";
 import Colors from "../constants/Colors";
 
 import { userRegister, userLogin } from "../api//callApi";
+import { makeAlert } from "../utils";
 
 const width = Dimensions.get("window").width;
 
@@ -27,6 +29,7 @@ class Register extends Component {
     password_confirmation: "",
     alreadyRegistered: false
   };
+
   handleOnChange = (value, text) => {
     this.setState({ [value]: text });
   };
@@ -34,6 +37,35 @@ class Register extends Component {
   changeRender = () => {
     const { alreadyRegistered } = this.state;
     this.setState({ alreadyRegistered: !alreadyRegistered });
+  };
+
+  login = async () => {
+    const { email, password } = this.state;
+    const { status, res } = await userLogin({ email, password });
+    console.log("STATUS:::", status);
+    console.log("RES:::", res);
+
+    if (status != 200) {
+      const { errors } = res;
+      makeAlert("Error", errors, "OK");
+    } else {
+      this.props.navigation.navigate("Profile");
+    }
+  };
+
+  register = async () => {
+    const { username, email, password, password_confirmation } = this.state;
+    const user = { username, email, password, password_confirmation };
+    const { status, res } = await userRegister(user);
+    console.log("STATUS:::", status);
+    console.log("RES:::", res);
+
+    if (status != 201) {
+      const { errors } = res;
+      makeAlert("Error", errors, "OK");
+    } else {
+      this.setState({ alreadyRegistered: true });
+    }
   };
 
   renderRegister = () => {
@@ -44,6 +76,7 @@ class Register extends Component {
       password,
       password_confirmation
     } = this.state;
+
     if (!alreadyRegistered) {
       return (
         <View style={styles.subContainer}>
@@ -71,17 +104,7 @@ class Register extends Component {
             handleOnChange={this.handleOnChange}
             name="password_confirmation"
           />
-          <Button
-            text="send"
-            onPress={() =>
-              userRegister({
-                username,
-                email,
-                password,
-                password_confirmation
-              })
-            }
-          />
+          <Button text="send" onPress={this.register} />
         </View>
       );
     } else {
@@ -99,7 +122,7 @@ class Register extends Component {
             handleOnChange={this.handleOnChange}
             name="password"
           />
-          <Button text="send" onPress={() => userLogin({ email, password })} />
+          <Button text="send" onPress={this.login} />
         </View>
       );
     }
@@ -158,7 +181,7 @@ class Register extends Component {
     );
   }
 }
-export default Register;
+export default withNavigation(Register);
 
 const styles = StyleSheet.create({
   container: {
