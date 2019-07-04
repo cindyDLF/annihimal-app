@@ -28,7 +28,7 @@ class Register extends Component {
     email: "",
     password: "",
     password_confirmation: "",
-    alreadyRegistered: false
+    alreadyRegistered: true
   };
 
   handleOnChange = (value, text) => {
@@ -65,7 +65,6 @@ class Register extends Component {
     const { status, res } = await userRegister(user);
     console.log("STATUS:::", status);
     console.log("RES:::", res);
-
     if (status != 201) {
       const { errors } = res;
       makeAlert("Error", errors, "OK");
@@ -151,7 +150,7 @@ class Register extends Component {
               <Title text="annihimal" />
               <View style={styles.containerSwitch}>
                 <TouchableOpacity
-                  onPress={this.changeRender}
+                  onPress={() => this.setState({ alreadyRegistered: true })}
                   style={styles.buttonSwitch}
                 >
                   <Text
@@ -165,7 +164,7 @@ class Register extends Component {
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={this.changeRender}
+                  onPress={() => this.setState({ alreadyRegistered: false })}
                   style={styles.buttonSwitch}
                 >
                   <Text
