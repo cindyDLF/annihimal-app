@@ -1,38 +1,36 @@
-import { BASE_URL, SUBCRIBE_USER, LOGIN_USER } from "../endpoint";
+import { BASE_URL, SUBSCRIBE_USER, LOGIN_USER } from "../constants/endpoint";
 
 export const userRegister = async data => {
-  console.log(data);
   try {
-    await fetch(BASE_URL + SUBCRIBE_USER, {
+    const ret = await fetch(BASE_URL + SUBSCRIBE_USER, {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
       body: JSON.stringify(data)
-    }).then(response => {
-      console.log(response);
-      return response.json();
     });
+    const { status } = ret;
+    const res = await ret.json();
+    return { status, res };
   } catch (err) {
     console.log(err);
   }
 };
 
 export const userLogin = async data => {
-  console.log(data);
   try {
-    await fetch(BASE_URL + LOGIN_USER, {
+    const ret = await fetch(BASE_URL + LOGIN_USER, {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
       body: JSON.stringify(data)
-    }).then(response => {
-      console.log(response);
-      return response.json();
     });
+    const { status } = ret;
+    const res = await ret.json();
+    return { status, res };
   } catch (err) {
     console.log(err);
   }
