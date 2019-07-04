@@ -1,11 +1,13 @@
 import React from "react";
-import { StyleSheet, View, FlatList } from "react-native";
+import { StyleSheet, View, FlatList, Dimensions } from "react-native";
 import { Constants } from "expo";
 import { ListItem, Text } from "react-native-elements";
 import TouchableScale from "react-native-touchable-scale";
 
 import Colors from "../constants/Colors";
 import images from "../components/images";
+
+const width = Dimensions.get("window").width;
 
 const data = [
   { id: 1, name: "Maki", img: images.maki },
@@ -72,15 +74,18 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight,
     backgroundColor: Colors.primaryColor,
-    flex: 1
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
   },
   containerStyle: {
-    backgroundColor: Colors.secondaryColor,
-    borderRadius: 30,
-    marginBottom: 8,
-    marginRight: 8,
-    marginLeft: 8,
-    borderWidth: 1,
+    backgroundColor: Colors.whiteColor,
+    //borderRadius: 30,
+    marginBottom: 10,
+    padding: 16,
+    //marginRight: 8,
+    //marginLeft: 8,
+    //borderWidth: 1,
     borderColor: "black",
     shadowColor: "#000",
     shadowOffset: {
@@ -88,10 +93,12 @@ const styles = StyleSheet.create({
       height: 5
     },
     shadowOpacity: 0.34,
-    shadowRadius: 6.27
+    shadowRadius: 6.27,
+    width: width - 10,
+    borderRadius: 20
   },
   containerTitle: {
-    color: Colors.primaryColor,
+    color: Colors.mainColor,
     fontFamily: "Avenir",
     fontWeight: "bold"
   }

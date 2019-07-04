@@ -8,11 +8,7 @@ import {
   TouchableOpacity
 } from "react-native";
 import { Constants, Font } from "expo";
-import {
-  withNavigation,
-  createStackNavigator,
-  createAppContainer
-} from "react-navigation";
+import { withNavigation } from "react-navigation";
 
 import SideSwipe from "react-native-sideswipe";
 

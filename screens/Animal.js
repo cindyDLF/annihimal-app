@@ -2,6 +2,8 @@ import React from "react";
 import { ScrollView, View, StyleSheet, FlatList } from "react-native";
 import { List } from "react-native-elements";
 
+import Colors from "../constants/Colors";
+
 import FavoriteButton from "../components/FavoriteButton";
 import Side from "../components/Side";
 import StickyHeader from "../components/StickyHeader";
@@ -89,7 +91,7 @@ const Animal = () => {
   const data = [presentation, hab, info, repro];
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={styles.container}>
       <StickyHeader conservation_status={animal.conservation_status} />
       <View style={styles.resultsContainer}>
         <FlatList
@@ -118,6 +120,10 @@ const Animal = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: Colors.primaryColor,
+    flex: 1
+  },
   contentContainer: {
     paddingVertical: 20
     //backgroundColor: "red"

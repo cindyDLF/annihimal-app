@@ -5,7 +5,7 @@ import Colors from "../constants/Colors";
 
 const Title = ({
   text,
-  color = Colors.mainColor,
+  color = Colors.blackColor,
   size = 40,
   weight = "bold",
   margin = 20
