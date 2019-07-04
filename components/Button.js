@@ -15,13 +15,14 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 26,
     fontFamily: "Avenir",
-    fontWeight: "bold"
+    fontWeight: "bold",
+    color: Colors.mainColor
   },
   button: {
-    backgroundColor: Colors.mainColor,
+    backgroundColor: Colors.whiteColor,
     alignItems: "center",
     width: width - 50,
-    borderRadius: 30,
+    borderRadius: 20,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,

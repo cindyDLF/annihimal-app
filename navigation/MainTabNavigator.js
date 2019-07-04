@@ -67,10 +67,10 @@ export default createBottomTabNavigator(
   },
   {
     tabBarOptions: {
-      activeTintColor: Colors.primaryColor, // active icon color
+      activeTintColor: Colors.mainColor, // active icon color
       //inactiveTintColor: "#586589", // inactive icon color
       style: {
-        backgroundColor: "#4D3A34" // TabBar background
+        backgroundColor: Colors.whiteColor // TabBar background
       }
     }
   }
