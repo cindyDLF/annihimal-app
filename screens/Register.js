@@ -25,8 +25,8 @@ const width = Dimensions.get("window").width;
 class Register extends Component {
   state = {
     username: "",
-    email: "",
-    password: "",
+    email: "iam@email.fr",
+    password: "Test123",
     password_confirmation: "",
     alreadyRegistered: true
   };
