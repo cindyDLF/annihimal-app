@@ -7,6 +7,7 @@ import {
   AsyncStorage,
   ActivityIndicator
 } from "react-native";
+import { Constants } from "expo";
 
 import User from "../components/User";
 import FlatAnni from "../components/List";
@@ -53,7 +54,6 @@ class Profile extends Component {
     try {
       const value = await AsyncStorage.getItem("@annihimal:user");
       if (value !== null) {
-        // We have data!!
         const user = JSON.parse(value);
         this.setState({ user, isLoading: false });
       }
@@ -65,17 +65,11 @@ class Profile extends Component {
     if (!isLoading) {
       return (
         <View style={styles.container}>
-          <View style={{ padding: 8 }}>
-            <User data={user} />
-          </View>
-          <View
-            style={{
-              height: height / 2
-            }}
-          >
-            <Title text="Favoris" />
-            <FlatAnni data={data} />
-          </View>
+          <User data={user} />
+
+          <Title text="Favorites" margin={5} />
+
+          <FlatAnni data={data} />
         </View>
       );
     } else {
@@ -86,7 +80,6 @@ class Profile extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 30,
     backgroundColor: Colors.primaryColor,
     flex: 1,
     alignItems: "center",

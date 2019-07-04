@@ -1,26 +1,59 @@
 import React from "react";
-import { StyleSheet, View, Dimensions } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Dimensions,
+  AsyncStorage,
+  TouchableOpacity
+} from "react-native";
+import { withNavigation } from "react-navigation";
+import { Constants } from "expo";
 import { Avatar, Text } from "react-native-elements";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import _ from "lodash";
+
+import Button from "./Button";
 
 import Colors from "../constants/Colors";
 import images from "./images";
 
 const { height, width } = Dimensions.get("window");
 
-const User = ({ data }) => {
-  const { email, username } = data.user;
+class User extends React.Component {
+  state = {
+    data: this.props.data
+  };
 
-  return (
-    <View style={styles.container}>
-      <Avatar size="xlarge" source={images["user"]} rounded />
-      <Text h4>{username}</Text>
-      <Text>{email}</Text>
-    </View>
-  );
-};
+  disconnect = async () => {
+    try {
+      await AsyncStorage.removeItem("@annihimal:user");
+      this.props.navigation.navigate("Register");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-export default User;
+  render() {
+    const { email, username } = this.state.data.user;
+    return (
+      <View style={styles.container}>
+        <TouchableOpacity onPress={this.disconnect} style={styles.logout}>
+          <FontAwesome5
+            name="power-off"
+            size={26}
+            style={{ marginBottom: -3 }}
+            color="red"
+          />
+        </TouchableOpacity>
+        <Avatar size="xlarge" source={images["user"]} rounded />
+        <Text h4>{username}</Text>
+        <Text>{email}</Text>
+      </View>
+    );
+  }
+}
+
+export default withNavigation(User);
 
 const styles = StyleSheet.create({
   container: {
@@ -28,6 +61,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     alignItems: "center",
     padding: 8,
+    marginTop: 30,
     width: width - 12,
     shadowColor: "#000",
     shadowOffset: {
@@ -36,5 +70,11 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.05,
     shadowRadius: 1
+  },
+  logout: {
+    ...StyleSheet.absoluteFillObject,
+    alignSelf: "flex-end",
+    margin: 8,
+    position: "absolute"
   }
 });
