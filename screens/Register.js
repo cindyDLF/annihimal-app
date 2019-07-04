@@ -151,7 +151,7 @@ class Register extends Component {
               <View style={styles.containerSwitch}>
                 <TouchableOpacity
                   onPress={() => this.setState({ alreadyRegistered: true })}
-                  style={styles.buttonSwitch}
+                  style={styles.buttonSwitchLeft}
                 >
                   <Text
                     style={
@@ -165,7 +165,7 @@ class Register extends Component {
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => this.setState({ alreadyRegistered: false })}
-                  style={styles.buttonSwitch}
+                  style={styles.buttonSwitchRight}
                 >
                   <Text
                     style={
@@ -197,13 +197,39 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
-  buttonSwitch: {
-    backgroundColor: Colors.mainColor,
+  buttonSwitchRight: {
+    backgroundColor: "white",
     width: (width - 50) / 2,
     alignItems: "center",
     justifyContent: "center",
     padding: 5,
-    borderWidth: 1
+    borderBottomRightRadius: 20,
+    borderTopRightRadius: 20,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 5
+    },
+    shadowOpacity: 0.05,
+    shadowRadius: 1
+  },
+  buttonSwitchLeft: {
+    backgroundColor: "white",
+    width: (width - 50) / 2,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 5,
+    borderRightWidth: 0.5,
+    borderColor: Colors.mainColor,
+    borderBottomLeftRadius: 20,
+    borderTopLeftRadius: 20,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 5
+    },
+    shadowOpacity: 0.05,
+    shadowRadius: 1
   },
   containerSwitch: {
     flexDirection: "row",
@@ -212,13 +238,14 @@ const styles = StyleSheet.create({
   },
   textButtonSwitch: {
     fontFamily: "Avenir",
-    fontSize: 20
+    fontSize: 20,
+    color: Colors.mainColor
   },
   textButtonSwitchActive: {
     fontFamily: "Avenir",
     fontSize: 20,
     fontWeight: "bold",
-    textDecorationLine: "underline"
+    color: Colors.mainColor
   },
   containerHeader: {
     justifyContent: "center",
