@@ -18,26 +18,29 @@ const { width } = Dimensions.get("window");
 
 const animals = [
   {
-    id: 9,
-    name: "Javan Rhinoceros",
+    id: 183,
+    name: "Robin",
+    value: "https://a-z-animals.com/media/animals/images/470x370/robin5.jpg"
+  },
+  {
+    id: 113,
+    name: "Umbrellabird",
     value:
-      "https://a-z-animals.com/media/animals/images/470x370/javan_rhinoceros.jpg"
+      "https://a-z-animals.com/media/animals/images/470x370/umbrellabird_5.jpg"
   },
   {
-    id: 13,
-    name: "Red Wolf",
-    value: "https://a-z-animals.com/media/animals/images/470x370/red_wolf2.jpg"
-  },
-  {
-    id: 14,
-    name: "Saola",
-    value: "https://a-z-animals.com/media/animals/images/470x370/saola.png"
-  },
-  {
-    id: 12,
-    name: "Radiated Tortoise",
+    id: 134,
+    name: "Elephant",
+
     value:
-      "https://a-z-animals.com/media/animals/images/470x370/radiated_tortoise1.jpg"
+      "https://a-z-animals.com/media/animals/images/470x370/african_elephant.jpg"
+  },
+  {
+    id: 176,
+    name: "Pink Fairy Armadillo",
+
+    value:
+      "https://a-z-animals.com/media/animals/images/470x370/pink_fairy_armadillo.jpg"
   }
 ];
 
@@ -50,7 +53,7 @@ class Carousel extends Component {
   }
 
   onPress = id => {
-    this.props.navigation.navigate("Animal", id);
+    this.props.navigation.navigate("Animal", { id });
   };
 
   render = () => {

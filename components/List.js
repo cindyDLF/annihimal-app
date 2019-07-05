@@ -43,8 +43,7 @@ class FlatAnni extends React.Component {
               title={item.name}
               leftAvatar={{ source: { uri: item.img } }}
               onPress={() => {
-                this.props.navigation.navigate("Animal", item.id);
-                console.log("TODO::: navigate to animal page + send data");
+                this.props.navigation.navigate("Animal", { id: item.id });
               }}
             />
           );
