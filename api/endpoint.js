@@ -5,3 +5,4 @@ export const LIST_USER_FAV = "/api/users/";
 export const FAVORITE = "/favorite";
 export const ANIMAL_LIST = "/api/animals";
 export const ANIMAL = "/api/animals/details/";
+export const ADD_USER_FAVORITE = "/api/users/favorite";

@@ -17,7 +17,7 @@ class FavoriteButton extends Component {
           )
         }
         degrees={0}
-        onPress={() => console.log("Add Fav")}
+        onPress={() => this.props.onPress()}
         backgroundTappable={true}
       >
         [your other action button items]
