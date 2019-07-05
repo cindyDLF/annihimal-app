@@ -6,3 +6,4 @@ export const FAVORITE = "/favorite";
 export const ANIMAL_LIST = "/api/animals";
 export const ANIMAL = "/api/animals/details/";
 export const RANDOM = "/api/animals/random?nbRequested=";
+export const ADD_USER_FAVORITE = "/api/users/favorite";

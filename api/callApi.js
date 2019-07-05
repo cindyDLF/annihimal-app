@@ -6,7 +6,8 @@ import {
   ANIMAL,
   LIST_USER_FAV,
   FAVORITE,
-  RANDOM
+  RANDOM,
+  ADD_USER_FAVORITE
 } from "./endpoint";
 
 export const userRegister = async data => {
@@ -97,7 +98,6 @@ export const getCarousel = async nb => {
 };
 
 export const userFavorite = async (token, id) => {
-  console.log(BASE_URL + LIST_USER_FAV + id + FAVORITE);
   const ret = await fetch(BASE_URL + LIST_USER_FAV + id + FAVORITE, {
     method: "GET",
     headers: {
@@ -109,5 +109,24 @@ export const userFavorite = async (token, id) => {
   const { status } = ret;
   const res = await ret.json();
   //  console.log(res);
+  return { status, res };
+};
+
+export const addUserFavorite = async (token, idUser, idAnimal) => {
+  const ret = await fetch(BASE_URL + ADD_USER_FAVORITE, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token
+    },
+    body: JSON.stringify({
+      userId: idUser,
+      animalId: idAnimal
+    })
+  });
+  const { status } = ret;
+  const res = await ret.json();
+  console.log(res, status);
   return { status, res };
 };
