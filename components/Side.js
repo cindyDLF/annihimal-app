@@ -90,7 +90,7 @@ const Side = ({ side, data, title, img }) => {
   getIcon = (key, value) => {
     const toHide = ["name", "scientific_name", "classification", "group"];
     if (toHide.indexOf(key) != -1) {
-      return;
+      key = "data";
     }
 
     if (value == "N/A") {

@@ -3,6 +3,6 @@ export const SUBSCRIBE_USER = "/api/users/subscribe";
 export const LOGIN_USER = "/api/users/login";
 export const LIST_USER_FAV = "/api/users/";
 export const FAVORITE = "/favorite";
-export const ANIMAL_LIST = "/api/animals";
+export const ANIMAL_LIST = "/api/animals?skip=";
 export const ANIMAL = "/api/animals/details/";
 export const RANDOM = "/api/animals/random?nbRequested=";

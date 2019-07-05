@@ -45,9 +45,9 @@ export const userLogin = async data => {
   }
 };
 
-export const getAnimalList = async () => {
+export const getAnimalList = async nb => {
   try {
-    const ret = await fetch(BASE_URL + ANIMAL_LIST, {
+    const ret = await fetch(BASE_URL + ANIMAL_LIST + nb, {
       method: "GET",
       headers: {
         Accept: "application/json",

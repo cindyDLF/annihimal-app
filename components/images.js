@@ -28,5 +28,6 @@ export default {
   threat: require("../assets/images/threat.png"),
   unknown: require("../assets/images/unknown.png"),
   solitary: require("../assets/images/solitary.png"),
-  herd: require("../assets/images/herd.png")
+  herd: require("../assets/images/herd.png"),
+  data: require("../assets/images/data.png")
 };
