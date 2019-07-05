@@ -7,6 +7,7 @@ import {
   AsyncStorage
 } from "react-native";
 import { List } from "react-native-elements";
+import { NavigationEvents } from "react-navigation";
 
 import Colors from "../constants/Colors";
 
@@ -59,7 +60,8 @@ class Animal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isConnected: false
+      isConnected: false,
+      trigger: false
     };
 
     this.handleViewableItemsChanged = this.handleViewableItemsChanged.bind(
@@ -71,6 +73,29 @@ class Animal extends Component {
   handleViewableItemsChanged(info) {
     console.log(info);
   }
+
+  componentDidUpdate() {
+    console.log(this.state.trigger);
+    if (this.state.trigger) {
+      this._retrieveData();
+    }
+  }
+
+  componentDidMount() {
+    console.log("test1");
+  }
+
+  _retrieveData = () => {
+    AsyncStorage.getItem("@annihimal:user").then(res => {
+      if (res !== null) {
+        this.setState({ isConnected: true });
+      } else {
+        this.setState({ isConnected: false });
+      }
+    });
+    this.setState({ trigger: !this.state.trigger });
+    console.log("test");
+  };
 
   render() {
     const { isConnected } = this.state;
@@ -116,6 +141,9 @@ class Animal extends Component {
 
     return (
       <View style={styles.container}>
+        <NavigationEvents
+          onWillFocus={() => this.setState({ trigger: !this.state.trigger })}
+        />
         <StickyHeader conservation_status={animal.conservation_status} />
         <View style={styles.resultsContainer}>
           <FlatList
