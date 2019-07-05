@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { List } from "react-native-elements";
 import { NavigationEvents } from "react-navigation";
+import _ from "lodash";
 
 import Colors from "../constants/Colors";
 
@@ -123,7 +124,12 @@ class Animal extends Component {
             onViewableItemsChanged={this.handleViewableItemsChanged}
             renderItem={({ item }) => {
               return (
-                <Side side={item.side} data={item.data} title={item.title} />
+                <Side
+                  side={item.side}
+                  data={item.data}
+                  title={item.title}
+                  titleIcon={_.startCase(animal.lifestyle.name)}
+                />
               );
             }}
           />

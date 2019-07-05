@@ -46,13 +46,8 @@ const Side = ({ side, data, title }) => {
                 justifyContent: "center"
               }}
             >
-              {/* <View>{this.getIcon(key, pres[key])}</View> */}
-              <View>
-                <Image
-                  source={images["lifespan"]}
-                  style={{ height: 40, width: 40, paddingTop: 16 }}
-                />
-              </View>
+              <View>{this.getIcon(key, pres[key])}</View>
+
               <Text style={{ textAlign: "center" }}>{_.startCase(key)}</Text>
 
               <Text style={{ textAlign: "center" }}>{pres[key]}</Text>
@@ -93,23 +88,20 @@ const Side = ({ side, data, title }) => {
   };
 
   getIcon = (key, value) => {
-    const toHide = [
-      "name",
-      "scientific_name",
-      "classification",
-      "group",
-      "location",
-      "group_behaviour",
-      "habitat",
-      "diet",
-      "threat",
-      "username",
-      "email",
-      "password"
-    ];
+    const toHide = ["name", "scientific_name", "classification", "group"];
     if (toHide.indexOf(key) != -1) {
       return;
     }
+
+    if (value == "N/A") {
+      key = "unknown";
+    }
+
+    if (key == "diet" || key == "group_behaviour") {
+      key = value;
+    }
+
+    key = key.toLowerCase();
 
     return (
       <Image
@@ -133,6 +125,21 @@ const Side = ({ side, data, title }) => {
 
       case "Reproduction":
         return images.stork;
+
+        break;
+
+      case "Diurnal":
+        return images.diurnal;
+
+        break;
+
+      case "Nocturnal":
+        return images.nocturnal;
+
+        break;
+
+      case "Herd":
+        return images.herd;
 
         break;
 
