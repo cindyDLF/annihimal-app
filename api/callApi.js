@@ -2,11 +2,9 @@ import {
   BASE_URL,
   SUBSCRIBE_USER,
   LOGIN_USER,
-  LIST_USER_FAV,
-  FAVORITE,
   ANIMAL_LIST,
   ANIMAL
-} from "../api/endpoint";
+} from "./endpoint";
 
 export const userRegister = async data => {
   try {
@@ -43,21 +41,6 @@ export const userLogin = async data => {
     console.log(err);
   }
 };
-
-export const userFavorite = async (token, id) => {
-  console.log(BASE_URL + LIST_USER_FAV + id + FAVORITE);
-  const ret = await fetch(BASE_URL + LIST_USER_FAV + id + FAVORITE, {
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + token
-    }
-  });
-  const { status } = ret;
-  const res = await ret.json();
-  //  console.log(res);
-  return { status, res };
 
 export const getAnimalList = async () => {
   try {
