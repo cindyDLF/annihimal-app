@@ -10,7 +10,7 @@ export default {
   diurnal: require("../assets/images/diurnal.png"),
   forest: require("../assets/images/forest.png"),
   gestation_period: require("../assets/images/gestation.png"),
-  group_behaviour: require("../assets/images/group.png"),
+  social: require("../assets/images/group.png"),
   herbivore: require("../assets/images/herbivore.png"),
   hunt: require("../assets/images/hunt.png"),
   lake: require("../assets/images/lake.png"),
@@ -24,5 +24,9 @@ export default {
   weight: require("../assets/images/weight.png"),
   size: require("../assets/images/size.png"),
   ourang: require("../assets/images/orang.png"),
-  user: require("../assets/images/user.png")
+  user: require("../assets/images/user.png"),
+  threat: require("../assets/images/threat.png"),
+  unknown: require("../assets/images/unknown.png"),
+  solitary: require("../assets/images/solitary.png"),
+  herd: require("../assets/images/herd.png")
 };
