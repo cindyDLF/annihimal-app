@@ -188,7 +188,6 @@ const styles = StyleSheet.create({
     padding: 8
   },
   img: {
-    // height: height / 2.5
     height: 300,
     width: 300,
     borderRadius: 150
