@@ -17,7 +17,7 @@ import Button from "../components/Button";
 
 import Colors from "../constants/Colors";
 
-import { userRegister, userLogin } from "../api//callApi";
+import { userRegister, userLogin } from "../api/callApi";
 import { makeAlert } from "../utils";
 
 const width = Dimensions.get("window").width;
@@ -43,8 +43,8 @@ class Register extends Component {
   login = async () => {
     const { email, password } = this.state;
     const { status, res } = await userLogin({ email, password });
-    console.log("STATUS:::", status);
-    console.log("RES:::", res);
+    //  console.log("STATUS:::", status);
+    //  console.log("RES:::", res);
 
     if (status != 200) {
       const { errors } = res;

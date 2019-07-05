@@ -16,18 +16,15 @@ import Title from "../components/Title";
 import Colors from "../constants/Colors";
 import images from "../components/images";
 
+import { userFavorite } from "../api/callApi";
+
 const { height, width } = Dimensions.get("window");
 
 class Profile extends Component {
   state = {
     user: {},
     isLoading: true,
-    data: [
-      { id: 1, name: "Maki", img: images.maki },
-      { id: 2, name: "Meerkat", img: images.meerkat },
-      { id: 3, name: "Tiger", img: images.tiger },
-      { id: 4, name: "Longnose", img: images.longnose }
-    ]
+    data: []
   };
 
   componentWillMount() {
@@ -39,13 +36,32 @@ class Profile extends Component {
       const value = await AsyncStorage.getItem("@annihimal:user");
       if (value !== null) {
         const user = JSON.parse(value);
+        console.log(user.jwt, user.user.id);
+        this.getFav(user.jwt, user.user.id);
+
         this.setState({ user, isLoading: false });
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  getFav = async (jwt, id) => {
+    try {
+      const { data, user, isLoading } = this.state;
+      const { status, res } = await userFavorite(jwt, id);
+      console.log("STATUS:::", status);
+      //console.log("RES:::", res);
+      //this.setState({ data: res });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   render() {
     const { user, isLoading, data } = this.state;
+    console.log(user);
+    console.log(data);
     if (!isLoading) {
       return (
         <View style={styles.container}>
