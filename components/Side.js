@@ -18,7 +18,7 @@ const { height, width } = Dimensions.get("window");
 
 import images from "./images";
 
-const Side = ({ side, data, title }) => {
+const Side = ({ side, data, title, img }) => {
   image = img => {
     return (
       <View style={styles.imgContainer}>
@@ -114,7 +114,9 @@ const Side = ({ side, data, title }) => {
   getImg = title => {
     switch (title) {
       case "Presentation":
-        return images.ourang;
+        return {
+          uri: img
+        };
 
         break;
 
@@ -186,7 +188,10 @@ const styles = StyleSheet.create({
     padding: 8
   },
   img: {
-    height: height / 2.5
+    // height: height / 2.5
+    height: 300,
+    width: 300,
+    borderRadius: 150
   },
   data: {
     padding: 8

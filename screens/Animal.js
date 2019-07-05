@@ -67,11 +67,13 @@ class Animal extends Component {
     const gestation_period = animal.gestation || "N/A";
     const size = animal.size || "N/A";
     const litter = animal.litter_size || "N/A";
+    const img = animal.img;
 
     const presentation = {
       title: "Presentation",
       side: "left",
-      data: { name, scientific_name, classification }
+      data: { name, scientific_name, classification },
+      img
     };
 
     const hab = {
@@ -128,7 +130,7 @@ class Animal extends Component {
                   side={item.side}
                   data={item.data}
                   title={item.title}
-                  titleIcon={_.startCase(animal.lifestyle.name)}
+                  img={item.img}
                 />
               );
             }}

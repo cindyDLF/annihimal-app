@@ -19,7 +19,6 @@ export default class Home extends Component {
 
   async componentDidMount() {
     const data = await this.getRandomAnimal(5);
-
     this.setState({ data: data.res.animals });
   }
 
@@ -28,15 +27,13 @@ export default class Home extends Component {
   };
 
   render = () => {
-    const { data } = this.state;
-    console.log(data);
     return (
       <View style={styles.container}>
         <View style={styles.center}>
           <Title text="annihimal" size={60} />
         </View>
         <View style={styles.container}>
-          <Carousel data={data} />
+          <Carousel />
         </View>
       </View>
     );
