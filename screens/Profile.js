@@ -12,9 +12,10 @@ import { Constants } from "expo";
 import User from "../components/User";
 import FlatAnni from "../components/List";
 import Title from "../components/Title";
-
 import Colors from "../constants/Colors";
 import images from "../components/images";
+
+import { userFavorite } from "../api/callApi";
 
 const { height, width } = Dimensions.get("window");
 
@@ -22,12 +23,7 @@ class Profile extends Component {
   state = {
     user: {},
     isLoading: true,
-    data: [
-      { id: 1, name: "Maki", img: images.maki },
-      { id: 2, name: "Meerkat", img: images.meerkat },
-      { id: 3, name: "Tiger", img: images.tiger },
-      { id: 4, name: "Longnose", img: images.longnose }
-    ]
+    data: []
   };
 
   componentWillMount() {
@@ -39,9 +35,21 @@ class Profile extends Component {
       const value = await AsyncStorage.getItem("@annihimal:user");
       if (value !== null) {
         const user = JSON.parse(value);
+        const arrAnimals = await this.getFav(user.jwt, user.user.id);
+        this.setState({ data: arrAnimals });
         this.setState({ user, isLoading: false });
       }
     } catch (error) {}
+  };
+
+  getFav = async (jwt, id) => {
+    try {
+      const { data, user, isLoading } = this.state;
+      const { status, res } = await userFavorite(jwt, id);
+      return res.animals;
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   render() {
