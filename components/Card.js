@@ -38,7 +38,9 @@ export class Card extends Component {
               ]
             }
           ]}
-          source={images[animal.value]}
+          source={{
+            uri: animal.value
+          }}
         />
         <Animated.Text
           style={[
@@ -60,7 +62,7 @@ export class Card extends Component {
             }
           ]}
         >
-          {animal.title.toUpperCase()}
+          {animal.name.toUpperCase()}
         </Animated.Text>
       </Animated.View>
     );

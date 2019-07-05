@@ -17,26 +17,45 @@ import { Card } from "./Card";
 const { width } = Dimensions.get("window");
 
 const animals = [
-  { title: "Meerkat", value: "meerkat", abbr: "Some fun fact" },
-  { title: "LongNose", value: "longnose", abbr: "Some fun fact" },
-  { title: "Maki", value: "maki", abbr: "Some fun fact" },
-  { title: "Tiger", value: "tiger", abbr: "Some fun fact" }
+  {
+    id: 9,
+    name: "Javan Rhinoceros",
+    value:
+      "https://a-z-animals.com/media/animals/images/470x370/javan_rhinoceros.jpg"
+  },
+  {
+    id: 13,
+    name: "Red Wolf",
+    value: "https://a-z-animals.com/media/animals/images/470x370/red_wolf2.jpg"
+  },
+  {
+    id: 14,
+    name: "Saola",
+    value: "https://a-z-animals.com/media/animals/images/470x370/saola.png"
+  },
+  {
+    id: 12,
+    name: "Radiated Tortoise",
+    value:
+      "https://a-z-animals.com/media/animals/images/470x370/radiated_tortoise1.jpg"
+  }
 ];
 
 class Carousel extends Component {
-  constructor(prop) {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       currentIndex: 0
     };
   }
 
-  onPress = () => {
-    this.props.navigation.navigate("Animal");
+  onPress = id => {
+    this.props.navigation.navigate("Animal", id);
   };
 
   render = () => {
     const offset = (width - Card.WIDTH) / 2;
+    const { data } = this.state;
 
     return (
       <SideSwipe
@@ -51,7 +70,11 @@ class Carousel extends Component {
         onIndexChange={index => this.setState(() => ({ currentIndex: index }))}
         renderItem={({ itemIndex, currentIndex, item, animatedValue }) => {
           return (
-            <TouchableOpacity onPress={this.onPress}>
+            <TouchableOpacity
+              onPress={() => {
+                this.onPress(item.id);
+              }}
+            >
               <Card
                 animal={item}
                 index={itemIndex}
