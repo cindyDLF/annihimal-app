@@ -15,77 +15,86 @@ import FavoriteButton from "../components/FavoriteButton";
 import Side from "../components/Side";
 import StickyHeader from "../components/StickyHeader";
 
-const animal = {
-  name: "Bornean Orang-utan",
-  img:
-    "https://a-z-animals.com/media/animals/images/470x370/bornean_orang-utan1.jpg",
-  kingdom: "Animalia",
-  phylum: "Chordata",
-  class: "Mammalia",
-  order: "Primates",
-  family: "Hominidae",
-  genus: "Pongo",
-  scientific_name: "Pongo pygmaeus",
-  common_name: "Bornean Orang-utan",
-  "other_name(s)": "Red Ape, Forest People",
-  group: "Mammal",
-  "number_of species": "3",
-  location: "Borneo",
-  habitat: "Lowland forest and peat-swamps",
-  colour: "Red, Orange, Brown, Grey, Black",
-  skin_type: "Hair",
-  "size_(h)": "1.25m - 1.5m (4ft - 5ft)",
-  weight: "30kg - 90kg (66lbs - 200lbs)",
-  top_speed: "6kph (2.7mph)",
-  diet: "Omnivore",
-  prey: "Fruits, Bark, Insects",
-  predators: "Human, Tiger, Clouded Leopard",
-  lifestyle: "Diurnal",
-  group_behaviour: "Solitary",
-  lifespan: "30 - 40 years",
-  "age_of sexual maturity": "12 - 15 years",
-  gestation_period: "9 months",
-  "average_litter size": "1",
-  "name_of young": "Infant",
-  "age_of weaning": "3 years",
-  conservation_status: "Extinct",
-  //  conservation_status: "Critically Endangered",
-  "estimated_population size": "13,500",
-  biggest_threat: "Habitat loss",
-  "most_distinctive feature": "Highly intelligent with very long arms",
-  fun_fact: "Known to use large leaves as umbrellas!"
-};
+import { getAnimal } from "../api/callApi";
 
 class Animal extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       isConnected: false,
-      trigger: false
+      trigger: false,
+      id: props.navigation.state.params,
+      animal: {},
+      data: []
     };
 
-    this.handleViewableItemsChanged = this.handleViewableItemsChanged.bind(
-      this
-    );
     this.viewabilityConfig = { viewAreaCoveragePercentThreshold: 100 };
   }
 
-  handleViewableItemsChanged(info) {
-    console.log(info);
-  }
-
   componentDidUpdate() {
-    console.log(this.state.trigger);
     if (this.state.trigger) {
-      this._retrieveData();
+      this.retrieveData();
     }
   }
 
-  componentDidMount() {
-    console.log("test1");
+  async componentDidMount() {
+    const data = await this.getAnimalDetails();
+    this.setState({ animal: data.res.animal });
+    const details = this.formatAnimal();
+    this.setState({ details });
   }
 
-  _retrieveData = () => {
+  getAnimalDetails = async () => {
+    const { id } = this.state;
+    return await getAnimal(id);
+  };
+
+  formatAnimal = () => {
+    const { animal } = this.state;
+
+    const name = animal.name;
+    const scientific_name = animal.scientific_name || "N/A";
+    const classification = animal.class.name || "N/A";
+    const habitat = animal.habitats > 0 ? animal.habitats[0].name : "N/A";
+    const diet = animal.diet.name || "N/A";
+    const threat = animal.threats > 0 ? animal.threats[0].name : "N/A";
+    const weight = animal.weight || "N/A";
+    const lifespan = animal.lifespan || "N/A";
+    const group_behaviour =
+      animal.group_Behavior !== null ? animal.group_Behavior.name : "N/A";
+    const gestation_period = animal.gestation || "N/A";
+    const size = animal.size || "N/A";
+    const litter = animal.litter_size || "N/A";
+
+    const presentation = {
+      title: "Presentation",
+      side: "left",
+      data: { name, scientific_name, classification }
+    };
+
+    const hab = {
+      title: "Habitat",
+      side: "right",
+      data: { habitat, diet, threat }
+    };
+
+    const info = {
+      title: "Informations",
+      side: "left",
+      data: { size, weight, lifespan, group_behaviour }
+    };
+
+    const repro = {
+      title: "Reproduction",
+      side: "right",
+      data: { gestation_period, litter }
+    };
+
+    return [presentation, hab, info, repro];
+  };
+
+  retrieveData = () => {
     AsyncStorage.getItem("@annihimal:user").then(res => {
       if (res !== null) {
         this.setState({ isConnected: true });
@@ -94,67 +103,24 @@ class Animal extends Component {
       }
     });
     this.setState({ trigger: !this.state.trigger });
-    console.log("test");
   };
 
   render() {
-    const { isConnected } = this.state;
-    const {
-      name,
-      scientific_name,
-      group,
-      class: classification,
-      location,
-      habitat,
-      diet,
-      biggest_threat,
-      weight,
-      lifespan,
-      group_behaviour,
-      gestation_period
-    } = animal;
-
-    const getRandomInt = max => {
-      return Math.floor(Math.random() * Math.floor(max)).toString();
-    };
-    const presentation = {
-      title: "Presentation",
-      side: "left",
-      data: { name, scientific_name, classification, group }
-    };
-    const hab = {
-      title: "Habitat",
-      side: "right",
-      data: { location, habitat, diet, threat: biggest_threat }
-    };
-    const info = {
-      title: "Informations",
-      side: "left",
-      data: { size: animal["size_(h)"], weight, lifespan, group_behaviour }
-    };
-    const repro = {
-      title: "Reproduction",
-      side: "right",
-      data: { gestation_period, litter: animal["average_litter size"] }
-    };
-    const data = [presentation, hab, info, repro];
+    const { isConnected, details, animal } = this.state;
 
     return (
       <View style={styles.container}>
         <NavigationEvents
           onWillFocus={() => this.setState({ trigger: !this.state.trigger })}
         />
-        <StickyHeader conservation_status={animal.conservation_status} />
+        <StickyHeader conservation_status={animal.status} />
         <View style={styles.resultsContainer}>
           <FlatList
             contentContainerStyle={styles.contentContainer}
-            data={data}
+            data={details}
             keyExtractor={item => item.title}
-            //windowSize={1}
-            initialNumToRender={1}
-            removeClippedSubviews="true"
+            removeClippedSubviews="false"
             onViewableItemsChanged={this.handleViewableItemsChanged}
-            viewabilityConfig={this.viewabilityConfig}
             renderItem={({ item }) => {
               return (
                 <Side side={item.side} data={item.data} title={item.title} />
@@ -175,7 +141,6 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     paddingVertical: 20
-    //backgroundColor: "red"
   },
   resultsContainer: {
     marginBottom: 100

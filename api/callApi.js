@@ -3,7 +3,9 @@ import {
   SUBSCRIBE_USER,
   LOGIN_USER,
   LIST_USER_FAV,
-  FAVORITE
+  FAVORITE,
+  ANIMAL_LIST,
+  ANIMAL
 } from "../api/endpoint";
 
 export const userRegister = async data => {
@@ -56,4 +58,38 @@ export const userFavorite = async (token, id) => {
   const res = await ret.json();
   //  console.log(res);
   return { status, res };
+
+export const getAnimalList = async () => {
+  try {
+    const ret = await fetch(BASE_URL + ANIMAL_LIST, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    });
+    const { status } = ret;
+    const res = await ret.json();
+    return { status, res };
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getAnimal = async id => {
+  console.log(id);
+  try {
+    const ret = await fetch(BASE_URL + ANIMAL + id, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    });
+    const { status } = ret;
+    const res = await ret.json();
+    return { status, res };
+  } catch (err) {
+    console.log(err);
+  }
 };

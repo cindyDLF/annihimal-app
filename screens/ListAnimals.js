@@ -1,47 +1,70 @@
 import React from "react";
-import { StyleSheet, View, Dimensions } from "react-native";
+import { StyleSheet, View, Dimensions, ActivityIndicator } from "react-native";
 import { Constants } from "expo";
 import { Text } from "react-native-elements";
 
 import Colors from "../constants/Colors";
 import ListAnni from "../components/List";
 import images from "../components/images";
+import { getAnimalList } from "../api/callApi";
 
 const width = Dimensions.get("window").width;
 
-const data = [
-  { id: 1, name: "Maki", img: images.maki },
-  { id: 2, name: "Meerkat", img: images.meerkat },
-  { id: 3, name: "Tiger", img: images.tiger },
-  { id: 4, name: "Longnose", img: images.longnose },
-  { id: 5, name: "Maki", img: images.maki },
-  { id: 6, name: "Meerkat", img: images.meerkat },
-  { id: 7, name: "Tiger", img: images.tiger },
-  { id: 8, name: "Longnose", img: images.longnose },
-  { id: 9, name: "Maki", img: images.maki },
-  { id: 10, name: "Meerkat", img: images.meerkat },
-  { id: 11, name: "Tiger", img: images.tiger },
-  { id: 12, name: "Longnose", img: images.longnose },
-  { id: 13, name: "Maki", img: images.maki },
-  { id: 14, name: "Meerkat", img: images.meerkat },
-  { id: 15, name: "Tiger", img: images.tiger },
-  { id: 16, name: "Longnose", img: images.longnose },
-  { id: 17, name: "Maki", img: images.maki },
-  { id: 18, name: "Meerkat", img: images.meerkat },
-  { id: 19, name: "Tiger", img: images.tiger },
-  { id: 20, name: "Longnose", img: images.longnose }
-];
+// const data = [
+//   { id: 1, name: "Maki", img: images.maki },
+//   { id: 2, name: "Meerkat", img: images.meerkat },
+//   { id: 3, name: "Tiger", img: images.tiger },
+//   { id: 4, name: "Longnose", img: images.longnose },
+//   { id: 5, name: "Maki", img: images.maki },
+//   { id: 6, name: "Meerkat", img: images.meerkat },
+//   { id: 7, name: "Tiger", img: images.tiger },
+//   { id: 8, name: "Longnose", img: images.longnose },
+//   { id: 9, name: "Maki", img: images.maki },
+//   { id: 10, name: "Meerkat", img: images.meerkat },
+//   { id: 11, name: "Tiger", img: images.tiger },
+//   { id: 12, name: "Longnose", img: images.longnose },
+//   { id: 13, name: "Maki", img: images.maki },
+//   { id: 14, name: "Meerkat", img: images.meerkat },
+//   { id: 15, name: "Tiger", img: images.tiger },
+//   { id: 16, name: "Longnose", img: images.longnose },
+//   { id: 17, name: "Maki", img: images.maki },
+//   { id: 18, name: "Meerkat", img: images.meerkat },
+//   { id: 19, name: "Tiger", img: images.tiger },
+//   { id: 20, name: "Longnose", img: images.longnose }
+// ];
 
-const ListAnimal = () => {
-  return (
-    <View style={styles.container}>
-      <Text h4 style={{ marginBottom: 16 }}>
-        Animal List
-      </Text>
-      <ListAnni data={data} />
-    </View>
-  );
-};
+class ListAnimal extends React.Component {
+  state = {
+    data: [],
+    isLoading: true
+  };
+
+  async componentDidMount() {
+    const data = await this.fetchAnimals();
+    this.setState({ data: data.res.animals, isLoading: false });
+  }
+
+  fetchAnimals = async () => {
+    return await getAnimalList();
+  };
+
+  render() {
+    const { data, isLoading } = this.state;
+
+    if (!isLoading) {
+      return (
+        <View style={styles.container}>
+          <Text h4 style={{ marginBottom: 16 }}>
+            Animal List
+          </Text>
+          <ListAnni data={data} />
+        </View>
+      );
+    } else {
+      return <ActivityIndicator size="small" color={Colors.primaryColor} />;
+    }
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
