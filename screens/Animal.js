@@ -29,7 +29,8 @@ class Animal extends Component {
       animal: {},
       data: [],
       token: "",
-      idUser: 0
+      idUser: 0,
+      favorites: []
     };
 
     this.viewabilityConfig = { viewAreaCoveragePercentThreshold: 100 };
@@ -121,22 +122,31 @@ class Animal extends Component {
         this.setState({ token: user.jwt });
         this.setState({ idUser: user.user.id });
         this.setState({ isConnected: true });
+        AsyncStorage.getItem("@annihimal:favorite").then(res => {
+          if (res !== null) {
+            const favorites = JSON.parse(res);
+            this.setState({ favorites });
+          } else {
+            this.setState({ isConnected: false });
+          }
+        });
       } else {
         this.setState({ isConnected: false });
       }
     });
+
     this.setState({ trigger: !this.state.trigger });
   };
 
   addFavorite = () => {
     const { token, idUser, id } = this.state;
-    console.log(token, idUser, id);
+    //console.log(token, idUser, id);
     addUserFavorite(token, idUser, id);
   };
 
   render() {
-    const { isConnected, details, animal, token } = this.state;
-    console.log(animal);
+    const { isConnected, details, animal, token, id, favorites } = this.state;
+    console.log(favorites);
     return (
       <View style={styles.container}>
         <NavigationEvents

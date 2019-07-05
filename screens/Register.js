@@ -17,6 +17,8 @@ import Button from "../components/Button";
 
 import Colors from "../constants/Colors";
 
+import { userFavorite } from "../api/callApi";
+
 import { userRegister, userLogin } from "../api//callApi";
 import { makeAlert } from "../utils";
 
@@ -52,6 +54,13 @@ class Register extends Component {
     } else {
       try {
         await AsyncStorage.setItem("@annihimal:user", JSON.stringify(res));
+        console.log(res.jwt, res.user.id);
+        const arrAnimalsFav = await this.getFav(res.jwt, res.user.id);
+
+        await AsyncStorage.setItem(
+          "@annihimal:favorite",
+          JSON.stringify(arrAnimalsFav)
+        );
       } catch (error) {
         console.log(error);
       }
@@ -70,6 +79,16 @@ class Register extends Component {
       makeAlert("Error", errors, "OK");
     } else {
       this.setState({ alreadyRegistered: true });
+    }
+  };
+
+  getFav = async (jwt, id) => {
+    try {
+      const { data, user, isLoading } = this.state;
+      const { status, res } = await userFavorite(jwt, id);
+      return res.animals;
+    } catch (err) {
+      console.log(err);
     }
   };
 
