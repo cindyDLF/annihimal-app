@@ -5,6 +5,7 @@ import AppNavigator from "./navigation/AppNavigator";
 import Colors from "./constants/Colors";
 
 const App = () => {
+  console.disableYellowBox = true;
   return (
     <View style={styles.container}>
       <AppNavigator />

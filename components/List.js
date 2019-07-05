@@ -21,8 +21,12 @@ class FlatAnni extends React.Component {
     };
   }
 
+  handleEnd = async () => {
+    await this.props.endReached();
+  };
+
   render() {
-    const { data } = this.state;
+    const { data } = this.props;
     return (
       <FlatList
         data={data}
@@ -30,6 +34,7 @@ class FlatAnni extends React.Component {
         windowSize={1}
         initialNumToRender={1}
         removeClippedSubviews="false"
+        onEndReached={this.handleEnd}
         viewabilityConfig={this.viewabilityConfig}
         renderItem={({ item }) => {
           return (

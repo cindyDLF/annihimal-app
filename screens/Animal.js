@@ -132,7 +132,7 @@ class Animal extends Component {
           onWillFocus={() => this.setState({ trigger: !this.state.trigger })}
         />
         <StickyHeader conservation_status={animal.status} />
-        <View style={styles.resultsContainer}>
+        <View>
           <FlatList
             contentContainerStyle={styles.contentContainer}
             data={details}
@@ -164,9 +164,6 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     paddingVertical: 20
-  },
-  resultsContainer: {
-    marginBottom: 100
   }
 });
 

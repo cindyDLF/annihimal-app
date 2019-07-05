@@ -4,40 +4,22 @@ import { Constants } from "expo";
 import { Text } from "react-native-elements";
 
 import Colors from "../constants/Colors";
+import Title from "../components/Title";
 import ListAnni from "../components/List";
 import images from "../components/images";
 import { getAnimalList } from "../api/callApi";
 
 const width = Dimensions.get("window").width;
 
-// const data = [
-//   { id: 1, name: "Maki", img: images.maki },
-//   { id: 2, name: "Meerkat", img: images.meerkat },
-//   { id: 3, name: "Tiger", img: images.tiger },
-//   { id: 4, name: "Longnose", img: images.longnose },
-//   { id: 5, name: "Maki", img: images.maki },
-//   { id: 6, name: "Meerkat", img: images.meerkat },
-//   { id: 7, name: "Tiger", img: images.tiger },
-//   { id: 8, name: "Longnose", img: images.longnose },
-//   { id: 9, name: "Maki", img: images.maki },
-//   { id: 10, name: "Meerkat", img: images.meerkat },
-//   { id: 11, name: "Tiger", img: images.tiger },
-//   { id: 12, name: "Longnose", img: images.longnose },
-//   { id: 13, name: "Maki", img: images.maki },
-//   { id: 14, name: "Meerkat", img: images.meerkat },
-//   { id: 15, name: "Tiger", img: images.tiger },
-//   { id: 16, name: "Longnose", img: images.longnose },
-//   { id: 17, name: "Maki", img: images.maki },
-//   { id: 18, name: "Meerkat", img: images.meerkat },
-//   { id: 19, name: "Tiger", img: images.tiger },
-//   { id: 20, name: "Longnose", img: images.longnose }
-// ];
-
 class ListAnimal extends React.Component {
-  state = {
-    data: [],
-    isLoading: true
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [],
+      isLoading: true,
+      nb: 0
+    };
+  }
 
   async componentDidMount() {
     const data = await this.fetchAnimals();
@@ -45,7 +27,20 @@ class ListAnimal extends React.Component {
   }
 
   fetchAnimals = async () => {
-    return await getAnimalList();
+    const { nb } = this.state;
+    return await getAnimalList(nb);
+  };
+
+  endReached = async () => {
+    console.log("in end reached");
+    const { nb, data } = this.state;
+    newNb = nb + 10;
+    this.setState({ nb: newNb });
+    const {
+      res: { animals }
+    } = await this.fetchAnimals();
+    const newData = [...data, ...animals];
+    this.setState({ data: newData });
   };
 
   render() {
@@ -54,10 +49,8 @@ class ListAnimal extends React.Component {
     if (!isLoading) {
       return (
         <View style={styles.container}>
-          <Text h4 style={{ marginBottom: 16 }}>
-            Animal List
-          </Text>
-          <ListAnni data={data} />
+          <Title text="list" />
+          <ListAnni data={data} endReached={this.endReached} />
         </View>
       );
     } else {
