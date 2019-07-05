@@ -25,7 +25,7 @@ class Animal extends Component {
     this.state = {
       isConnected: false,
       trigger: false,
-      id: props.navigation.state.params,
+      id: props.navigation.state.params.id,
       animal: {},
       data: []
     };
@@ -33,9 +33,24 @@ class Animal extends Component {
     this.viewabilityConfig = { viewAreaCoveragePercentThreshold: 100 };
   }
 
-  componentDidUpdate() {
+  static getDerivedStateFromProps(props, state) {
+    if (props.navigation.state.params.id !== state.id) {
+      return { id: props.navigation.state.params.id };
+    } else {
+      return null;
+    }
+  }
+
+  async componentDidUpdate(prevProps, prevState) {
     if (this.state.trigger) {
       this.retrieveData();
+    }
+
+    if (this.state.id != prevProps.navigation.state.params.id) {
+      const data = await this.getAnimalDetails();
+      this.setState({ animal: data.res.animal });
+      const details = this.formatAnimal();
+      this.setState({ details });
     }
   }
 
@@ -67,11 +82,13 @@ class Animal extends Component {
     const gestation_period = animal.gestation || "N/A";
     const size = animal.size || "N/A";
     const litter = animal.litter_size || "N/A";
+    const img = animal.img;
 
     const presentation = {
       title: "Presentation",
       side: "left",
-      data: { name, scientific_name, classification }
+      data: { name, scientific_name, classification },
+      img
     };
 
     const hab = {
@@ -128,7 +145,7 @@ class Animal extends Component {
                   side={item.side}
                   data={item.data}
                   title={item.title}
-                  titleIcon={_.startCase(animal.lifestyle.name)}
+                  img={item.img}
                 />
               );
             }}

@@ -6,11 +6,24 @@ import SideSwipe from "react-native-sideswipe";
 import Carousel from "../components/Carousel";
 import Title from "../components/Title";
 
+import { getCarousel } from "../api/callApi";
+
 import Colors from "../constants/Colors";
 
 export default class Home extends Component {
   static navigationOptions = {
     title: "Home"
+  };
+
+  state = { data: [] };
+
+  async componentDidMount() {
+    const data = await this.getRandomAnimal(5);
+    this.setState({ data: data.res.animals });
+  }
+
+  getRandomAnimal = async nb => {
+    return await getCarousel(nb);
   };
 
   render = () => {

@@ -5,7 +5,8 @@ import {
   ANIMAL_LIST,
   ANIMAL,
   LIST_USER_FAV,
-  FAVORITE
+  FAVORITE,
+  RANDOM
 } from "./endpoint";
 
 export const userRegister = async data => {
@@ -62,9 +63,25 @@ export const getAnimalList = async () => {
 };
 
 export const getAnimal = async id => {
-  console.log(id);
   try {
     const ret = await fetch(BASE_URL + ANIMAL + id, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    });
+    const { status } = ret;
+    const res = await ret.json();
+    return { status, res };
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getCarousel = async nb => {
+  try {
+    const ret = await fetch(BASE_URL + RANDOM + nb, {
       method: "GET",
       headers: {
         Accept: "application/json",
