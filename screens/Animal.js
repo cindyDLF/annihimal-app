@@ -16,7 +16,7 @@ import FavoriteButton from "../components/FavoriteButton";
 import Side from "../components/Side";
 import StickyHeader from "../components/StickyHeader";
 
-import { getAnimal } from "../api/callApi";
+import { getAnimal, addUserFavorite } from "../api/callApi";
 
 class Animal extends Component {
   constructor(props) {
@@ -27,7 +27,11 @@ class Animal extends Component {
       trigger: false,
       id: props.navigation.state.params.id,
       animal: {},
-      data: []
+      data: [],
+      token: "",
+      idUser: 0,
+      favorites: [],
+      isFavoriteUser: false
     };
 
     this.viewabilityConfig = { viewAreaCoveragePercentThreshold: 100 };
@@ -59,6 +63,7 @@ class Animal extends Component {
     this.setState({ animal: data.res.animal });
     const details = this.formatAnimal();
     this.setState({ details });
+    this.retrieveData();
   }
 
   getAnimalDetails = async () => {
@@ -115,17 +120,52 @@ class Animal extends Component {
   retrieveData = () => {
     AsyncStorage.getItem("@annihimal:user").then(res => {
       if (res !== null) {
+        const user = JSON.parse(res);
+        this.setState({ token: user.jwt });
+        this.setState({ idUser: user.user.id });
         this.setState({ isConnected: true });
+        AsyncStorage.getItem("@annihimal:favorite").then(res => {
+          if (res !== null) {
+            const favorites = JSON.parse(res);
+
+            this.setState({ favorites });
+          } else {
+            this.setState({ isConnected: false });
+          }
+        });
+        this.checkFav();
       } else {
         this.setState({ isConnected: false });
       }
     });
+
     this.setState({ trigger: !this.state.trigger });
   };
 
-  render() {
-    const { isConnected, details, animal } = this.state;
+  checkFav = () => {
+    const { favorites, id } = this.state;
 
+    favorites.forEach(item => {
+      if (item.id === id) {
+        return this.setState({ isFavoriteUser: true });
+      }
+    });
+  };
+  addFavorite = () => {
+    const { token, idUser, id, isFavoriteUser } = this.state;
+    addUserFavorite(token, idUser, id);
+  };
+
+  render() {
+    const {
+      isConnected,
+      details,
+      animal,
+      token,
+      id,
+      favorites,
+      isFavoriteUser
+    } = this.state;
     return (
       <View style={styles.container}>
         <NavigationEvents
@@ -151,7 +191,12 @@ class Animal extends Component {
             }}
           />
         </View>
-        {isConnected ? <FavoriteButton /> : null}
+        {isConnected ? (
+          <FavoriteButton
+            isFavorite={isFavoriteUser}
+            onPress={this.addFavorite}
+          />
+        ) : null}
       </View>
     );
   }

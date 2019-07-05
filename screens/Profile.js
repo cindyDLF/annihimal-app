@@ -54,6 +54,7 @@ class Profile extends Component {
 
   render() {
     const { user, isLoading, data } = this.state;
+    //console.log(data);
     if (!isLoading) {
       return (
         <View style={styles.container}>
