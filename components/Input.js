@@ -1,5 +1,6 @@
 import React from "react";
 import { TextInput, StyleSheet, Dimensions } from "react-native";
+import * as Animatable from "react-native-animatable";
 
 import Colors from "../constants/Colors";
 
