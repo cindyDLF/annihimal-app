@@ -9,6 +9,8 @@ import {
 } from "react-native";
 import { Constants } from "expo";
 
+import { NavigationEvents } from "react-navigation";
+
 import User from "../components/User";
 import FlatAnni from "../components/List";
 import Title from "../components/Title";
@@ -23,11 +25,21 @@ class Profile extends Component {
   state = {
     user: {},
     isLoading: true,
-    data: []
+    data: [],
+    trigger: false
   };
 
   componentWillMount() {
     this.retrieveData();
+  }
+
+  async componentDidUpdate(prevProps, prevState) {
+    const { data, user } = this.state;
+    if (this.state.trigger) {
+      const arrAnimal = await this.getFav(user.jwt, user.user.id);
+
+      this.setState({ data: arrAnimal });
+    }
   }
 
   retrieveData = async () => {
@@ -44,12 +56,13 @@ class Profile extends Component {
 
   getFav = async (jwt, id) => {
     try {
-      const { data, user, isLoading } = this.state;
+      const { data, user, isLoading, trigger } = this.state;
       const { status, res } = await userFavorite(jwt, id);
       return res.animals;
     } catch (err) {
       console.log(err);
     }
+    this.setState({ trigger: !trigger });
   };
 
   render() {
@@ -58,6 +71,9 @@ class Profile extends Component {
     if (!isLoading) {
       return (
         <View style={styles.container}>
+          <NavigationEvents
+            onWillFocus={() => this.setState({ trigger: !this.state.trigger })}
+          />
           <User data={user} />
 
           <Title text="Favourites" margin={5} />
