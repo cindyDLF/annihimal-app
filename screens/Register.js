@@ -37,6 +37,12 @@ class Register extends Component {
     animationStart: "bounceInRight"
   };
 
+  componentWillUpdate(prevProps, prevState) {
+    if (this.state.animationStart === "bounceOutLeft") {
+      this.setState({ animationStart: "bounceInRight" });
+    }
+  }
+
   handleOnChange = (value, text) => {
     this.setState({ [value]: text });
   };
@@ -84,10 +90,6 @@ class Register extends Component {
     } else {
       this.setState({ alreadyRegistered: true });
     }
-  };
-
-  waitForAnimation = () => {
-    this.setState({ animationStart: "bounceOutLeft" });
   };
 
   getFav = async (jwt, id) => {
@@ -162,6 +164,7 @@ class Register extends Component {
 
   render() {
     const { alreadyRegistered, animationStart } = this.state;
+    console.log(this.state.animationStart);
 
     return (
       <KeyboardAvoidingView
