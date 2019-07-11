@@ -234,7 +234,7 @@ class Animal extends Component {
                   !isFavoriteUser ? this.addFavorite() : this.removeFavorite();
                 } else {
                   this.refs.toast.show(
-                    "You must be connected to add favorites",
+                    "You must be connected to add favourites!",
                     DURATION.LENGTH_LONG
                   );
                 }
