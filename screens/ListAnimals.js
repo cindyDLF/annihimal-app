@@ -1,12 +1,11 @@
 import React from "react";
 import { StyleSheet, View, Dimensions, ActivityIndicator } from "react-native";
 import { Constants } from "expo";
-import { Text } from "react-native-elements";
 
 import Colors from "../constants/Colors";
 import Title from "../components/Title";
 import ListAnni from "../components/List";
-import images from "../components/images";
+
 import { getAnimalList } from "../api/callApi";
 
 const width = Dimensions.get("window").width;

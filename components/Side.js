@@ -1,17 +1,9 @@
-import React, { Component } from "react";
-import {
-  ActivityIndicator,
-  View,
-  StyleSheet,
-  Dimensions,
-  Platform,
-  Image,
-  Fragment
-} from "react-native";
+import React from "react";
+import { View, StyleSheet, Dimensions, Image } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { Text } from "react-native-elements";
+
 import Title from "./Title";
-import { Constants, Font } from "expo";
 import _ from "lodash";
 
 const { height, width } = Dimensions.get("window");

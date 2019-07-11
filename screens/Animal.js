@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import {
-  ScrollView,
   View,
   StyleSheet,
   FlatList,
   AsyncStorage
 } from "react-native";
-import { List } from "react-native-elements";
 import { NavigationEvents } from "react-navigation";
 import _ from "lodash";
 
