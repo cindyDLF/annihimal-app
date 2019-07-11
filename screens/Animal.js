@@ -16,7 +16,7 @@ import FavoriteButton from "../components/FavoriteButton";
 import Side from "../components/Side";
 import StickyHeader from "../components/StickyHeader";
 
-import { getAnimal } from "../api/callApi";
+import { getAnimal, addUserFavorite, removeUserFavorite } from "../api/callApi";
 
 class Animal extends Component {
   constructor(props) {
@@ -28,7 +28,11 @@ class Animal extends Component {
       id: props.navigation.state.params.id,
       animal: {},
       data: [],
-      isLoading: true
+      isLoading: true,
+      token: "",
+      idUser: 0,
+      favorites: [],
+      isFavoriteUser: false
     };
 
     this.viewabilityConfig = { viewAreaCoveragePercentThreshold: 100 };
@@ -52,6 +56,7 @@ class Animal extends Component {
       this.setState({ animal: data.res.animal });
       const details = this.formatAnimal();
       this.setState({ details });
+      this.retrieveData();
     }
   }
 
@@ -116,7 +121,20 @@ class Animal extends Component {
   retrieveData = () => {
     AsyncStorage.getItem("@annihimal:user").then(res => {
       if (res !== null) {
+        const user = JSON.parse(res);
+        this.setState({ token: user.jwt });
+        this.setState({ idUser: user.user.id });
         this.setState({ isConnected: true });
+        AsyncStorage.getItem("@annihimal:favorite").then(res => {
+          if (res !== null) {
+            const favorites = JSON.parse(res);
+
+            this.setState({ favorites });
+          } else {
+            this.setState({ isConnected: false });
+          }
+        });
+        this.checkFav();
       } else {
         this.setState({ isConnected: false });
       }
@@ -124,8 +142,36 @@ class Animal extends Component {
     this.setState({ trigger: !this.state.trigger });
   };
 
+  checkFav = () => {
+    const { favorites, id } = this.state;
+
+    favorites.forEach(item => {
+      if (item.id === id) {
+        return this.setState({ isFavoriteUser: true });
+      }
+    });
+  };
+
+  addFavorite = () => {
+    const { token, idUser, id } = this.state;
+    this.setState({ isFavoriteUser: true });
+    addUserFavorite(token, idUser, id);
+  };
+
+  removeFavorite = () => {
+    const { token, idUser, id } = this.state;
+    removeUserFavorite(token, idUser, id);
+    this.setState({ isFavoriteUser: false });
+  };
+
   render() {
-    const { isConnected, details, animal, isLoading } = this.state;
+    const {
+      isConnected,
+      details,
+      animal,
+      isLoading,
+      isFavoriteUser
+    } = this.state;
 
     if (!isLoading) {
       return (
@@ -153,7 +199,12 @@ class Animal extends Component {
               }}
             />
           </View>
-          {isConnected ? <FavoriteButton /> : null}
+          {isConnected ? (
+            <FavoriteButton
+              isFavorite={isFavoriteUser}
+              onPress={!isFavoriteUser ? this.addFavorite : this.removeFavorite}
+            />
+          ) : null}
         </View>
       );
     } else {
