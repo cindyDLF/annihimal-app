@@ -1,5 +1,11 @@
 import React from "react";
-import { StyleSheet, View, Dimensions, ActivityIndicator } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Dimensions,
+  ActivityIndicator,
+  ImageBackground
+} from "react-native";
 import { Constants } from "expo";
 
 import Colors from "../constants/Colors";
@@ -41,10 +47,15 @@ class ListAnimal extends React.Component {
     if (!isLoading) {
       return (
         <View style={styles.container}>
-          <Title text="animals" animated={true} />
-          <View style={styles.containerFlatList}>
-            <ListAnni data={data} endReached={this.endReached} />
-          </View>
+          <ImageBackground
+            source={require("../assets/images/background.png")}
+            style={{ width: "100%", height: "100%" }}
+          >
+            <Title text="animals" animated={true} />
+            <View style={styles.containerFlatList}>
+              <ListAnni data={data} endReached={this.endReached} />
+            </View>
+          </ImageBackground>
         </View>
       );
     } else {
