@@ -35,7 +35,7 @@ class FlatAnni extends React.Component {
           data={data}
           keyExtractor={item => item.id.toString()}
           windowSize={1}
-          initialNumToRender={1}
+          initialNumToRender={15}
           removeClippedSubviews="false"
           onEndReached={this.handleEnd}
           viewabilityConfig={this.viewabilityConfig}
@@ -67,7 +67,8 @@ export default withNavigation(FlatAnni);
 const styles = StyleSheet.create({
   containerStyle: {
     backgroundColor: "transparent",
-    padding: 25,
+    paddingTop: 25,
+    paddingBottom: 10,
     borderColor: "black",
 
     width: width,
@@ -81,9 +82,9 @@ const styles = StyleSheet.create({
     fontFamily: "Avenir",
     fontWeight: "bold"
   },
-  container: {
+  containerFlatList: {
     backgroundColor: Colors.whiteColor,
-    paddingTop: 55,
+    paddingTop: 20,
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
     shadowColor: "#000",

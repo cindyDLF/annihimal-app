@@ -54,20 +54,13 @@ export default withNavigation(User);
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
+    //backgroundColor: "white",
     borderRadius: 20,
-    alignItems: "center",
     padding: 8,
     marginTop: 30,
-    width: width - 12,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 5
-    },
-    shadowOpacity: 0.05,
-    shadowRadius: 1
+    width: width - 12
   },
+
   logout: {
     ...StyleSheet.absoluteFillObject,
     alignSelf: "flex-end",

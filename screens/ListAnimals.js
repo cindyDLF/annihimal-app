@@ -28,9 +28,7 @@ class ListAnimal extends React.Component {
   endReached = async () => {
     const { nb, data } = this.state;
     newNb = nb + 10;
-    const {
-      res: { animals }
-    } = await getAnimalList(newNb);
+    const { res: { animals } } = await getAnimalList(newNb);
     const newData = [...data, ...animals];
     await this.setState({ data: newData, nb: newNb });
   };
@@ -42,7 +40,9 @@ class ListAnimal extends React.Component {
       return (
         <View style={styles.container}>
           <Title text="animals" />
-          <ListAnni data={data} endReached={this.endReached} />
+          <View style={styles.containerFlatList}>
+            <ListAnni data={data} endReached={this.endReached} />
+          </View>
         </View>
       );
     } else {
@@ -59,9 +59,9 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight,
     backgroundColor: Colors.primaryColor,
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
+    flex: 1
+    //justifyContent: "center",
+    //alignItems: "center"
   },
   containerLoad: {
     flex: 1,
@@ -89,6 +89,19 @@ const styles = StyleSheet.create({
     color: Colors.mainColor,
     fontFamily: "Avenir",
     fontWeight: "bold"
+  },
+  containerFlatList: {
+    backgroundColor: Colors.whiteColor,
+    paddingTop: 20,
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65
   }
 });
 
