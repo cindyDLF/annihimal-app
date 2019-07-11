@@ -22,7 +22,9 @@ class FlatAnni extends React.Component {
   }
 
   handleEnd = async () => {
-    await this.props.endReached();
+    if (this.props.endReached) {
+      await this.props.endReached();
+    }
   };
 
   render() {
