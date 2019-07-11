@@ -27,7 +27,7 @@ class User extends React.Component {
   disconnect = async () => {
     try {
       await AsyncStorage.removeItem("@annihimal:user");
-      this.props.navigation.navigate("Register");
+      this.props.navigation.navigate("Register", { param: true });
     } catch (error) {
       console.log(error);
     }

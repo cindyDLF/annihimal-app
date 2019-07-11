@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Dimensions, FlatList } from "react-native";
+import { StyleSheet, Dimensions, FlatList, View } from "react-native";
 import { ListItem } from "react-native-elements";
 import { withNavigation } from "react-navigation";
 import TouchableScale from "react-native-touchable-scale";

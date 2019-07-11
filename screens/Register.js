@@ -8,14 +8,17 @@ import {
   Dimensions,
   KeyboardAvoidingView,
   Platform,
-  AsyncStorage
+  AsyncStorage,
+  Image
 } from "react-native";
+import * as Animatable from "react-native-animatable";
 import { withNavigation } from "react-navigation";
 import Input from "../components/Input";
 import Title from "../components/Title";
 import Button from "../components/Button";
 
 import Colors from "../constants/Colors";
+import { logo } from "../assets/images/annihimal-logo.png";
 
 import { userFavorite } from "../api/callApi";
 
@@ -30,8 +33,15 @@ class Register extends Component {
     email: "iam@email.fr",
     password: "Test123",
     password_confirmation: "",
-    alreadyRegistered: true
+    alreadyRegistered: true,
+    animationStart: "bounceInRight"
   };
+
+  componentWillUpdate(prevProps, prevState) {
+    if (this.state.animationStart === "bounceOutLeft") {
+      this.setState({ animationStart: "bounceInRight" });
+    }
+  }
 
   handleOnChange = (value, text) => {
     this.setState({ [value]: text });
@@ -54,9 +64,7 @@ class Register extends Component {
     } else {
       try {
         await AsyncStorage.setItem("@annihimal:user", JSON.stringify(res));
-        console.log(res.jwt, res.user.id);
         const arrAnimalsFav = await this.getFav(res.jwt, res.user.id);
-
         await AsyncStorage.setItem(
           "@annihimal:favorite",
           JSON.stringify(arrAnimalsFav)
@@ -64,7 +72,9 @@ class Register extends Component {
       } catch (error) {
         console.log(error);
       }
-      this.props.navigation.navigate("Profile");
+      //this.waitForAnimation();
+      this.setState({ animationStart: "bounceOutLeft" });
+      setTimeout(() => this.props.navigation.navigate("Profile"), 1300);
     }
   };
 
@@ -153,7 +163,8 @@ class Register extends Component {
   };
 
   render() {
-    const { alreadyRegistered } = this.state;
+    const { alreadyRegistered, animationStart } = this.state;
+    console.log(this.state.animationStart);
 
     return (
       <KeyboardAvoidingView
@@ -167,6 +178,17 @@ class Register extends Component {
           <View style={styles.container}>
             <View style={styles.containerHeader}>
               <Title text="annihimal" />
+              <Animatable.Image
+                animation={animationStart}
+                style={styles.stretch}
+                duration={3000}
+                source={require("../assets/images/annihimal-logo.png")}
+                style={{
+                  width: 100,
+                  height: 100,
+                  margin: 20
+                }}
+              />
               <View style={styles.containerSwitch}>
                 <TouchableOpacity
                   onPress={() => this.setState({ alreadyRegistered: true })}
