@@ -143,7 +143,6 @@ export const addUserFavorite = async (token, idUser, idAnimal) => {
 };
 
 export const removeUserFavorite = async (token, idUser, idAnimal) => {
-  console.log("removeUserFavorite ====> ", token, idUser, idAnimal);
   const ret = await fetch(BASE_URL + USER_FAVORITE, {
     method: "DELETE",
     headers: {

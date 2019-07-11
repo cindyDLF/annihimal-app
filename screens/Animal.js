@@ -130,17 +130,12 @@ class Animal extends Component {
   };
 
   retrieveData = async () => {
-    console.log("test");
     AsyncStorage.getItem("@annihimal:user").then(async res => {
       if (res !== null) {
         const user = JSON.parse(res);
 
-        //this.setState({ token: user.jwt });
-        //this.setState({ idUser: user.user.id });
         this.setState({ isConnected: true });
-        console.log("token ====>", user.jwt, user.user.id);
         const arrAnimals = await this.getFav(user.jwt, user.user.id);
-        console.log(arrAnimals);
         this.setState({ favorites: arrAnimals });
         this.checkFav();
       } else {
@@ -153,7 +148,6 @@ class Animal extends Component {
     try {
       const { data, user, isLoading, trigger } = this.state;
       const { status, res } = await userFavorite(jwt, id);
-      //console.log(res.animals);
       return res.animals;
     } catch (err) {
       console.log(err);
@@ -164,7 +158,6 @@ class Animal extends Component {
     const { favorites, id } = this.state;
 
     favorites.forEach(item => {
-      //console.log("fav===>", item);
       if (item.id === id) {
         this.setState({ isFavoriteUser: true });
       }
