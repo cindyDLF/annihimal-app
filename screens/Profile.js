@@ -35,9 +35,7 @@ class Profile extends Component {
   async componentDidUpdate(prevProps, prevState) {
     const { data, user } = this.state;
     if (this.state.trigger) {
-      const arrAnimal = await this.getFav(user.jwt, user.user.id);
-
-      this.setState({ data: arrAnimal });
+      await this.retrieveData();
     }
   }
 
@@ -50,18 +48,21 @@ class Profile extends Component {
         this.setState({ data: arrAnimals });
         this.setState({ user, isLoading: false });
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   getFav = async (jwt, id) => {
     try {
       const { data, user, isLoading, trigger } = this.state;
       const { status, res } = await userFavorite(jwt, id);
+
+      this.setState({ trigger: !trigger });
       return res.animals;
     } catch (err) {
       console.log(err);
     }
-    this.setState({ trigger: !trigger });
   };
 
   render() {
@@ -94,8 +95,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.primaryColor,
     flex: 1
-    // alignItems: "center",
-    // justifyContent: "center"
   },
   containerLoad: {
     flex: 1,

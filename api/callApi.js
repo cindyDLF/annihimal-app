@@ -95,7 +95,7 @@ export const getCarousel = async nb => {
     });
     const { status } = ret;
     const res = await ret.json();
-    
+
     return { status, res };
   } catch (err) {
     console.log(err);
@@ -103,40 +103,47 @@ export const getCarousel = async nb => {
 };
 
 export const userFavorite = async (token, id) => {
-  const ret = await fetch(BASE_URL + LIST_USER_FAV + id + FAVORITE, {
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + token
-    }
-  });
-  const { status } = ret;
-  const res = await ret.json();
-
-  return { status, res };
+  try {
+    const ret = await fetch(BASE_URL + LIST_USER_FAV + id + FAVORITE, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token
+      }
+    });
+    const { status } = ret;
+    const res = await ret.json();
+    return { status, res };
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const addUserFavorite = async (token, idUser, idAnimal) => {
-  const ret = await fetch(BASE_URL + USER_FAVORITE, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + token
-    },
-    body: JSON.stringify({
-      userId: idUser,
-      animalId: idAnimal
-    })
-  });
-  const { status } = ret;
-  const res = await ret.json();
-
-  return { status, res };
+  try {
+    const ret = await fetch(BASE_URL + USER_FAVORITE, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token
+      },
+      body: JSON.stringify({
+        userId: idUser,
+        animalId: idAnimal
+      })
+    });
+    const { status } = ret;
+    const res = await ret.json();
+    return { status, res };
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const removeUserFavorite = async (token, idUser, idAnimal) => {
+  console.log("removeUserFavorite ====> ", token, idUser, idAnimal);
   const ret = await fetch(BASE_URL + USER_FAVORITE, {
     method: "DELETE",
     headers: {

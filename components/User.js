@@ -9,6 +9,7 @@ import {
 import { withNavigation } from "react-navigation";
 import { Avatar, Text } from "react-native-elements";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import Colors from "../constants/Colors";
 
 import _ from "lodash";
 
@@ -54,11 +55,11 @@ export default withNavigation(User);
 
 const styles = StyleSheet.create({
   container: {
-    //backgroundColor: "white",
     borderRadius: 20,
     padding: 8,
     marginTop: 30,
-    width: width - 12
+    width: width - 12,
+    alignItems: "center"
   },
 
   logout: {

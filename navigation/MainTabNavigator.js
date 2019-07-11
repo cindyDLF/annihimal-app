@@ -45,7 +45,7 @@ ListAnimalsStack.navigationOptions = {
   tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={"hippo"} />
 };
 
-const UserStack = createSwitchNavigator(
+const UserStack = createStackNavigator(
   {
     Register: Register,
     Profile: Profile

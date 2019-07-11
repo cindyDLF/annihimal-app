@@ -81,6 +81,7 @@ class Register extends Component {
           "@annihimal:favorite",
           JSON.stringify(arrAnimalsFav)
         );
+        console.log("get fav register ====>", arrAnimalsFav);
       } catch (error) {
         console.log(error);
       }
