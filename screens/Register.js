@@ -37,6 +37,20 @@ class Register extends Component {
     animationStart: "bounceInRight"
   };
 
+  async componentWillMount() {
+    try {
+      const value = await AsyncStorage.getItem("@annihimal:user");
+      if (value !== null) {
+        const user = JSON.parse(value);
+        if (user.jwt) {
+          this.props.navigation.navigate("Profile");
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   componentWillUpdate(prevProps, prevState) {
     if (this.state.animationStart === "bounceOutLeft") {
       this.setState({ animationStart: "bounceInRight" });

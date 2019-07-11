@@ -2,7 +2,8 @@ import React from "react";
 import { Platform } from "react-native";
 import {
   createStackNavigator,
-  createBottomTabNavigator
+  createBottomTabNavigator,
+  createSwitchNavigator
 } from "react-navigation";
 
 import TabBarIcon from "../components/TabBarIcon";
@@ -45,7 +46,7 @@ ListAnimalsStack.navigationOptions = {
   tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={"hippo"} />
 };
 
-const UserStack = createStackNavigator(
+const UserStack = createSwitchNavigator(
   {
     Register: Register,
     Profile: Profile
