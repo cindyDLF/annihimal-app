@@ -16,7 +16,7 @@ import FavoriteButton from "../components/FavoriteButton";
 import Side from "../components/Side";
 import StickyHeader from "../components/StickyHeader";
 
-import { getAnimal, addUserFavorite } from "../api/callApi";
+import { getAnimal, addUserFavorite, removeUserFavorite } from "../api/callApi";
 
 class Animal extends Component {
   constructor(props) {
@@ -153,7 +153,14 @@ class Animal extends Component {
   };
   addFavorite = () => {
     const { token, idUser, id, isFavoriteUser } = this.state;
+    this.setState({ isFavoriteUser: true });
     addUserFavorite(token, idUser, id);
+  };
+
+  removeFavorite = () => {
+    const { token, idUser, id, isFavorite } = this.state;
+    removeUserFavorite(token, idUser, id);
+    this.setState({ isFavoriteUser: false });
   };
 
   render() {
@@ -194,7 +201,7 @@ class Animal extends Component {
         {isConnected ? (
           <FavoriteButton
             isFavorite={isFavoriteUser}
-            onPress={this.addFavorite}
+            onPress={!isFavoriteUser ? this.addFavorite : this.removeFavorite}
           />
         ) : null}
       </View>

@@ -1,18 +1,20 @@
 import React, { Component } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import ActionButton from "react-native-action-button";
 import Icon from "react-native-vector-icons/Ionicons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
-const FavoriteButton = ({ isFavorite }) => (
-  <View style={styles.actionButtonIcon}>
-    {isFavorite ? (
-      <Icon name="md-heart" size={25} />
-    ) : (
-      <Icon name="md-heart-empty" size={25} />
-    )}
-  </View>
-);
+const FavoriteButton = ({ isFavorite, onPress }) => {
+  return (
+    <TouchableOpacity style={styles.actionButtonIcon} onPress={() => onPress()}>
+      {isFavorite ? (
+        <Icon name="md-heart" size={25} />
+      ) : (
+        <Icon name="md-heart-empty" size={25} />
+      )}
+    </TouchableOpacity>
+  );
+};
 
 export default FavoriteButton;
 
