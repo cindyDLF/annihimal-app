@@ -5,7 +5,8 @@ import {
   FlatList,
   AsyncStorage,
   ActivityIndicator,
-  Image
+  Image,
+  Alert
 } from "react-native";
 import { NavigationEvents } from "react-navigation";
 import { Constants } from "expo";
@@ -216,7 +217,16 @@ class Animal extends Component {
 
           <FavoriteButton
             isFavorite={isFavoriteUser}
-            onPress={!isFavoriteUser ? this.addFavorite : this.removeFavorite}
+            onPress={() => {
+              if (isConnected) {
+                console.log("isConnected");
+                !isFavoriteUser ? this.addFavorite() : this.removeFavorite();
+              } else {
+                console.log("not isConnected");
+
+                Alert.alert("blabla");
+              }
+            }}
           />
         </View>
       );
