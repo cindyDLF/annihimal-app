@@ -5,8 +5,7 @@ import {
   FlatList,
   AsyncStorage,
   ActivityIndicator,
-  Image,
-  Alert
+  ImageBackground
 } from "react-native";
 import Toast, { DURATION } from "react-native-easy-toast";
 import { NavigationEvents } from "react-navigation";
@@ -167,14 +166,20 @@ class Animal extends Component {
   };
 
   addFavorite = async () => {
-    const { jwt, user: { id: idUser } } = await getUserAsync();
+    const {
+      jwt,
+      user: { id: idUser }
+    } = await getUserAsync();
     const { id } = this.state;
     addUserFavorite(jwt, idUser, id);
     this.setState({ isFavoriteUser: true });
   };
 
   removeFavorite = async () => {
-    const { jwt, user: { id: idUser } } = await getUserAsync();
+    const {
+      jwt,
+      user: { id: idUser }
+    } = await getUserAsync();
     const { id } = this.state;
     removeUserFavorite(jwt, idUser, id);
     this.setState({ isFavoriteUser: false });
@@ -191,54 +196,61 @@ class Animal extends Component {
     if (!isLoading) {
       return (
         <View style={styles.container}>
-          <NavigationEvents
-            onWillFocus={() => this.setState({ trigger: !this.state.trigger })}
-          />
-          <StickyHeader conservation_status={animal.status} />
-          <View>
-            <FlatList
-              contentContainerStyle={styles.contentContainer}
-              data={details}
-              keyExtractor={item => item.title}
-              removeClippedSubviews="false"
-              onViewableItemsChanged={this.handleViewableItemsChanged}
-              renderItem={({ item }) => {
-                return (
-                  <Side
-                    side={item.side}
-                    data={item.data}
-                    title={item.title}
-                    img={item.img}
-                    lifestyle={item.lifestyle}
-                  />
-                );
+          <ImageBackground
+            source={require("../assets/images/background.png")}
+            style={{ width: "100%", height: "100%" }}
+          >
+            <NavigationEvents
+              onWillFocus={() =>
+                this.setState({ trigger: !this.state.trigger })
+              }
+            />
+            <StickyHeader conservation_status={animal.status} />
+            <View>
+              <FlatList
+                contentContainerStyle={styles.contentContainer}
+                data={details}
+                keyExtractor={item => item.title}
+                removeClippedSubviews="false"
+                onViewableItemsChanged={this.handleViewableItemsChanged}
+                renderItem={({ item }) => {
+                  return (
+                    <Side
+                      side={item.side}
+                      data={item.data}
+                      title={item.title}
+                      img={item.img}
+                      lifestyle={item.lifestyle}
+                    />
+                  );
+                }}
+              />
+            </View>
+
+            <FavoriteButton
+              isFavorite={isFavoriteUser}
+              onPress={() => {
+                if (isConnected) {
+                  !isFavoriteUser ? this.addFavorite() : this.removeFavorite();
+                } else {
+                  this.refs.toast.show(
+                    "You must be connected to add favorites",
+                    DURATION.LENGTH_LONG
+                  );
+                }
               }}
             />
-          </View>
-
-          <FavoriteButton
-            isFavorite={isFavoriteUser}
-            onPress={() => {
-              if (isConnected) {
-                !isFavoriteUser ? this.addFavorite() : this.removeFavorite();
-              } else {
-                this.refs.toast.show(
-                  "You must be connected to add favorites",
-                  DURATION.LENGTH_LONG
-                );
-              }
-            }}
-          />
-          <Toast
-            ref="toast"
-            style={{ backgroundColor: "black" }}
-            position="bottom"
-            positionValue={250}
-            fadeInDuration={3000}
-            fadeOutDuration={1000}
-            opacity={0.9}
-            textStyle={{ color: "white" }}
-          />
+            <Toast
+              ref="toast"
+              style={{ backgroundColor: "black" }}
+              position="bottom"
+              positionValue={250}
+              fadeInDuration={3000}
+              fadeOutDuration={1000}
+              opacity={0.9}
+              textStyle={{ color: "white" }}
+            />
+          </ImageBackground>
         </View>
       );
     } else {

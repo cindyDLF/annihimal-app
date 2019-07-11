@@ -1,5 +1,10 @@
 import React, { Component } from "react";
-import { View, StyleSheet, ActivityIndicator } from "react-native";
+import {
+  View,
+  StyleSheet,
+  ActivityIndicator,
+  ImageBackground
+} from "react-native";
 import { Constants } from "expo";
 
 import Carousel from "../components/Carousel";
@@ -30,12 +35,17 @@ export default class Home extends Component {
     if (!isLoading) {
       return (
         <View style={styles.container}>
-          <View style={styles.center}>
-            <Title text="annihimal" size={60} animated={true} />
-          </View>
-          <View style={styles.container}>
-            <Carousel data={data} />
-          </View>
+          <ImageBackground
+            source={require("../assets/images/background.png")}
+            style={{ width: "100%", height: "100%" }}
+          >
+            <View style={styles.center}>
+              <Title text="annihimal" size={60} animated={true} />
+            </View>
+            <View style={styles.containerList}>
+              <Carousel data={data} />
+            </View>
+          </ImageBackground>
         </View>
       );
     } else {
@@ -55,6 +65,12 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     paddingTop: Constants.statusBarHeight,
     backgroundColor: Colors.primaryColor
+  },
+  containerList: {
+    flex: 1,
+    alignItems: "stretch",
+    justifyContent: "flex-start",
+    paddingTop: Constants.statusBarHeight
   },
   containerLoad: {
     flex: 1,

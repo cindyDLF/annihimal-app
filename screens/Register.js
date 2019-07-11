@@ -9,7 +9,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   AsyncStorage,
-  Image
+  ImageBackground
 } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { withNavigation } from "react-navigation";
@@ -186,51 +186,56 @@ class Register extends Component {
           style={{ backgroundColor: Colors.primaryColor }}
         >
           <View style={styles.container}>
-            <View style={styles.containerHeader}>
-              <Title text="annihimal" />
-              <Animatable.Image
-                animation={animationStart}
-                style={styles.stretch}
-                duration={3000}
-                source={require("../assets/images/annihimal-logo.png")}
-                style={{
-                  width: 100,
-                  height: 100,
-                  margin: 20
-                }}
-              />
-              <View style={styles.containerSwitch}>
-                <TouchableOpacity
-                  onPress={() => this.setState({ alreadyRegistered: true })}
-                  style={styles.buttonSwitchLeft}
-                >
-                  <Text
-                    style={
-                      alreadyRegistered
-                        ? styles.textButtonSwitchActive
-                        : styles.textButtonSwitch
-                    }
+            <ImageBackground
+              source={require("../assets/images/background.png")}
+              style={{ width: "100%", height: "100%" }}
+            >
+              <View style={styles.containerHeader}>
+                <Title text="annihimal" />
+                <Animatable.Image
+                  animation={animationStart}
+                  style={styles.stretch}
+                  duration={3000}
+                  source={require("../assets/images/annihimal-logo.png")}
+                  style={{
+                    width: 100,
+                    height: 100,
+                    margin: 20
+                  }}
+                />
+                <View style={styles.containerSwitch}>
+                  <TouchableOpacity
+                    onPress={() => this.setState({ alreadyRegistered: true })}
+                    style={styles.buttonSwitchLeft}
                   >
-                    sign in
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => this.setState({ alreadyRegistered: false })}
-                  style={styles.buttonSwitchRight}
-                >
-                  <Text
-                    style={
-                      !alreadyRegistered
-                        ? styles.textButtonSwitchActive
-                        : styles.textButtonSwitch
-                    }
+                    <Text
+                      style={
+                        alreadyRegistered
+                          ? styles.textButtonSwitchActive
+                          : styles.textButtonSwitch
+                      }
+                    >
+                      sign in
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => this.setState({ alreadyRegistered: false })}
+                    style={styles.buttonSwitchRight}
                   >
-                    sign up
-                  </Text>
-                </TouchableOpacity>
+                    <Text
+                      style={
+                        !alreadyRegistered
+                          ? styles.textButtonSwitchActive
+                          : styles.textButtonSwitch
+                      }
+                    >
+                      sign up
+                    </Text>
+                  </TouchableOpacity>
+                </View>
               </View>
-            </View>
-            {this.renderRegister()}
+              {this.renderRegister()}
+            </ImageBackground>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>

@@ -5,7 +5,8 @@ import {
   View,
   AsyncStorage,
   ActivityIndicator,
-  Dimensions
+  Dimensions,
+  ImageBackground
 } from "react-native";
 
 import { NavigationEvents } from "react-navigation";
@@ -70,15 +71,22 @@ class Profile extends Component {
     if (!isLoading) {
       return (
         <View style={styles.container}>
-          <NavigationEvents
-            onWillFocus={() => this.setState({ trigger: !this.state.trigger })}
-          />
-          <User data={user} />
+          <ImageBackground
+            source={require("../assets/images/background.png")}
+            style={{ width: "100%", height: "100%" }}
+          >
+            <NavigationEvents
+              onWillFocus={() =>
+                this.setState({ trigger: !this.state.trigger })
+              }
+            />
+            <User data={user} />
 
-          <Title text="favourites" margin={5} />
-          <View style={styles.containerFlatList}>
-            {data ? <FlatAnni data={data} /> : <Text>No favourites 😿</Text>}
-          </View>
+            <Title text="favourites" margin={5} />
+            <View style={styles.containerFlatList}>
+              {data ? <FlatAnni data={data} /> : <Text>No favourites 😿</Text>}
+            </View>
+          </ImageBackground>
         </View>
       );
     } else {
