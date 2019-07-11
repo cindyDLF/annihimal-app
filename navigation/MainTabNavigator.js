@@ -16,10 +16,8 @@ import Colors from "../constants/Colors";
 
 const HomeStack = createStackNavigator(
   {
-    Home: {
-      screen: Home,
-      navigationOptions: {}
-    }
+    Home: Home,
+    AnimalH: Animal
   },
   { headerMode: "none" }
 );
