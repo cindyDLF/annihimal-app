@@ -1,12 +1,11 @@
 import React from "react";
 import { StyleSheet, View, Dimensions, ActivityIndicator } from "react-native";
 import { Constants } from "expo";
-import { Text } from "react-native-elements";
 
 import Colors from "../constants/Colors";
 import Title from "../components/Title";
 import ListAnni from "../components/List";
-import images from "../components/images";
+
 import { getAnimalList } from "../api/callApi";
 
 const width = Dimensions.get("window").width;
@@ -47,7 +46,11 @@ class ListAnimal extends React.Component {
         </View>
       );
     } else {
-      return <ActivityIndicator size="small" color={Colors.primaryColor} />;
+      return (
+        <View style={styles.containerLoad}>
+          <ActivityIndicator size="large" color="black" />
+        </View>
+      );
     }
   }
 }
@@ -59,6 +62,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center"
+  },
+  containerLoad: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingTop: Constants.statusBarHeight,
+    backgroundColor: Colors.primaryColor
   },
   containerStyle: {
     backgroundColor: Colors.whiteColor,

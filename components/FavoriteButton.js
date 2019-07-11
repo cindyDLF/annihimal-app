@@ -1,8 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
-import ActionButton from "react-native-action-button";
 import Icon from "react-native-vector-icons/Ionicons";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 const FavoriteButton = ({ isFavorite, onPress }) => {
   return (

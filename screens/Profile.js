@@ -2,24 +2,20 @@ import React, { Component } from "react";
 import {
   Text,
   StyleSheet,
-  Dimensions,
   View,
   AsyncStorage,
   ActivityIndicator
 } from "react-native";
-import { Constants } from "expo";
 
 import { NavigationEvents } from "react-navigation";
+import { Constants } from "expo";
 
 import User from "../components/User";
 import FlatAnni from "../components/List";
 import Title from "../components/Title";
 import Colors from "../constants/Colors";
-import images from "../components/images";
 
 import { userFavorite } from "../api/callApi";
-
-const { height, width } = Dimensions.get("window");
 
 class Profile extends Component {
   state = {
@@ -67,7 +63,6 @@ class Profile extends Component {
 
   render() {
     const { user, isLoading, data } = this.state;
-    //console.log(data);
     if (!isLoading) {
       return (
         <View style={styles.container}>
@@ -82,7 +77,11 @@ class Profile extends Component {
         </View>
       );
     } else {
-      return <ActivityIndicator size="small" color={Colors.primaryColor} />;
+      return (
+        <View style={styles.containerLoad}>
+          <ActivityIndicator size="large" color="black" />
+        </View>
+      );
     }
   }
 }
@@ -93,6 +92,13 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center"
+  },
+  containerLoad: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingTop: Constants.statusBarHeight,
+    backgroundColor: Colors.primaryColor
   }
 });
 

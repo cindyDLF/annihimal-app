@@ -22,6 +22,7 @@ export const userRegister = async data => {
     });
     const { status } = ret;
     const res = await ret.json();
+
     return { status, res };
   } catch (err) {
     console.log(err);
@@ -40,6 +41,7 @@ export const userLogin = async data => {
     });
     const { status } = ret;
     const res = await ret.json();
+
     return { status, res };
   } catch (err) {
     console.log(err);
@@ -57,6 +59,7 @@ export const getAnimalList = async nb => {
     });
     const { status } = ret;
     const res = await ret.json();
+
     return { status, res };
   } catch (err) {
     console.log(err);
@@ -74,6 +77,7 @@ export const getAnimal = async id => {
     });
     const { status } = ret;
     const res = await ret.json();
+
     return { status, res };
   } catch (err) {
     console.log(err);
@@ -91,6 +95,7 @@ export const getCarousel = async nb => {
     });
     const { status } = ret;
     const res = await ret.json();
+    
     return { status, res };
   } catch (err) {
     console.log(err);
@@ -108,7 +113,7 @@ export const userFavorite = async (token, id) => {
   });
   const { status } = ret;
   const res = await ret.json();
-  //  console.log(res);
+
   return { status, res };
 };
 
@@ -127,7 +132,7 @@ export const addUserFavorite = async (token, idUser, idAnimal) => {
   });
   const { status } = ret;
   const res = await ret.json();
-  console.log(res, status);
+
   return { status, res };
 };
 
@@ -146,6 +151,6 @@ export const removeUserFavorite = async (token, idUser, idAnimal) => {
   });
   const { status } = ret;
   const res = await ret.json();
-  console.log(res, status);
+
   return { status, res };
 };

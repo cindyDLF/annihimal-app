@@ -1,5 +1,4 @@
 import React from "react";
-import { Platform } from "react-native";
 import {
   createStackNavigator,
   createBottomTabNavigator,
@@ -68,10 +67,9 @@ export default createBottomTabNavigator(
   },
   {
     tabBarOptions: {
-      activeTintColor: Colors.mainColor, // active icon color
-      //inactiveTintColor: "#586589", // inactive icon color
+      activeTintColor: Colors.mainColor,
       style: {
-        backgroundColor: Colors.whiteColor // TabBar background
+        backgroundColor: Colors.whiteColor
       }
     }
   }
