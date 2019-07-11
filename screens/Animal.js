@@ -89,6 +89,7 @@ class Animal extends Component {
     const size = animal.size || "N/A";
     const litter = animal.litter_size || "N/A";
     const img = animal.img;
+    const lifestyle = animal.lifestyle.name || "Unknown";
 
     const presentation = {
       title: "presentation",
@@ -106,7 +107,8 @@ class Animal extends Component {
     const info = {
       title: "informations",
       side: "left",
-      data: { size, weight, lifespan, group_behaviour }
+      data: { size, weight, lifespan, group_behaviour },
+      lifestyle
     };
 
     const repro = {
@@ -194,6 +196,7 @@ class Animal extends Component {
                     data={item.data}
                     title={item.title}
                     img={item.img}
+                    lifestyle={item.lifestyle}
                   />
                 );
               }}

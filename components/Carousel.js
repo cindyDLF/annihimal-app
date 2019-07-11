@@ -1,9 +1,5 @@
 import React, { Component } from "react";
-import {
-  StyleSheet,
-  Dimensions,
-  TouchableOpacity
-} from "react-native";
+import { StyleSheet, Dimensions, TouchableOpacity } from "react-native";
 import { Constants } from "expo";
 import { withNavigation } from "react-navigation";
 
@@ -23,7 +19,7 @@ class Carousel extends Component {
   }
 
   onPress = id => {
-    this.props.navigation.navigate("Animal", { id });
+    this.props.navigation.navigate("AnimalH", { id });
   };
 
   render = () => {
