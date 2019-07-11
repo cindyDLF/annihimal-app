@@ -63,8 +63,8 @@ export default withNavigation(Carousel);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "stretch",
-    justifyContent: "flex-start",
+    //alignItems: "stretch",
+    //justifyContent: "flex-start",
     paddingTop: Constants.statusBarHeight
   },
   fill: {
