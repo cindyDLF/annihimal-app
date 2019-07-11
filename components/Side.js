@@ -113,19 +113,19 @@ const Side = ({ side, data, title, img }) => {
 
   getImg = title => {
     switch (title) {
-      case "Presentation":
+      case "presentation":
         return {
           uri: img
         };
 
         break;
 
-      case "Habitat":
+      case "habitat":
         return images.forest;
 
         break;
 
-      case "Reproduction":
+      case "reproduction":
         return images.stork;
 
         break;
@@ -145,12 +145,12 @@ const Side = ({ side, data, title, img }) => {
 
         break;
 
-      case "Informations":
+      case "informations":
         return images.diurnal;
 
         break;
 
-      case "Profile":
+      case "profile":
         return images.user;
 
         break;

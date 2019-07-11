@@ -16,7 +16,7 @@ import FavoriteButton from "../components/FavoriteButton";
 import Side from "../components/Side";
 import StickyHeader from "../components/StickyHeader";
 
-import { getAnimal, addUserFavorite, removeUserFavorite } from "../api/callApi";
+import { getAnimal } from "../api/callApi";
 
 class Animal extends Component {
   constructor(props) {
@@ -27,11 +27,7 @@ class Animal extends Component {
       trigger: false,
       id: props.navigation.state.params.id,
       animal: {},
-      data: [],
-      token: "",
-      idUser: 0,
-      favorites: [],
-      isFavoriteUser: false
+      data: []
     };
 
     this.viewabilityConfig = { viewAreaCoveragePercentThreshold: 100 };
@@ -63,7 +59,6 @@ class Animal extends Component {
     this.setState({ animal: data.res.animal });
     const details = this.formatAnimal();
     this.setState({ details });
-    this.retrieveData();
   }
 
   getAnimalDetails = async () => {
@@ -90,26 +85,26 @@ class Animal extends Component {
     const img = animal.img;
 
     const presentation = {
-      title: "Presentation",
+      title: "presentation",
       side: "left",
       data: { name, scientific_name, classification },
       img
     };
 
     const hab = {
-      title: "Habitat",
+      title: "habitat",
       side: "right",
       data: { habitat, diet, threat }
     };
 
     const info = {
-      title: "Informations",
+      title: "informations",
       side: "left",
       data: { size, weight, lifespan, group_behaviour }
     };
 
     const repro = {
-      title: "Reproduction",
+      title: "reproduction",
       side: "right",
       data: { gestation_period, litter }
     };
@@ -120,59 +115,17 @@ class Animal extends Component {
   retrieveData = () => {
     AsyncStorage.getItem("@annihimal:user").then(res => {
       if (res !== null) {
-        const user = JSON.parse(res);
-        this.setState({ token: user.jwt });
-        this.setState({ idUser: user.user.id });
         this.setState({ isConnected: true });
-        AsyncStorage.getItem("@annihimal:favorite").then(res => {
-          if (res !== null) {
-            const favorites = JSON.parse(res);
-
-            this.setState({ favorites });
-          } else {
-            this.setState({ isConnected: false });
-          }
-        });
-        this.checkFav();
       } else {
         this.setState({ isConnected: false });
       }
     });
-
     this.setState({ trigger: !this.state.trigger });
   };
 
-  checkFav = () => {
-    const { favorites, id } = this.state;
-
-    favorites.forEach(item => {
-      if (item.id === id) {
-        return this.setState({ isFavoriteUser: true });
-      }
-    });
-  };
-  addFavorite = () => {
-    const { token, idUser, id, isFavoriteUser } = this.state;
-    this.setState({ isFavoriteUser: true });
-    addUserFavorite(token, idUser, id);
-  };
-
-  removeFavorite = () => {
-    const { token, idUser, id, isFavorite } = this.state;
-    removeUserFavorite(token, idUser, id);
-    this.setState({ isFavoriteUser: false });
-  };
-
   render() {
-    const {
-      isConnected,
-      details,
-      animal,
-      token,
-      id,
-      favorites,
-      isFavoriteUser
-    } = this.state;
+    const { isConnected, details, animal } = this.state;
+
     return (
       <View style={styles.container}>
         <NavigationEvents
@@ -198,12 +151,7 @@ class Animal extends Component {
             }}
           />
         </View>
-        {isConnected ? (
-          <FavoriteButton
-            isFavorite={isFavoriteUser}
-            onPress={!isFavoriteUser ? this.addFavorite : this.removeFavorite}
-          />
-        ) : null}
+        {isConnected ? <FavoriteButton /> : null}
       </View>
     );
   }

@@ -48,7 +48,8 @@ class Carousel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentIndex: 0
+      currentIndex: 0,
+      data: this.props.data
     };
   }
 
@@ -62,13 +63,13 @@ class Carousel extends Component {
 
     return (
       <SideSwipe
-        data={animals}
+        data={data}
         shouldRelease={() => true}
         style={[styles.fill, { width }]}
         contentContainerStyle={{ paddingTop: 100 }}
         itemWidth={Card.WIDTH}
         threshold={Card.WIDTH / 4}
-        extractKey={item => item.value}
+        extractKey={item => item.id.toString()}
         contentOffset={offset}
         onIndexChange={index => this.setState(() => ({ currentIndex: index }))}
         renderItem={({ itemIndex, currentIndex, item, animatedValue }) => {

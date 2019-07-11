@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, ActivityIndicator } from "react-native";
 import { Constants } from "expo";
 import SideSwipe from "react-native-sideswipe";
 
@@ -15,11 +15,11 @@ export default class Home extends Component {
     title: "Home"
   };
 
-  state = { data: [] };
+  state = { data: [], isLoading: true };
 
   async componentDidMount() {
     const data = await this.getRandomAnimal(5);
-    this.setState({ data: data.res.animals });
+    this.setState({ data: data.res.animals, isLoading: false });
   }
 
   getRandomAnimal = async nb => {
@@ -27,16 +27,25 @@ export default class Home extends Component {
   };
 
   render = () => {
-    return (
-      <View style={styles.container}>
-        <View style={styles.center}>
-          <Title text="annihimal" size={60} />
-        </View>
+    const { data, isLoading } = this.state;
+    if (!isLoading) {
+      return (
         <View style={styles.container}>
-          <Carousel />
+          <View style={styles.center}>
+            <Title text="annihimal" size={60} />
+          </View>
+          <View style={styles.container}>
+            <Carousel data={data} />
+          </View>
         </View>
-      </View>
-    );
+      );
+    } else {
+      return (
+        <View style={styles.container}>
+          <ActivityIndicator size="small" color={Colors.primaryColor} />
+        </View>
+      );
+    }
   };
 }
 

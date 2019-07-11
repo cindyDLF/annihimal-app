@@ -164,7 +164,6 @@ class Register extends Component {
 
   render() {
     const { alreadyRegistered, animationStart } = this.state;
-    console.log(this.state.animationStart);
 
     return (
       <KeyboardAvoidingView

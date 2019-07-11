@@ -39,10 +39,10 @@ export class Card extends Component {
             }
           ]}
           source={{
-            uri: animal.value
+            uri: animal.img
           }}
         />
-        <Animated.Text
+        {/* <Animated.Text
           style={[
             styles.title,
             {
@@ -63,7 +63,7 @@ export class Card extends Component {
           ]}
         >
           {animal.name.toUpperCase()}
-        </Animated.Text>
+        </Animated.Text> */}
       </Animated.View>
     );
   };
