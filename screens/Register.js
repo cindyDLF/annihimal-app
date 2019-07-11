@@ -8,7 +8,8 @@ import {
   Dimensions,
   KeyboardAvoidingView,
   Platform,
-  AsyncStorage
+  AsyncStorage,
+  Image
 } from "react-native";
 import * as Animatable from "react-native-animatable";
 import { withNavigation } from "react-navigation";
@@ -17,6 +18,7 @@ import Title from "../components/Title";
 import Button from "../components/Button";
 
 import Colors from "../constants/Colors";
+import { logo } from "../assets/images/annihimal-logo.png";
 
 import { userFavorite } from "../api/callApi";
 
@@ -84,7 +86,7 @@ class Register extends Component {
       } catch (error) {
         console.log(error);
       }
-
+      //this.waitForAnimation();
       this.setState({ animationStart: "bounceOutLeft" });
       setTimeout(() => this.props.navigation.navigate("Profile"), 1300);
     }
@@ -94,7 +96,8 @@ class Register extends Component {
     const { username, email, password, password_confirmation } = this.state;
     const user = { username, email, password, password_confirmation };
     const { status, res } = await userRegister(user);
-
+    console.log("STATUS:::", status);
+    console.log("RES:::", res);
     if (status != 201) {
       const { errors } = res;
       makeAlert("Error", errors, "OK");

@@ -30,32 +30,34 @@ class FlatAnni extends React.Component {
   render() {
     const { data } = this.props;
     return (
-      <FlatList
-        data={data}
-        keyExtractor={item => item.id.toString()}
-        windowSize={1}
-        initialNumToRender={1}
-        removeClippedSubviews="false"
-        onEndReached={this.handleEnd}
-        viewabilityConfig={this.viewabilityConfig}
-        renderItem={({ item }) => {
-          return (
-            <ListItem
-              friction={90}
-              tension={100}
-              activeScale={0.95}
-              Component={TouchableScale}
-              containerStyle={styles.containerStyle}
-              titleStyle={styles.containerTitle}
-              title={item.name}
-              leftAvatar={{ source: { uri: item.img } }}
-              onPress={() => {
-                this.props.navigation.navigate("Animal", { id: item.id });
-              }}
-            />
-          );
-        }}
-      />
+      <View style={styles.container}>
+        <FlatList
+          data={data}
+          keyExtractor={item => item.id.toString()}
+          windowSize={1}
+          initialNumToRender={15}
+          removeClippedSubviews="false"
+          onEndReached={this.handleEnd}
+          viewabilityConfig={this.viewabilityConfig}
+          renderItem={({ item }) => {
+            return (
+              <ListItem
+                friction={90}
+                tension={100}
+                activeScale={0.95}
+                Component={TouchableScale}
+                containerStyle={styles.containerStyle}
+                titleStyle={styles.containerTitle}
+                title={item.name}
+                leftAvatar={{ source: { uri: item.img } }}
+                onPress={() => {
+                  this.props.navigation.navigate("Animal", { id: item.id });
+                }}
+              />
+            );
+          }}
+        />
+      </View>
     );
   }
 }
@@ -64,23 +66,33 @@ export default withNavigation(FlatAnni);
 
 const styles = StyleSheet.create({
   containerStyle: {
-    backgroundColor: Colors.whiteColor,
-    marginBottom: 10,
-    padding: 16,
+    backgroundColor: "transparent",
+    paddingTop: 25,
+    paddingBottom: 10,
     borderColor: "black",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 5
-    },
-    shadowOpacity: 0.05,
-    shadowRadius: 1,
-    width: width - 10,
-    borderRadius: 20
+
+    width: width,
+    borderBottomWidth: 1,
+    borderColor: Colors.primaryColor,
+    marginLeft: 20
+    //  borderRadius: 20
   },
   containerTitle: {
     color: Colors.mainColor,
     fontFamily: "Avenir",
     fontWeight: "bold"
+  },
+  containerFlatList: {
+    backgroundColor: Colors.whiteColor,
+    paddingTop: 20,
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65
   }
 });

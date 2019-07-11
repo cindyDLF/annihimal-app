@@ -4,7 +4,8 @@ import {
   StyleSheet,
   View,
   AsyncStorage,
-  ActivityIndicator
+  ActivityIndicator,
+  Dimensions
 } from "react-native";
 
 import { NavigationEvents } from "react-navigation";
@@ -14,6 +15,8 @@ import User from "../components/User";
 import FlatAnni from "../components/List";
 import Title from "../components/Title";
 import Colors from "../constants/Colors";
+
+const height = Dimensions.get("window").height;
 
 import { userFavorite } from "../api/callApi";
 
@@ -72,8 +75,9 @@ class Profile extends Component {
           <User data={user} />
 
           <Title text="Favourites" margin={5} />
-
-          {data ? <FlatAnni data={data} /> : <Text>No favourites 😿</Text>}
+          <View style={styles.containerFlatList}>
+            {data ? <FlatAnni data={data} /> : <Text>No favourites 😿</Text>}
+          </View>
         </View>
       );
     } else {
@@ -89,9 +93,9 @@ class Profile extends Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.primaryColor,
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
+    flex: 1
+    // alignItems: "center",
+    // justifyContent: "center"
   },
   containerLoad: {
     flex: 1,
@@ -99,6 +103,20 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingTop: Constants.statusBarHeight,
     backgroundColor: Colors.primaryColor
+  },
+  containerFlatList: {
+    backgroundColor: Colors.whiteColor,
+    paddingTop: 20,
+    flex: 1,
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65
   }
 });
 
