@@ -31,7 +31,7 @@ export default class Home extends Component {
       return (
         <View style={styles.container}>
           <View style={styles.center}>
-            <Title text="annihimal" size={60} />
+            <Title text="annihimal" size={60} animated={true} />
           </View>
           <View style={styles.container}>
             <Carousel data={data} />

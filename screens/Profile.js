@@ -74,7 +74,7 @@ class Profile extends Component {
           />
           <User data={user} />
 
-          <Title text="Favourites" margin={5} />
+          <Title text="favourites" margin={5} />
           <View style={styles.containerFlatList}>
             {data ? <FlatAnni data={data} /> : <Text>No favourites 😿</Text>}
           </View>

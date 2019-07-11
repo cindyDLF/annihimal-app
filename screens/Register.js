@@ -69,8 +69,6 @@ class Register extends Component {
   login = async () => {
     const { email, password } = this.state;
     const { status, res } = await userLogin({ email, password });
-    console.log("STATUS:::", status);
-    console.log("RES:::", res);
 
     if (status != 200) {
       const { errors } = res;
@@ -86,7 +84,7 @@ class Register extends Component {
       } catch (error) {
         console.log(error);
       }
-      //this.waitForAnimation();
+
       this.setState({ animationStart: "bounceOutLeft" });
       setTimeout(() => this.props.navigation.navigate("Profile"), 1300);
     }
@@ -96,8 +94,7 @@ class Register extends Component {
     const { username, email, password, password_confirmation } = this.state;
     const user = { username, email, password, password_confirmation };
     const { status, res } = await userRegister(user);
-    console.log("STATUS:::", status);
-    console.log("RES:::", res);
+
     if (status != 201) {
       const { errors } = res;
       makeAlert("Error", errors, "OK");
@@ -108,8 +105,7 @@ class Register extends Component {
 
   getFav = async (jwt, id) => {
     try {
-      const { data, user, isLoading } = this.state;
-      const { status, res } = await userFavorite(jwt, id);
+      const { res } = await userFavorite(jwt, id);
       return res.animals;
     } catch (err) {
       console.log(err);
