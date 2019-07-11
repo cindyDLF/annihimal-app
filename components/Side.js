@@ -164,13 +164,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "row",
-    //height: height / 1.5,
     alignItems: "center",
     justifyContent: "center"
   },
   imgContainer: {
     width: width - width / 2.5,
-    //height: height / 1.5,
+    height: height / 1.8,
     alignItems: "center",
     justifyContent: "center"
   },
