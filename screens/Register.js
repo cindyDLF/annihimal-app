@@ -18,7 +18,6 @@ import Title from "../components/Title";
 import Button from "../components/Button";
 
 import Colors from "../constants/Colors";
-import { logo } from "../assets/images/annihimal-logo.png";
 
 import { userFavorite } from "../api/callApi";
 
@@ -81,7 +80,6 @@ class Register extends Component {
           "@annihimal:favorite",
           JSON.stringify(arrAnimalsFav)
         );
-        console.log("get fav register ====>", arrAnimalsFav);
       } catch (error) {
         console.log(error);
       }
@@ -149,7 +147,7 @@ class Register extends Component {
             handleOnChange={this.handleOnChange}
             name="password_confirmation"
           />
-          <Button text="send" onPress={this.register} />
+          <Button text="register" onPress={this.register} />
         </View>
       );
     } else {
@@ -167,7 +165,7 @@ class Register extends Component {
             handleOnChange={this.handleOnChange}
             name="password"
           />
-          <Button text="send" onPress={this.login} />
+          <Button text="log in" onPress={this.login} />
         </View>
       );
     }
@@ -215,7 +213,7 @@ class Register extends Component {
                           : styles.textButtonSwitch
                       }
                     >
-                      sign in
+                      log in
                     </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
@@ -229,7 +227,7 @@ class Register extends Component {
                           : styles.textButtonSwitch
                       }
                     >
-                      sign up
+                      register
                     </Text>
                   </TouchableOpacity>
                 </View>
@@ -295,13 +293,15 @@ const styles = StyleSheet.create({
   textButtonSwitch: {
     fontFamily: "Avenir",
     fontSize: 20,
-    color: Colors.mainColor
+    color: "#2D344D"
+    // color: Colors.mainColor
   },
   textButtonSwitchActive: {
     fontFamily: "Avenir",
     fontSize: 20,
     fontWeight: "bold",
-    color: Colors.mainColor
+    color: "#2D344D"
+    // color: Colors.mainColor
   },
   containerHeader: {
     justifyContent: "center",

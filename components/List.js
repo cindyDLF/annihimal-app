@@ -78,7 +78,8 @@ const styles = StyleSheet.create({
     //  borderRadius: 20
   },
   containerTitle: {
-    color: Colors.mainColor,
+    // color: Colors.mainColor,
+    color: "#2D344D",
     fontFamily: "Avenir",
     fontWeight: "bold"
   },

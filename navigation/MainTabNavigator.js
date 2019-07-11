@@ -65,7 +65,8 @@ export default createBottomTabNavigator(
   },
   {
     tabBarOptions: {
-      activeTintColor: Colors.mainColor,
+      // activeTintColor: Colors.mainColor,
+      activeTintColor: "#2D344D",
       style: {
         backgroundColor: Colors.whiteColor,
         borderTopColor: "transparent"
