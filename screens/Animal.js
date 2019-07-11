@@ -4,7 +4,8 @@ import {
   StyleSheet,
   FlatList,
   AsyncStorage,
-  ActivityIndicator
+  ActivityIndicator,
+  Image
 } from "react-native";
 import { NavigationEvents } from "react-navigation";
 import { Constants } from "expo";
@@ -192,7 +193,6 @@ class Animal extends Component {
       isLoading,
       isFavoriteUser
     } = this.state;
-
     if (!isLoading) {
       return (
         <View style={styles.container}>
