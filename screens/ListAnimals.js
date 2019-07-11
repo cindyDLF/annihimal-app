@@ -42,7 +42,7 @@ class ListAnimal extends React.Component {
     if (!isLoading) {
       return (
         <View style={styles.container}>
-          <Title text="list" />
+          <Title text="animals" />
           <ListAnni data={data} endReached={this.endReached} />
         </View>
       );
