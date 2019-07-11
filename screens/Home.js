@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { View, StyleSheet, ActivityIndicator } from "react-native";
 import { Constants } from "expo";
-import SideSwipe from "react-native-sideswipe";
 
 import Carousel from "../components/Carousel";
 import Title from "../components/Title";
@@ -41,8 +40,8 @@ export default class Home extends Component {
       );
     } else {
       return (
-        <View style={styles.container}>
-          <ActivityIndicator size="small" color={Colors.primaryColor} />
+        <View style={styles.containerLoad}>
+          <ActivityIndicator size="large" color="black" />
         </View>
       );
     }
@@ -54,6 +53,13 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "stretch",
     justifyContent: "flex-start",
+    paddingTop: Constants.statusBarHeight,
+    backgroundColor: Colors.primaryColor
+  },
+  containerLoad: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
     paddingTop: Constants.statusBarHeight,
     backgroundColor: Colors.primaryColor
   },

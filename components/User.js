@@ -7,17 +7,14 @@ import {
   TouchableOpacity
 } from "react-native";
 import { withNavigation } from "react-navigation";
-import { Constants } from "expo";
 import { Avatar, Text } from "react-native-elements";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+
 import _ from "lodash";
 
-import Button from "./Button";
-
-import Colors from "../constants/Colors";
 import images from "./images";
 
-const { height, width } = Dimensions.get("window");
+const { width } = Dimensions.get("window");
 
 class User extends React.Component {
   state = {

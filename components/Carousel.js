@@ -1,13 +1,10 @@
 import React, { Component } from "react";
 import {
-  ActivityIndicator,
-  View,
   StyleSheet,
   Dimensions,
-  Platform,
   TouchableOpacity
 } from "react-native";
-import { Constants, Font } from "expo";
+import { Constants } from "expo";
 import { withNavigation } from "react-navigation";
 
 import SideSwipe from "react-native-sideswipe";
@@ -15,34 +12,6 @@ import SideSwipe from "react-native-sideswipe";
 import { Card } from "./Card";
 
 const { width } = Dimensions.get("window");
-
-const animals = [
-  {
-    id: 183,
-    name: "Robin",
-    value: "https://a-z-animals.com/media/animals/images/470x370/robin5.jpg"
-  },
-  {
-    id: 113,
-    name: "Umbrellabird",
-    value:
-      "https://a-z-animals.com/media/animals/images/470x370/umbrellabird_5.jpg"
-  },
-  {
-    id: 134,
-    name: "Elephant",
-
-    value:
-      "https://a-z-animals.com/media/animals/images/470x370/african_elephant.jpg"
-  },
-  {
-    id: 176,
-    name: "Pink Fairy Armadillo",
-
-    value:
-      "https://a-z-animals.com/media/animals/images/470x370/pink_fairy_armadillo.jpg"
-  }
-];
 
 class Carousel extends Component {
   constructor(props) {

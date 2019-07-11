@@ -3,8 +3,6 @@ import { Animated, Dimensions, StyleSheet } from "react-native";
 
 import Colors from "../constants/Colors";
 
-import images from "./images";
-
 const { width: screenWidth } = Dimensions.get("window");
 const width = screenWidth - 125;
 
@@ -42,28 +40,6 @@ export class Card extends Component {
             uri: animal.img
           }}
         />
-        {/* <Animated.Text
-          style={[
-            styles.title,
-            {
-              opacity: animatedValue.interpolate({
-                inputRange: [index - 1, index, index + 1],
-                outputRange: [0, 1, 0]
-              }),
-              transform: [
-                {
-                  translateY: animatedValue.interpolate({
-                    inputRange: [index - 1, index, index + 1],
-                    outputRange: [-30, 0, -30],
-                    extrapolate: "clamp"
-                  })
-                }
-              ]
-            }
-          ]}
-        >
-          {animal.name.toUpperCase()}
-        </Animated.Text> */}
       </Animated.View>
     );
   };
