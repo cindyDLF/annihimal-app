@@ -9,6 +9,7 @@ import {
 import { NavigationEvents } from "react-navigation";
 import { Constants } from "expo";
 import _ from "lodash";
+import { getUserAsync } from "../storageRepo";
 
 import Colors from "../constants/Colors";
 
@@ -16,7 +17,12 @@ import FavoriteButton from "../components/FavoriteButton";
 import Side from "../components/Side";
 import StickyHeader from "../components/StickyHeader";
 
-import { getAnimal, addUserFavorite, removeUserFavorite } from "../api/callApi";
+import {
+  getAnimal,
+  addUserFavorite,
+  removeUserFavorite,
+  userFavorite
+} from "../api/callApi";
 
 class Animal extends Component {
   constructor(props) {
@@ -32,7 +38,8 @@ class Animal extends Component {
       token: "",
       idUser: 0,
       favorites: [],
-      isFavoriteUser: false
+      isFavoriteUser: false,
+      trigger: false
     };
 
     this.viewabilityConfig = { viewAreaCoveragePercentThreshold: 100 };
@@ -48,7 +55,8 @@ class Animal extends Component {
 
   async componentDidUpdate(prevProps, prevState) {
     if (this.state.trigger) {
-      this.retrieveData();
+      await this.retrieveData();
+      this.setState({ trigger: false });
     }
 
     if (this.state.id != prevProps.navigation.state.params.id) {
@@ -56,11 +64,11 @@ class Animal extends Component {
       this.setState({ animal: data.res.animal });
       const details = this.formatAnimal();
       this.setState({ details });
-      this.retrieveData();
     }
   }
 
   async componentDidMount() {
+    this.retrieveData();
     const data = await this.getAnimalDetails();
     this.setState({ animal: data.res.animal });
     const details = this.formatAnimal();
@@ -120,49 +128,59 @@ class Animal extends Component {
     return [presentation, hab, info, repro];
   };
 
-  retrieveData = () => {
-    AsyncStorage.getItem("@annihimal:user").then(res => {
+  retrieveData = async () => {
+    console.log("test");
+    AsyncStorage.getItem("@annihimal:user").then(async res => {
       if (res !== null) {
         const user = JSON.parse(res);
-        this.setState({ token: user.jwt });
-        this.setState({ idUser: user.user.id });
-        this.setState({ isConnected: true });
-        AsyncStorage.getItem("@annihimal:favorite").then(res => {
-          if (res !== null) {
-            const favorites = JSON.parse(res);
 
-            this.setState({ favorites });
-          } else {
-            this.setState({ isConnected: false });
-          }
-        });
+        //this.setState({ token: user.jwt });
+        //this.setState({ idUser: user.user.id });
+        this.setState({ isConnected: true });
+        console.log("token ====>", user.jwt, user.user.id);
+        const arrAnimals = await this.getFav(user.jwt, user.user.id);
+        console.log(arrAnimals);
+        this.setState({ favorites: arrAnimals });
         this.checkFav();
       } else {
         this.setState({ isConnected: false });
       }
     });
-    this.setState({ trigger: !this.state.trigger });
+  };
+
+  getFav = async (jwt, id) => {
+    try {
+      const { data, user, isLoading, trigger } = this.state;
+      const { status, res } = await userFavorite(jwt, id);
+      //console.log(res.animals);
+      return res.animals;
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   checkFav = () => {
     const { favorites, id } = this.state;
 
     favorites.forEach(item => {
+      //console.log("fav===>", item);
       if (item.id === id) {
-        return this.setState({ isFavoriteUser: true });
+        this.setState({ isFavoriteUser: true });
       }
     });
   };
 
-  addFavorite = () => {
-    const { token, idUser, id } = this.state;
+  addFavorite = async () => {
+    const { jwt, user: { id: idUser } } = await getUserAsync();
+    const { id } = this.state;
+    addUserFavorite(jwt, idUser, id);
     this.setState({ isFavoriteUser: true });
-    addUserFavorite(token, idUser, id);
   };
 
-  removeFavorite = () => {
-    const { token, idUser, id } = this.state;
-    removeUserFavorite(token, idUser, id);
+  removeFavorite = async () => {
+    const { jwt, user: { id: idUser } } = await getUserAsync();
+    const { id } = this.state;
+    removeUserFavorite(jwt, idUser, id);
     this.setState({ isFavoriteUser: false });
   };
 
@@ -202,12 +220,11 @@ class Animal extends Component {
               }}
             />
           </View>
-          {isConnected ? (
-            <FavoriteButton
-              isFavorite={isFavoriteUser}
-              onPress={!isFavoriteUser ? this.addFavorite : this.removeFavorite}
-            />
-          ) : null}
+
+          <FavoriteButton
+            isFavorite={isFavoriteUser}
+            onPress={!isFavoriteUser ? this.addFavorite : this.removeFavorite}
+          />
         </View>
       );
     } else {
