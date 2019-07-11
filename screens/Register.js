@@ -29,8 +29,8 @@ const width = Dimensions.get("window").width;
 class Register extends Component {
   state = {
     username: "",
-    email: "iam@email.fr",
-    password: "Test123",
+    email: "",
+    password: "",
     password_confirmation: "",
     alreadyRegistered: true,
     animationStart: "bounceInRight"
