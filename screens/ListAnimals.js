@@ -46,7 +46,11 @@ class ListAnimal extends React.Component {
         </View>
       );
     } else {
-      return <ActivityIndicator size="small" color={Colors.primaryColor} />;
+      return (
+        <View style={styles.containerLoad}>
+          <ActivityIndicator size="large" color="black" />
+        </View>
+      );
     }
   }
 }
@@ -58,6 +62,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center"
+  },
+  containerLoad: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingTop: Constants.statusBarHeight,
+    backgroundColor: Colors.primaryColor
   },
   containerStyle: {
     backgroundColor: Colors.whiteColor,
