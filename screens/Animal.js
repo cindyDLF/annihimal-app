@@ -3,9 +3,11 @@ import {
   View,
   StyleSheet,
   FlatList,
-  AsyncStorage
+  AsyncStorage,
+  ActivityIndicator
 } from "react-native";
 import { NavigationEvents } from "react-navigation";
+import { Constants } from "expo";
 import _ from "lodash";
 
 import Colors from "../constants/Colors";
@@ -25,7 +27,8 @@ class Animal extends Component {
       trigger: false,
       id: props.navigation.state.params.id,
       animal: {},
-      data: []
+      data: [],
+      isLoading: true
     };
 
     this.viewabilityConfig = { viewAreaCoveragePercentThreshold: 100 };
@@ -56,7 +59,7 @@ class Animal extends Component {
     const data = await this.getAnimalDetails();
     this.setState({ animal: data.res.animal });
     const details = this.formatAnimal();
-    this.setState({ details });
+    this.setState({ details, isLoading: false });
   }
 
   getAnimalDetails = async () => {
@@ -122,36 +125,44 @@ class Animal extends Component {
   };
 
   render() {
-    const { isConnected, details, animal } = this.state;
+    const { isConnected, details, animal, isLoading } = this.state;
 
-    return (
-      <View style={styles.container}>
-        <NavigationEvents
-          onWillFocus={() => this.setState({ trigger: !this.state.trigger })}
-        />
-        <StickyHeader conservation_status={animal.status} />
-        <View>
-          <FlatList
-            contentContainerStyle={styles.contentContainer}
-            data={details}
-            keyExtractor={item => item.title}
-            removeClippedSubviews="false"
-            onViewableItemsChanged={this.handleViewableItemsChanged}
-            renderItem={({ item }) => {
-              return (
-                <Side
-                  side={item.side}
-                  data={item.data}
-                  title={item.title}
-                  img={item.img}
-                />
-              );
-            }}
+    if (!isLoading) {
+      return (
+        <View style={styles.container}>
+          <NavigationEvents
+            onWillFocus={() => this.setState({ trigger: !this.state.trigger })}
           />
+          <StickyHeader conservation_status={animal.status} />
+          <View>
+            <FlatList
+              contentContainerStyle={styles.contentContainer}
+              data={details}
+              keyExtractor={item => item.title}
+              removeClippedSubviews="false"
+              onViewableItemsChanged={this.handleViewableItemsChanged}
+              renderItem={({ item }) => {
+                return (
+                  <Side
+                    side={item.side}
+                    data={item.data}
+                    title={item.title}
+                    img={item.img}
+                  />
+                );
+              }}
+            />
+          </View>
+          {isConnected ? <FavoriteButton /> : null}
         </View>
-        {isConnected ? <FavoriteButton /> : null}
-      </View>
-    );
+      );
+    } else {
+      return (
+        <View style={styles.containerLoad}>
+          <ActivityIndicator size="large" color="black" />
+        </View>
+      );
+    }
   }
 }
 
@@ -162,6 +173,13 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     paddingVertical: 20
+  },
+  containerLoad: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingTop: Constants.statusBarHeight,
+    backgroundColor: Colors.primaryColor
   }
 });
 
