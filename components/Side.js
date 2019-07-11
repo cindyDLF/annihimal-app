@@ -11,9 +11,6 @@ const { height, width } = Dimensions.get("window");
 import images from "./images";
 
 const Side = ({ side, data, title, img, lifestyle }) => {
-  console.log("====================================");
-  console.log(lifestyle);
-  console.log("====================================");
   image = img => {
     return (
       <View style={styles.imgContainer}>
@@ -135,38 +132,22 @@ const Side = ({ side, data, title, img, lifestyle }) => {
   };
 
   getLifestyle = lifestyle => {
-    switch (lifestyle) {
-      case "Diurnal":
+    if (lifestyle !== "Unknown") {
+      if (lifestyle === "Diurnal") {
         return images.diurnal;
+      }
 
-        break;
-
-      case "Nocturnal":
+      if (lifestyle === "Nocturnal") {
         return images.nocturnal;
+      }
 
-        break;
-
-      case "Herd":
-        return images.herd;
-
-        break;
-
-      case "Troop":
-        return images.herd;
-
-        break;
-
-      case "Solitary":
+      if (lifestyle === "Solitary") {
         return images.solitary;
+      }
 
-        break;
-
-      case "Unknown":
-        return images.unknown;
-
-        break;
-
-      default:
+      return images.herd;
+    } else {
+      return images.unknown;
     }
   };
 
@@ -201,7 +182,7 @@ const styles = StyleSheet.create({
   img: {
     height: 300,
     width: 300,
-    borderRadius: 150
+    borderRadius: 60
   },
   data: {
     padding: 8
