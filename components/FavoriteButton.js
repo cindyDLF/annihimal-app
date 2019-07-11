@@ -6,9 +6,9 @@ const FavoriteButton = ({ isFavorite, onPress }) => {
   return (
     <TouchableOpacity style={styles.actionButtonIcon} onPress={() => onPress()}>
       {isFavorite ? (
-        <Icon name="md-heart" size={25} />
+        <Icon name="md-heart" size={25} color="#fff" />
       ) : (
-        <Icon name="md-heart-empty" size={25} />
+        <Icon name="md-heart-empty" size={25} color="#fff" />
       )}
     </TouchableOpacity>
   );
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     bottom: 20,
     right: 10,
     height: 70,
-    backgroundColor: "#C3CC6A",
+    backgroundColor: "#E22735",
     borderRadius: 100,
     shadowColor: "#000",
     shadowOffset: {
