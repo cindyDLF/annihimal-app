@@ -89,23 +89,23 @@ export default class Home extends Component {
             source={require("../assets/images/background.png")}
             style={{ width: "100%", height: "100%" }}
           >
-          <View style={styles.center}>
-            <Title text="annihimal" size={60} animated={true} />
-          </View>
-          <View style={styles.container}>
-            <Carousel data={data} />
-          </View>
-          <Animatable.View
-            style={styles.containerInfo}
-            animation={animation}
-            iterationCount="infinite"
-            direction="alternate"
-            duration={3000}
-            iterationDelay={1000}
-          >
-            <Text style={styles.textInfo}>{infoNew[idx]}</Text>
-          </Animatable.View>
-        </ImageBackground>
+            <View style={styles.center}>
+              <Title text="annihimal" size={60} animated={true} />
+            </View>
+            <View style={styles.containerList}>
+              <Carousel data={data} />
+            </View>
+            <Animatable.View
+              style={styles.containerInfo}
+              animation={animation}
+              iterationCount="infinite"
+              direction="alternate"
+              duration={3000}
+              iterationDelay={1000}
+            >
+              <Text style={styles.textInfo}>{infoNew[idx]}</Text>
+            </Animatable.View>
+          </ImageBackground>
         </View>
       );
     } else {
