@@ -8,6 +8,7 @@ import {
   Image,
   Alert
 } from "react-native";
+import Toast, { DURATION } from "react-native-easy-toast";
 import { NavigationEvents } from "react-navigation";
 import { Constants } from "expo";
 import _ from "lodash";
@@ -219,14 +220,24 @@ class Animal extends Component {
             isFavorite={isFavoriteUser}
             onPress={() => {
               if (isConnected) {
-                console.log("isConnected");
                 !isFavoriteUser ? this.addFavorite() : this.removeFavorite();
               } else {
-                console.log("not isConnected");
-
-                Alert.alert("blabla");
+                this.refs.toast.show(
+                  "You must be connected to add favorites",
+                  DURATION.LENGTH_LONG
+                );
               }
             }}
+          />
+          <Toast
+            ref="toast"
+            style={{ backgroundColor: "black" }}
+            position="bottom"
+            positionValue={250}
+            fadeInDuration={3000}
+            fadeOutDuration={1000}
+            opacity={0.9}
+            textStyle={{ color: "white" }}
           />
         </View>
       );

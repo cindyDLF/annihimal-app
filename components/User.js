@@ -43,7 +43,12 @@ class User extends React.Component {
             color="red"
           />
         </TouchableOpacity>
-        <Avatar size="xlarge" source={images.user} rounded />
+        <Avatar
+          size="xlarge"
+          source={images.user}
+          rounded
+          overlayContainerStyle={{ backgroundColor: "#fff" }}
+        />
         <Text h4>{username}</Text>
         <Text>{email}</Text>
       </View>

@@ -94,6 +94,8 @@ class Profile extends Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.primaryColor,
+    alignItems: "center",
+    justifyContent: "center",
     flex: 1
   },
   containerLoad: {
