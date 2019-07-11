@@ -22,25 +22,18 @@ class ListAnimal extends React.Component {
   }
 
   async componentDidMount() {
-    const data = await this.fetchAnimals();
+    const data = await getAnimalList(0);
     this.setState({ data: data.res.animals, isLoading: false });
   }
 
-  fetchAnimals = async () => {
-    const { nb } = this.state;
-    return await getAnimalList(nb);
-  };
-
   endReached = async () => {
-    console.log("in end reached");
     const { nb, data } = this.state;
     newNb = nb + 10;
-    this.setState({ nb: newNb });
     const {
       res: { animals }
-    } = await this.fetchAnimals();
+    } = await getAnimalList(newNb);
     const newData = [...data, ...animals];
-    this.setState({ data: newData });
+    await this.setState({ data: newData, nb: newNb });
   };
 
   render() {
