@@ -19,18 +19,31 @@ import Colors from "../constants/Colors";
 
 const width = Dimensions.get("window").width;
 
-const info = [
-  { id: 1, new: "ce matin un lapin a tué un chasseur" },
-  {
-    id: 2,
-    new: "la chèvre de monsieur Seguin s'est encore fait manger par le loup"
-  },
-  { id: 3, new: "trois petits sont entrés dans ma cuisine blablabla" }
-];
 const infoNew = [
-  "ce matin un lapin a tué un chasseur",
-  "la chèvre de monsieur Seguin s'est encore fait manger par le loup",
-  "trois petits sont entrés dans ma cuisine blablabla"
+  {
+    title: "Pygmy 3-toed sloth",
+    new: "Destruction of Panama Mangrove’s threatens the sloths existence."
+  },
+  {
+    title: "Greater Bamboo Lemur",
+    new:
+      "Once populous in Madagascar, the natural habitat for these slow moving creatures is disappearing. There are no supporting habitats to take its place."
+  },
+  {
+    title: "Bazzania Bhutanica",
+    new:
+      "A type of Liverwort plant, it is all but extinct due to human interference and destruction of the dry, tropical rainforest areas that it prefers."
+  },
+  {
+    title: "Santa Catarina’s Guinea Pig",
+    new:
+      "Found only on a small island off Brazil, this population of guinea pigs is diminishing through poaching and land development."
+  },
+  {
+    title: "Discoglossus Nigriventer",
+    new:
+      "This painted frog lives in the Israeli region and was once declared extinct, before a few survivors were spotted."
+  }
 ];
 export default class Home extends Component {
   static navigationOptions = {
@@ -41,7 +54,6 @@ export default class Home extends Component {
     data: [],
     isLoading: true,
     animation: "fadeInUpBig",
-    info: info[0],
     idx: 0
   };
 
@@ -52,34 +64,19 @@ export default class Home extends Component {
     let index = idx;
 
     this._interval = setInterval(() => {
-      let compare;
-      console.log(infoNew.length, index);
       if (index === infoNew.length - 1) {
         index = 0;
-        console.log("Tamère", index);
       } else {
         index++;
-        console.log("tonpère: ", index);
       }
       this.setState({ idx: index });
-    }, 8000);
+    }, 12000);
   }
 
   getRandomAnimal = async nb => {
     return await getCarousel(nb);
   };
 
-  displayNew() {
-    return info.map(item => {
-      console.log(item);
-      return (
-        <Animatable.View animation="bounceInRight" key={item.id}>
-          <Text>{item.new}</Text>
-        </Animatable.View>
-      );
-    });
-    return map;
-  }
   render = () => {
     const { data, isLoading, animation, idx } = this.state;
     if (!isLoading) {
@@ -100,10 +97,14 @@ export default class Home extends Component {
               animation={animation}
               iterationCount="infinite"
               direction="alternate"
-              duration={3000}
+              duration={5000}
               iterationDelay={1000}
             >
-              <Text style={styles.textInfo}>{infoNew[idx]}</Text>
+              <View style={styles.containerTitle}>
+                <Text style={styles.textTitle}>{infoNew[idx].title}</Text>
+              </View>
+
+              <Text style={styles.textInfo}>{infoNew[idx].new}</Text>
             </Animatable.View>
           </ImageBackground>
         </View>
@@ -151,9 +152,23 @@ const styles = StyleSheet.create({
     width: width - 80,
     marginBottom: 50,
     borderRadius: 10,
-    marginLeft: 10
+    marginLeft: "auto",
+    marginRight: "auto"
   },
   textInfo: {
-    fontFamily: "Avenir"
+    fontFamily: "Avenir",
+    color: Colors.blackColor,
+    fontSize: 18
+  },
+  containerTitle: {
+    backgroundColor: Colors.secondaryColor,
+    marginBottom: 5,
+    borderRadius: 5,
+    padding: 5
+  },
+  textTitle: {
+    fontWeight: "bold",
+    fontSize: 18,
+    color: Colors.whiteColor
   }
 });
