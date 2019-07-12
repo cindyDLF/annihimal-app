@@ -44,7 +44,9 @@ const Side = ({ side, data, title, img, lifestyle }) => {
                 {_.startCase(key)}
               </Text>
 
-              <Text style={{ textAlign: "center" }}>{pres[key]}</Text>
+              <Text style={{ textAlign: "center" }}>
+                {_.capitalize(pres[key])}
+              </Text>
             </View>
           );
         })}
