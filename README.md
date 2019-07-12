@@ -1,6 +1,6 @@
 ##this is annihimal
 
-![logo](https://github.com/cindyDLF/annihimal-app/blob/master/assets/images/annihimal.png=150x150)
+![logo](https://github.com/cindyDLF/annihimal-app/blob/master/assets/images/annihimal.png?raw=true=150x150)
 
 Stay informed on the state of each animal,  
 gather informations on its size, habitat, diet,  
