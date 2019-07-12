@@ -7,7 +7,7 @@ import SideSwipe from "react-native-sideswipe";
 
 import { Card } from "./Card";
 
-const { width } = Dimensions.get("window");
+const { width, height } = Dimensions.get("window");
 
 class Carousel extends Component {
   constructor(props) {
@@ -30,7 +30,7 @@ class Carousel extends Component {
       <SideSwipe
         data={data}
         shouldRelease={() => true}
-        style={[styles.fill, { width }]}
+        style={[styles.fill, { width, height: height / 1.5 }]}
         contentContainerStyle={{ paddingTop: 100 }}
         itemWidth={Card.WIDTH}
         threshold={Card.WIDTH / 4}
@@ -62,13 +62,10 @@ export default withNavigation(Carousel);
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    //alignItems: "stretch",
-    //justifyContent: "flex-start",
-    paddingTop: Constants.statusBarHeight
+    flex: 1
   },
   fill: {
-    position: "absolute",
+    position: "relative",
     top: 0,
     left: 0,
     right: 0,
