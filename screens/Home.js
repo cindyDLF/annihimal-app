@@ -121,20 +121,17 @@ export default class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: Constants.statusBarHeight,
     backgroundColor: Colors.primaryColor
   },
   containerList: {
     flex: 1,
     alignItems: "stretch",
-    justifyContent: "flex-start",
-    paddingTop: Constants.statusBarHeight
+    justifyContent: "flex-start"
   },
   containerLoad: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    paddingTop: Constants.statusBarHeight,
     backgroundColor: Colors.primaryColor
   },
   center: {

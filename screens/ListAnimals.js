@@ -70,7 +70,6 @@ class ListAnimal extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: Constants.statusBarHeight,
     backgroundColor: Colors.primaryColor,
     flex: 1,
     alignItems: "center"
@@ -79,7 +78,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    paddingTop: Constants.statusBarHeight,
     backgroundColor: Colors.primaryColor
   },
   containerStyle: {

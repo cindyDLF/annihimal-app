@@ -54,9 +54,9 @@ const styles = StyleSheet.create({
     overflow: "visible"
   },
   animal: {
-    width: width - 25,
-    height: width - 25,
-    borderRadius: (width - 25) / 2
+    width: width - 40,
+    height: width - 40,
+    borderRadius: (width - 40) / 2
   },
   title: {
     fontFamily: "Avenir",
