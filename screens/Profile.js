@@ -56,8 +56,8 @@ class Profile extends Component {
 
   getFav = async (jwt, id) => {
     try {
-      const { data, user, isLoading, trigger } = this.state;
-      const { status, res } = await userFavorite(jwt, id);
+      const { trigger } = this.state;
+      const { res } = await userFavorite(jwt, id);
 
       this.setState({ trigger: !trigger });
       return res.animals;
@@ -84,7 +84,15 @@ class Profile extends Component {
 
             <Title text="favourites" margin={5} />
             <View style={styles.containerFlatList}>
-              {data ? <FlatAnni data={data} /> : <Text>No favourites 😿</Text>}
+              {data.length > 0 ? (
+                <FlatAnni data={data} />
+              ) : (
+                <View
+                  style={{ alignItems: "center", justifyContent: "center" }}
+                >
+                  <Text style={{ fontSize: 26 }}>No favourites 😿</Text>
+                </View>
+              )}
             </View>
           </ImageBackground>
         </View>
