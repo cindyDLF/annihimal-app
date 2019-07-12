@@ -16,7 +16,8 @@ const styles = StyleSheet.create({
     fontSize: 26,
     fontFamily: "Avenir",
     fontWeight: "bold",
-    color: Colors.mainColor
+    color: "#2D344D"
+    // color: Colors.mainColor
   },
   button: {
     backgroundColor: Colors.whiteColor,

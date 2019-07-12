@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginTop: 30,
     fontFamily: "Avenir",
-    color: Colors.whiteColor
+    color: "#2D344D"
+    // color: Colors.whiteColor
   }
 });

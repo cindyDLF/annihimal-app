@@ -40,9 +40,13 @@ const Side = ({ side, data, title, img, lifestyle }) => {
             >
               <View>{this.getIcon(key, pres[key])}</View>
 
-              <Text style={{ textAlign: "center" }}>{_.startCase(key)}</Text>
+              <Text style={{ textAlign: "center", fontWeight: "bold" }}>
+                {_.startCase(key)}
+              </Text>
 
-              <Text style={{ textAlign: "center" }}>{pres[key]}</Text>
+              <Text style={{ textAlign: "center" }}>
+                {_.capitalize(pres[key])}
+              </Text>
             </View>
           );
         })}

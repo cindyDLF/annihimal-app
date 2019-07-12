@@ -88,9 +88,10 @@ class Animal extends Component {
     const name = animal.name;
     const scientific_name = animal.scientific_name || "N/A";
     const classification = animal.class.name || "N/A";
-    const habitat = animal.habitats > 0 ? animal.habitats[0].name : "N/A";
+    const habitat =
+      animal.habitats.length > 0 ? animal.habitats[0].name : "N/A";
     const diet = animal.diet.name || "N/A";
-    const threat = animal.threats > 0 ? animal.threats[0].name : "N/A";
+    const threat = animal.threats.length > 0 ? animal.threats[0].name : "N/A";
     const weight = animal.weight || "N/A";
     const lifespan = animal.lifespan || "N/A";
     const group_behaviour =
@@ -147,8 +148,7 @@ class Animal extends Component {
 
   getFav = async (jwt, id) => {
     try {
-      const { data, user, isLoading, trigger } = this.state;
-      const { status, res } = await userFavorite(jwt, id);
+      const { res } = await userFavorite(jwt, id);
       return res.animals;
     } catch (err) {
       console.log(err);
@@ -234,7 +234,7 @@ class Animal extends Component {
                   !isFavoriteUser ? this.addFavorite() : this.removeFavorite();
                 } else {
                   this.refs.toast.show(
-                    "You must be connected to add favorites",
+                    "You must be connected to add favourites!",
                     DURATION.LENGTH_LONG
                   );
                 }

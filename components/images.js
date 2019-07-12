@@ -18,7 +18,7 @@ export default {
   nocturnal: require("../assets/images/nocturnal.png"),
   ocean: require("../assets/images/ocean.png"),
   omnivore: require("../assets/images/omnivore.png"),
-  prairie: require("../assets/images/prairie.png"),
+  habitat: require("../assets/images/prairie.png"),
   stork: require("../assets/images/stork.png"),
   trap: require("../assets/images/trap.png"),
   weight: require("../assets/images/weight.png"),
